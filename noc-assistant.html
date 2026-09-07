@@ -346,6 +346,19 @@ body {
   background: rgba(239, 68, 68, 0.16);
 }
 
+.suggestion-item.no-answer-link {
+  background: transparent;
+  border: 0;
+  padding: 7px 2px 2px;
+  color: var(--primary);
+  text-decoration: underline;
+  text-align: left;
+}
+
+.suggestion-item.no-answer-link:hover {
+  background: transparent;
+}
+
 .suggestion-prompt {
   font-size: 13px;
   font-weight: 600;
@@ -940,7 +953,7 @@ body {
 ===================================================== */
 
 const API_URL =
-  'https://script.google.com/macros/s/AKfycbz64ij12ElvKsTKg6aAUDkY7shC5Q487wBbxWffdknBRofzYNNajZYboT8ci21V7t7x/exec';
+  'https://script.google.com/macros/s/AKfycbwYkDhkMbq6ReqMal5q6UU8_qaPqs3wGouvB4MZEa-sD0Gzvl4OWnF6irl8SJ84lPgI/exec';
 
 const STORAGE_KEYS = {
 
@@ -1044,6 +1057,7 @@ let waiting =
 let currentSuggestions = [];
 let isAwaitingSuggestionResponse = false;
 let pendingQuestion = '';
+let lastSubmittedQuestion = '';
 
 
 /* =====================================================
@@ -1543,33 +1557,202 @@ questionInput.addEventListener(
 ===================================================== */
 
 function handleSuggestionResponse() {
-  const input = questionInput.value.trim();
-  
-  if (!input) {
-    return;
-  }
 
-  const selectedIndex = parseInt(input) - 1;
+  const input =
+    questionInput.value.trim();
 
-  if (isNaN(selectedIndex) || selectedIndex < 0 || selectedIndex >= currentSuggestions.length) {
-    addBotMessage(
-      'Please enter a valid number from the list above.'
+  if (!input) return;
+
+  const match =
+    input.match(
+      /^(?:question\\s*)?(\\d+)$/i
     );
+
+  const noneNumber =
+    currentSuggestions.length + 1;
+
+  if (!match) {
+
+    addBotMessage(
+      'Please provide a question number within the displayed range.'
+    );
+
     questionInput.value = '';
     questionInput.focus();
     return;
   }
 
-  // Check if "None of these" was selected (last item)
-  if (selectedIndex === currentSuggestions.length - 1) {
-    // Submit to Unanswered_Queries
-    submitUnansweredQuery(pendingQuestion);
+  const selectedNumber =
+    parseInt(
+      match[1],
+      10
+    );
+
+  if (
+    selectedNumber ===
+    noneNumber
+  ) {
+
+    addUserMessage(
+      escapeHtml(input)
+    );
+
+    submitUnansweredQuery(
+      pendingQuestion
+    );
+
     return;
   }
 
-  // Display the selected suggestion's answer
-  const suggestion = currentSuggestions[selectedIndex];
-  displaySuggestionAnswer(suggestion);
+  if (
+    selectedNumber < 1 ||
+    selectedNumber > currentSuggestions.length
+  ) {
+
+    addBotMessage(
+      'Please provide a question number within the range 1-' +
+      noneNumber +
+      '.'
+    );
+
+    questionInput.value = '';
+    questionInput.focus();
+    return;
+  }
+
+  const suggestion =
+    currentSuggestions[
+      selectedNumber - 1
+    ];
+
+  addUserMessage(
+    escapeHtml(input)
+  );
+
+  sendSuggestedQuestion(
+    suggestion.question
+  );
+}
+
+
+function sendSuggestedQuestion(
+  suggestedQuestion
+) {
+
+  isAwaitingSuggestionResponse =
+    false;
+
+  currentSuggestions =
+    [];
+
+  pendingQuestion =
+    '';
+
+  questionInput.value =
+    '';
+
+  questionInput.placeholder =
+    'Type your question...';
+
+  autoResize();
+
+  const typingId =
+    showTyping();
+
+  waiting =
+    true;
+
+  sendBtn.disabled =
+    true;
+
+  jsonp(
+    'ask',
+    {
+      name: userName,
+      brCode: brCode,
+      question: suggestedQuestion
+    },
+    function(response) {
+
+      removeTyping(
+        typingId
+      );
+
+      waiting =
+        false;
+
+      sendBtn.disabled =
+        false;
+
+      if (!response) {
+        addBotMessage(
+          'Unable to contact the chatbot server.'
+        );
+        return;
+      }
+
+      if (!response.success) {
+
+        addBotMessage(
+          escapeHtml(
+            response.error ||
+            'Unable to process your question.'
+          )
+        );
+
+        return;
+      }
+
+      if (
+        response.answered === true
+      ) {
+
+        lastSubmittedQuestion =
+          suggestedQuestion;
+
+        renderAnswer(
+          response
+        );
+
+        return;
+      }
+
+      if (
+        response.suggestions &&
+        response.suggestions.length > 0
+      ) {
+
+        showSuggestions(
+          response.suggestions,
+          suggestedQuestion
+        );
+
+        return;
+      }
+
+      let html =
+        escapeHtml(
+          response.answer ||
+          'Sorry, I could not find a suitable answer.'
+        );
+
+      if (response.queryId) {
+
+        html +=
+          '<div class="query-id">' +
+          'Query ID: <strong>' +
+          escapeHtml(
+            response.queryId
+          ) +
+          '</strong>' +
+          '</div>';
+      }
+
+      addBotMessage(
+        html
+      );
+    }
+  );
 }
 
 
@@ -1599,46 +1782,88 @@ function displaySuggestionAnswer(suggestion) {
    SUBMIT UNANSWERED QUERY
 ===================================================== */
 
-function submitUnansweredQuery(question) {
-  isAwaitingSuggestionResponse = false;
-  currentSuggestions = [];
-  questionInput.placeholder = 'Type your question...';
-  
-  // Send to server as unanswered
-  waiting = true;
-  sendBtn.disabled = true;
+function submitUnansweredQuery(
+  question
+) {
+
+  isAwaitingSuggestionResponse =
+    false;
+
+  currentSuggestions =
+    [];
+
+  pendingQuestion =
+    '';
+
+  questionInput.placeholder =
+    'Type your question...';
+
+  waiting =
+    true;
+
+  sendBtn.disabled =
+    true;
 
   jsonp(
-    'ask',
+    'unanswered',
     {
       name: userName,
       brCode: brCode,
       question: question
     },
-    function (response) {
-      waiting = false;
-      sendBtn.disabled = false;
-      questionInput.value = '';
+    function(response) {
+
+      waiting =
+        false;
+
+      sendBtn.disabled =
+        false;
+
+      questionInput.value =
+        '';
+
+      autoResize();
       questionInput.focus();
 
       if (!response) {
-        addBotMessage('Unable to contact the chatbot server.');
+
+        addBotMessage(
+          'Unable to contact the chatbot server.'
+        );
+
         return;
       }
 
       if (!response.success) {
-        addBotMessage(escapeHtml(response.error || 'Unable to process your question.'));
+
+        addBotMessage(
+          escapeHtml(
+            response.error ||
+            'Unable to submit your question.'
+          )
+        );
+
         return;
       }
 
-      // Show the no-answer message with query ID
-      let html = escapeHtml(response.answer || 'Sorry, I could not find a suitable answer.');
+      let html =
+        'Your question has been sent for review.';
 
       if (response.queryId) {
-        html += '<div class="query-id">Query ID: <strong>' + escapeHtml(response.queryId) + '</strong></div>';
+
+        html +=
+          '<div class="query-id">' +
+          'Query ID: <strong>' +
+          escapeHtml(
+            response.queryId
+          ) +
+          '</strong>' +
+          '</div>';
       }
 
-      addBotMessage(html);
+      addBotMessage(
+        html
+      );
     }
   );
 }
@@ -1661,6 +1886,9 @@ function sendQuestion() {
 
   const question =
     questionInput.value.trim();
+
+  lastSubmittedQuestion =
+    question;
 
 
   if (!question) {
@@ -1834,30 +2062,110 @@ function sendQuestion() {
    SHOW SUGGESTIONS
 ===================================================== */
 
-function showSuggestions(suggestions, originalQuestion) {
-  isAwaitingSuggestionResponse = true;
-  currentSuggestions = suggestions;
-  pendingQuestion = originalQuestion;
+function showSuggestions(
+  suggestions,
+  originalQuestion
+) {
 
-  let html = '<div class="suggestion-prompt">🤔 I couldn\'t find an exact match. Did you mean one of these?</div>';
+  isAwaitingSuggestionResponse =
+    true;
 
-  suggestions.forEach((suggestion, index) => {
-    const num = index + 1;
-    const questionText = suggestion.question || 'Question ' + num;
-    html += '<div class="suggestion-item">' + num + '. ' + escapeHtml(questionText) + '</div>';
-  });
+  currentSuggestions =
+    suggestions || [];
 
-  // Add "None of these" option
-  const noneNum = suggestions.length + 1;
-  html += '<div class="suggestion-item none">' + noneNum + '. None of these — submit as new query</div>';
+  pendingQuestion =
+    originalQuestion || '';
 
-  html += '<div style="margin-top:12px;font-size:13px;color:var(--muted);">Please type the number (1-' + noneNum + ') and press Enter.</div>';
+  const noneNum =
+    currentSuggestions.length + 1;
 
-  addBotMessage(html);
+  let html =
+    '<div class="suggestion-prompt">' +
+    'See also — related questions:' +
+    '</div>';
 
-  // Focus input and show placeholder
+  currentSuggestions.forEach(
+    function(
+      suggestion,
+      index
+    ) {
+
+      const num =
+        index + 1;
+
+      html +=
+        '<div class="suggestion-item">' +
+        '<strong>' +
+        num +
+        '.</strong> ' +
+        escapeHtml(
+          suggestion.question ||
+          'Question ' + num
+        ) +
+        '</div>';
+    }
+  );
+
+  html +=
+    '<button type="button" ' +
+    'class="suggestion-item none no-answer-link" ' +
+    'data-no-exact-answer="1">' +
+    'I can\'t find the exact what I searched for' +
+    '</button>';
+
+  html +=
+    '<div style="margin-top:8px;font-size:13px;color:var(--muted);">' +
+    'Please reply with a question number (1-' +
+    noneNum +
+    ').' +
+    '</div>';
+
+  addBotMessage(
+    html
+  );
+
+  bindSuggestionPanel_();
+
   questionInput.focus();
-  questionInput.placeholder = 'Enter number (1-' + noneNum + ')...';
+
+  questionInput.placeholder =
+    'Enter number (1-' +
+    noneNum +
+    ')...';
+}
+
+
+function bindSuggestionPanel_() {
+
+  const buttons =
+    chat.querySelectorAll(
+      '[data-no-exact-answer="1"]'
+    );
+
+  const button =
+    buttons[
+      buttons.length - 1
+    ];
+
+  if (button) {
+
+    button.addEventListener(
+      'click',
+      function() {
+
+        const question =
+          pendingQuestion;
+
+        addUserMessage(
+          'I can\'t find the exact what I searched for'
+        );
+
+        submitUnansweredQuery(
+          question
+        );
+      }
+    );
+  }
 }
 
 
@@ -1872,32 +2180,74 @@ function renderAnswer(
   let answer =
     response.answer || '';
 
-  let sourceInfo = '';
+  let sourceInfo =
+    '';
 
-  // Determine source info based on match type
-  if (response.matchType === 'EXACT') {
-    sourceInfo = 'Showing result for: Exact Question Match';
-  } else if (response.matchType === 'EXTERNAL') {
-    if (response.lookupBR) {
-      sourceInfo = 'Showing result for: ' + response.lookupBR + ' (External Source)';
-    } else {
-      sourceInfo = 'Showing result for: External Source';
-    }
-  } else if (response.matchType === 'BRANCH_LOOKUP' || response.lookupBR) {
-    sourceInfo = 'Showing result for: ' + (response.lookupBR || brCode);
-  } else if (response.matchType === 'KEYWORD') {
-    sourceInfo = 'Showing result for: Keyword Match';
-  } else if (response.source === 'External_Sources') {
-    if (response.lookupBR) {
-      sourceInfo = 'Showing result for: ' + response.lookupBR + ' (External Source)';
-    } else {
-      sourceInfo = 'Showing result for: External Source';
-    }
+  if (
+    response.matchType ===
+    'EXACT'
+  ) {
+
+    sourceInfo =
+      'Showing result for: Exact Question Match';
+
+  } else if (
+    response.matchType ===
+    'EXTERNAL'
+  ) {
+
+    sourceInfo =
+      response.lookupBR
+        ? 'Showing result for: ' +
+          response.lookupBR +
+          ' (External Source)'
+        : 'Showing result for: External Source';
+
+  } else if (
+    response.matchType ===
+      'BRANCH_LOOKUP' ||
+    response.lookupBR
+  ) {
+
+    sourceInfo =
+      'Showing result for: ' +
+      (
+        response.lookupBR ||
+        brCode
+      );
+
+  } else if (
+    response.matchType ===
+    'KEYWORD'
+  ) {
+
+    sourceInfo =
+      'Showing result for: Keyword Match';
+
+  } else if (
+    response.source ===
+    'External_Sources'
+  ) {
+
+    sourceInfo =
+      response.lookupBR
+        ? 'Showing result for: ' +
+          response.lookupBR +
+          ' (External Source)'
+        : 'Showing result for: External Source';
+
   } else {
-    sourceInfo = 'Showing result for: ' + (response.lookupBR || brCode);
+
+    sourceInfo =
+      'Showing result for: ' +
+      (
+        response.lookupBR ||
+        brCode
+      );
   }
 
-  // If answer type is HTML, render HTML
+  let contentHtml;
+
   if (
     String(
       response.answerType || ''
@@ -1905,26 +2255,105 @@ function renderAnswer(
     'HTML'
   ) {
 
-    addBotMessageWithSource(
-      answer,
-      sourceInfo,
-      'HTML'
-    );
+    contentHtml =
+      answer;
 
   } else {
 
-    addBotMessageWithSource(
+    contentHtml =
       escapeHtml(
         answer
-      )
-      .replace(
+      ).replace(
         /\n/g,
         '<br>'
-      ),
-      sourceInfo,
-      'TEXT'
-    );
+      );
   }
+
+  if (
+    response.suggestions &&
+    response.suggestions.length > 0
+  ) {
+
+    contentHtml +=
+      buildSuggestionHtml_(
+        response.suggestions
+      );
+  }
+
+  addBotMessageWithSource(
+    contentHtml,
+    sourceInfo,
+    'HTML'
+  );
+
+  if (
+    response.suggestions &&
+    response.suggestions.length > 0
+  ) {
+
+    bindSuggestionPanel_();
+  }
+}
+
+
+function buildSuggestionHtml_(
+  suggestions
+) {
+
+  currentSuggestions =
+    suggestions || [];
+
+  pendingQuestion =
+    lastSubmittedQuestion;
+
+  isAwaitingSuggestionResponse =
+    true;
+
+  const noneNum =
+    currentSuggestions.length + 1;
+
+  let html =
+    '<div class="suggestion-prompt">' +
+    'See also — related questions:' +
+    '</div>';
+
+  currentSuggestions.forEach(
+    function(
+      suggestion,
+      index
+    ) {
+
+      const num =
+        index + 1;
+
+      html +=
+        '<div class="suggestion-item">' +
+        '<strong>' +
+        num +
+        '.</strong> ' +
+        escapeHtml(
+          suggestion.question ||
+          'Question ' + num
+        ) +
+        '</div>';
+    }
+  );
+
+  html +=
+    '<button type="button" ' +
+    'class="suggestion-item none no-answer-link" ' +
+    'data-no-exact-answer="1">' +
+    'I can\'t find the exact what I searched for' +
+    '</button>';
+
+  html +=
+    '<div style="margin-top:8px;font-size:13px;color:var(--muted);">' +
+    'Please reply with a question number (1-' +
+    noneNum +
+    ').' +
+    '</div>';
+
+  return html;
 }
 
 
