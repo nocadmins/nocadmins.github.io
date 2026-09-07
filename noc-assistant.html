@@ -145,26 +145,19 @@ body {
 }
 
 .bot-icon {
-
-  width: 44px;
-
-  height: 44px;
-
-  border-radius: 14px;
-
-  display: grid;
-
-  place-items: center;
-
- /* background: var(--primary);*/
-
-  color: white;
-
-  font-size: 32px;
-
-  font-weight: 700;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
+.bot-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .bot-title {
 
   font-size: 17px;
@@ -789,9 +782,9 @@ body {
 
     <div class="brand">
 
-      <div class="bot-icon">
-       🤖
-      </div>
+       <div class="bot-icon">
+    <img src="./images/bot.png" alt="NOC Assistant">
+  </div>
 
       <div>
 
