@@ -331,6 +331,7 @@ body {
   cursor: pointer;
   transition: background 0.2s;
   font-size: 13px;
+  color:var(--text);
 }
 
 .suggestion-item:hover {
@@ -953,7 +954,7 @@ body {
 ===================================================== */
 
 const API_URL =
-  'https://script.google.com/macros/s/AKfycbwYkDhkMbq6ReqMal5q6UU8_qaPqs3wGouvB4MZEa-sD0Gzvl4OWnF6irl8SJ84lPgI/exec';
+  'https://script.google.com/macros/s/AKfycbyLrbvP3jA6B1tDMnDfyAQbJ7MyfT122qDF93JvgrBYcR7aM29xTJHSOAaoP-5Bi7MH/exec';
 
 const STORAGE_KEYS = {
 
@@ -1573,12 +1574,18 @@ function handleSuggestionResponse() {
 
   if (!match) {
 
-    addBotMessage(
-      'Please provide a question number within the displayed range.'
-    );
+    /*
+     * The user has entered a new question/keyword instead of
+     * selecting one of the displayed suggestions.
+     * Cancel suggestion-selection mode and process the new
+     * input through the normal keyword/question search.
+     */
+    isAwaitingSuggestionResponse = false;
+    currentSuggestions = [];
+    pendingQuestion = '';
+    questionInput.placeholder = 'Type your question...';
 
-    questionInput.value = '';
-    questionInput.focus();
+    sendQuestion();
     return;
   }
 
@@ -1665,8 +1672,9 @@ function sendSuggestedQuestion(
   sendBtn.disabled =
     true;
 
+  // Resolve a clicked suggestion by exact Question (column F), never by Keywords (column E).
   jsonp(
-    'ask',
+    'askexact',
     {
       name: userName,
       brCode: brCode,
@@ -2094,7 +2102,11 @@ function showSuggestions(
         index + 1;
 
       html +=
-        '<div class="suggestion-item">' +
+        '<button type="button" ' +
+        'class="suggestion-item suggestion-question" ' +
+        'data-suggestion-index="' +
+        index +
+        '">' +
         '<strong>' +
         num +
         '.</strong> ' +
@@ -2102,7 +2114,7 @@ function showSuggestions(
           suggestion.question ||
           'Question ' + num
         ) +
-        '</div>';
+        '</button>';
     }
   );
 
@@ -2115,9 +2127,7 @@ function showSuggestions(
 
   html +=
     '<div style="margin-top:8px;font-size:13px;color:var(--muted);">' +
-    'Please reply with a question number (1-' +
-    noneNum +
-    ').' +
+    'Click a related question above.' +
     '</div>';
 
   addBotMessage(
@@ -2129,13 +2139,56 @@ function showSuggestions(
   questionInput.focus();
 
   questionInput.placeholder =
-    'Enter number (1-' +
-    noneNum +
-    ')...';
+    'Click a related question above...';
 }
 
 
 function bindSuggestionPanel_() {
+
+  const suggestionButtons =
+    chat.querySelectorAll(
+      '[data-suggestion-index]'
+    );
+
+  suggestionButtons.forEach(
+    function(button) {
+
+      button.addEventListener(
+        'click',
+        function() {
+
+          const index =
+            parseInt(
+              button.getAttribute(
+                'data-suggestion-index'
+              ),
+              10
+            );
+
+          if (
+            Number.isNaN(index) ||
+            !currentSuggestions[index]
+          ) {
+            return;
+          }
+
+          const suggestion =
+            currentSuggestions[index];
+
+          addUserMessage(
+            escapeHtml(
+              suggestion.question ||
+              'Question ' + (index + 1)
+            )
+          );
+
+          sendSuggestedQuestion(
+            suggestion.question
+          );
+        }
+      );
+    }
+  );
 
   const buttons =
     chat.querySelectorAll(
@@ -2327,7 +2380,11 @@ function buildSuggestionHtml_(
         index + 1;
 
       html +=
-        '<div class="suggestion-item">' +
+        '<button type="button" ' +
+        'class="suggestion-item suggestion-question" ' +
+        'data-suggestion-index="' +
+        index +
+        '">' +
         '<strong>' +
         num +
         '.</strong> ' +
@@ -2335,7 +2392,7 @@ function buildSuggestionHtml_(
           suggestion.question ||
           'Question ' + num
         ) +
-        '</div>';
+        '</button>';
     }
   );
 
@@ -2348,9 +2405,7 @@ function buildSuggestionHtml_(
 
   html +=
     '<div style="margin-top:8px;font-size:13px;color:var(--muted);">' +
-    'Please reply with a question number (1-' +
-    noneNum +
-    ').' +
+    'Click a related question above.' +
     '</div>';
 
   return html;
