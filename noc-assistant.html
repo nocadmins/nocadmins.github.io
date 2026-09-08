@@ -1459,7 +1459,7 @@
     currentSuggestions = suggestions || [];
     pendingQuestion = originalQuestion || '';
 
-    let html = '<div class="suggestion-prompt">See also — related questions:</div>';
+    let html = '<br><hr><div class="suggestion-prompt">See also — related questions:</div>';
 
     currentSuggestions.forEach(function(suggestion, index) {
       const num = index + 1;
@@ -1554,7 +1554,7 @@
     pendingQuestion = lastSubmittedQuestion;
     isAwaitingSuggestionResponse = true;
 
-    let html = '<div class="suggestion-prompt">See also — related questions:</div>';
+    let html = '<br><br><div style="border-top: 1px solid rgba(128, 128, 128, 0.15);"></div><div  class="suggestion-prompt">See also — related questions:</div>';
 
     currentSuggestions.forEach(function(suggestion, index) {
       const num = index + 1;
@@ -1569,7 +1569,7 @@
       'I can\'t find what I\'m looking for' +
       '</button>';
 
-    html += '<div class="suggestion-hint">Click a related question above.</div>';
+    html += '<div class="suggestion-hint"> </div>';
 
     return html;
   }
