@@ -55,7 +55,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   .app{width:100%;min-width:0;height:100vh}
   .header{height:60px;padding:0 16px}
   .bot-icon{width:38px;height:38px}.bot-title{font-size:15px}
-  .chat{padding:72px 12px 100px;background:var(--page)} /* bottom padding is synced to the fixed composer */
+  .chat{padding:72px 12px 140px;background:var(--page)} /* bottom padding is synced to the fixed composer */
   .message.user,.message.bot{padding-left:0;padding-right:0}
   .bubble{max-width:92%;font-size:13px;padding:10px 14px}
   .composer{position:fixed;left:0;right:0;bottom:0;transform:none;width:100%;max-width:none;min-width:0;padding:12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));gap:8px;flex-shrink:0;background:var(--composer-bg);border-top:1px solid var(--composer-border);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
@@ -66,10 +66,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 @media (max-width:400px){
   .header{padding:0 12px}.header-actions button,.header-actions a{font-size:16px;padding:6px 8px}.header-actions .btn-change{font-size:12px;padding:4px 10px}
-  .question-input{font-size:13px;padding:8px 10px;min-height:38px}.send-btn{width:38px;height:38px;font-size:15px}.composer{padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px));gap:6px}.chat{padding:68px 12px 90px}
+  .question-input{font-size:13px;padding:8px 10px;min-height:38px}.send-btn{width:38px;height:38px;font-size:15px}.composer{padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px));gap:6px}.chat{padding:68px 12px 130px}
 }
 @supports (-webkit-touch-callout:none){.app{height:-webkit-fill-available}.composer{bottom:env(safe-area-inset-bottom,0px)}}
-@media (max-height:500px) and (orientation:landscape){.header{height:52px;padding:0 16px}.bot-icon{width:32px;height:32px}.bot-title{font-size:14px}.chat{padding:62px 16px 72px}.question-input{min-height:34px;/*padding:6px 10px;*/font-size:13px}.send-btn{width:34px;height:34px;font-size:14px}.bubble{padding:8px 12px;font-size:12px}.composer{padding:6px 12px}}
+@media (max-height:500px) and (orientation:landscape){.header{height:52px;padding:0 16px}.bot-icon{width:32px;height:32px}.bot-title{font-size:14px}.chat{padding:62px 16px 110px}.question-input{min-height:34px;/*padding:6px 10px;*/font-size:13px}.send-btn{width:34px;height:34px;font-size:14px}.bubble{padding:8px 12px;font-size:12px}.composer{padding:6px 12px}}
 </style>
 </head>
 <body>
@@ -191,7 +191,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     if (!composer || !chat) return;
 
     if (window.matchMedia('(max-width:900px)').matches) {
-      chat.style.paddingBottom = Math.ceil(composer.getBoundingClientRect().height + 16) + 'px';
+      chat.style.paddingBottom = Math.ceil(composer.getBoundingClientRect().height + 48) + 'px';
     } else {
       chat.style.paddingBottom = '';
     }
@@ -898,10 +898,21 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
   function scrollChat() {
     updateChatBottomPadding();
-    setTimeout(function() {
+
+    const scrollToBottom = function() {
       updateChatBottomPadding();
-      chat.scrollTop = chat.scrollHeight;
-    }, 30);
+      chat.scrollTop = Math.max(0, chat.scrollHeight - chat.clientHeight);
+    };
+
+    requestAnimationFrame(function() {
+      scrollToBottom();
+      requestAnimationFrame(function() {
+        scrollToBottom();
+      });
+    });
+
+    setTimeout(scrollToBottom, 80);
+    setTimeout(scrollToBottom, 180);
   }
 
   function autoResize() {
