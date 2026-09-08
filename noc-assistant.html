@@ -974,7 +974,7 @@
       <textarea
         id="questionInput"
         class="question-input"
-        placeholder="Ask me anything..."
+        placeholder="Ask a question, enter a topic, or type keywords..."
         rows="1"
         autocomplete="off"
       ></textarea>
@@ -1270,7 +1270,7 @@
       isAwaitingSuggestionResponse = false;
       currentSuggestions = [];
       pendingQuestion = '';
-      questionInput.placeholder = 'Ask me anything...';
+      questionInput.placeholder = 'Ask a question, enter a topic, or type keywords...';
       sendQuestion();
       return;
     }
@@ -1300,7 +1300,7 @@
     currentSuggestions = [];
     pendingQuestion = '';
     questionInput.value = '';
-    questionInput.placeholder = 'Ask me anything...';
+    questionInput.placeholder = 'Ask a question, enter a topic, or type keywords...';
     autoResize();
 
     const typingId = showTyping();
@@ -1352,7 +1352,7 @@
     isAwaitingSuggestionResponse = false;
     currentSuggestions = [];
     pendingQuestion = '';
-    questionInput.placeholder = 'Ask me anything...';
+    questionInput.placeholder = 'Ask a question, enter a topic, or type keywords...';
 
     waiting = true;
     sendBtn.disabled = true;
@@ -1394,7 +1394,7 @@
 
     isAwaitingSuggestionResponse = false;
     currentSuggestions = [];
-    questionInput.placeholder = 'Ask me anything...';
+    questionInput.placeholder = 'Ask a question, enter a topic, or type keywords...';
 
     const question = questionInput.value.trim();
     lastSubmittedQuestion = question;
