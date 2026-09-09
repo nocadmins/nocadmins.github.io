@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-  <title>Treasury NOC Assistant</title>
+  <title>NOC Assistant</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,8 +79,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   border-color:rgba(120,120,120,.55);
   box-shadow:0 4px 20px rgba(0,0,0,.16),0 0 28px rgba(70,150,255,.12);
 }
-.input-wrapper:focus-within::before{opacity:.95;animation-duration:5s}.question-input{flex:1;min-width:0;border:0;background:transparent;color:var(--text);padding:14px 16px;outline:none;resize:none;font-family:inherit;font-size:14px;min-height:50px;max-height:130px;line-height:1.5}.question-input::placeholder{color:var(--muted)}.send-btn{width:40px;height:40px;border:0;border-radius:11px;background:#202123;color:#fff;cursor:pointer;font-size:17px;flex-shrink:0;transition:.18s;display:flex;align-items:center;justify-content:center;align-self:flex-end;margin:5px;box-shadow:0 0 8px rgb(113 118 129 / 62%),0 0 18px rgba(32, 33, 35, 0.25);}.send-btn:hover:not(:disabled){background:#343541;transform: scale(1.06);box-shadow:0 0 10px rgba(16, 163, 127, 0.65),0 0 24px rgba(16, 163, 127, 0.40);}.send-btn:active:not(:disabled){ transform: scale(0.96);}.send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000;animation:fadeIn .2s ease-out}.modal-backdrop.show{display:flex}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.modal{width:100%;max-width:440px;background:var(--input-bg);border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:slideUp .25s ease-out}@keyframes slideUp{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}.modal-icon{width:50px;height:50px;border-radius:12px;background:#202123;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:15px;color:#fff}.modal h2{font-size:21px;font-weight:650;margin:0 0 6px;color:var(--text)}.modal p{margin:0 0 22px;color:var(--muted);font-size:14px;line-height:1.6}.field{margin-bottom:17px}.field label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--text)}.field input{width:100%;border:1px solid var(--border);background:var(--input-bg);color:var(--text);padding:12px 13px;border-radius:10px;outline:none;font-family:inherit;font-size:14px;transition:.18s}.field input:focus{border-color:#999;box-shadow:0 0 0 3px rgba(127,127,127,.12)}.br-help{margin-top:6px;color:var(--muted);font-size:12px}.branch-info{margin-top:10px;padding:10px 13px;border-radius:8px;background:rgba(127,127,127,.10);font-size:13px;color:var(--text);display:none}.branch-info.show{display:block}.modal-error{display:none;margin-bottom:15px;padding:11px 13px;border-radius:8px;background:#fff0f0;color:#c62828;font-size:13px;border:1px solid #ffd2d2}.modal-error.show{display:block}.btn-primary{width:100%;border:0;background:#202123;color:#fff;border-radius:10px;padding:13px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.18s}.btn-primary:hover:not(:disabled){background:#343541}.btn-primary:disabled{opacity:.55;cursor:not-allowed}.btn-secondary{width:100%;margin-top:10px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);border-radius:10px;padding:11px;font-family:inherit;font-size:13px;cursor:pointer}.btn-secondary:hover{filter:brightness(.96)}
+.input-wrapper:focus-within::before{opacity:.95;animation-duration:5s}.question-input{flex:1;min-width:0;position:relative;z-index:2;border:0;background:transparent;color:var(--text);padding:14px 16px;outline:none;resize:none;font-family:inherit;font-size:14px;min-height:50px;max-height:130px;line-height:1.5;caret-color:var(--text)}.question-input::placeholder{color:var(--muted)}.input-wrapper:focus-within .question-input{background:linear-gradient(90deg,rgba(0,190,255,.035),rgba(100,80,255,.025),rgba(0,220,170,.035),rgba(255,80,190,.025))}.send-btn{width:40px;height:40px;border:0;border-radius:11px;background:#202123;color:#fff;cursor:pointer;font-size:17px;flex-shrink:0;transition:.18s;display:flex;align-items:center;justify-content:center;align-self:flex-end;margin:5px;box-shadow:0 0 8px rgb(113 118 129 / 62%),0 0 18px rgba(32, 33, 35, 0.25);}.send-btn:hover:not(:disabled){background:#343541;transform: scale(1.06);box-shadow:0 0 10px rgba(16, 163, 127, 0.65),0 0 24px rgba(16, 163, 127, 0.40);}.send-btn:active:not(:disabled){ transform: scale(0.96);}.send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000;animation:fadeIn .2s ease-out}.modal-backdrop.show{display:flex}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.modal{width:100%;max-width:440px;background:var(--input-bg);border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:slideUp .25s ease-out}@keyframes slideUp{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}.modal-icon{width:50px;height:50px;border-radius:12px;background:#202123;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:15px;color:#fff}.modal h2{font-size:21px;font-weight:650;margin:0 0 6px;color:var(--text)}.modal p{margin:0 0 22px;color:var(--muted);font-size:14px;line-height:1.6}.field{margin-bottom:17px}.field label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--text)}
+.floating-field{position:relative;margin-top:20px}.floating-field input{width:100%;border:1px solid var(--border);background:var(--input-bg);color:var(--text);padding:13px;border-radius:10px;outline:none;font-family:inherit;font-size:14px;transition:border-color .18s,box-shadow .18s}.floating-field label{position:absolute;left:11px;top:50%;transform:translateY(-50%);margin:0;padding:0 4px;color:var(--muted);font-size:14px;font-weight:400;pointer-events:none;background:var(--input-bg);transition:all .18s ease}.floating-field input:focus{border-color:#999;box-shadow:0 0 0 3px rgba(127,127,127,.12)}.floating-field input:focus + label,.floating-field input:not(:placeholder-shown) + label{top:0;transform:translateY(-50%);font-size:11px;font-weight:600;color:var(--text)}.floating-field input:focus + label{color:#0b7f68}.floating-field .br-help{margin-top:6px}.floating-field .branch-info{margin-top:10px}.field input:focus{border-color:#999;box-shadow:0 0 0 3px rgba(127,127,127,.12)}.br-help{margin-top:6px;color:var(--muted);font-size:12px}.branch-info{margin-top:10px;padding:10px 13px;border-radius:8px;background:rgba(127,127,127,.10);font-size:13px;color:var(--text);display:none}.branch-info.show{display:block}.modal-error{display:none;margin-bottom:15px;padding:11px 13px;border-radius:8px;background:#fff0f0;color:#c62828;font-size:13px;border:1px solid #ffd2d2}.modal-error.show{display:block}.btn-primary{width:100%;border:0;background:#202123;color:#fff;border-radius:10px;padding:13px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.18s}.btn-primary:hover:not(:disabled){background:#343541}.btn-primary:disabled{opacity:.55;cursor:not-allowed}.btn-secondary{width:100%;margin-top:10px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);border-radius:10px;padding:11px;font-family:inherit;font-size:13px;cursor:pointer}.btn-secondary:hover{filter:brightness(.96)}
 /* Mobile: restore the original full-width composer behavior; never overflow horizontally */
 @media (max-width:900px){
   html,body{overflow:hidden;width:100%;min-width:0}
@@ -92,7 +93,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   .message.user,.message.bot{padding-left:0;padding-right:0}
   .bubble{max-width:92%;font-size:13px;padding:10px 14px}
   .composer{position:fixed;left:0;right:0;bottom:0;transform:none;width:100%;max-width:none;min-width:0;padding:12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));gap:8px;flex-shrink:0;background:var(--composer-bg);border-top:1px solid var(--composer-border);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-  .input-wrapper{min-width:0;width:auto;flex:1;border-radius:14px;box-shadow:none}
+  .input-wrapper{min-width:0;width:auto;flex:1;border-radius:14px;box-shadow:none;overflow:visible}
   .question-input{min-width:0;width:100%;font-size:14px;min-height:44px;padding:10px 12px}
   .send-btn{width:44px;height:44px;margin:0;border-radius:11px;font-size:18px}
   .modal{padding:24px;margin:12px}
@@ -120,7 +121,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
         <img src="./images/bot.png" alt="NOC Assistant">
       </div>
       <div class="bot-info">
-        <div class="bot-title" id="botTitle">Treasury NOC Assistant</div>
+        <div class="bot-title" id="botTitle">NOC</div>
         <div class="bot-status">
           <span class="status-dot"></span>
           <span id="botStatus">Online</span>
@@ -174,14 +175,14 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     <h2>Welcome</h2>
     <p>Please enter your name and BR Code to start using the Treasury NOC Assistant.</p>
 
-    <div class="field">
+    <div class="field floating-field">
+      <input id="nameInput" type="text" placeholder=" " autocomplete="name">
       <label for="nameInput">Your Name</label>
-      <input id="nameInput" type="text" placeholder="Enter your full name" autocomplete="name">
     </div>
 
-    <div class="field">
+    <div class="field floating-field">
+      <input id="brInput" type="text" placeholder=" " autocomplete="off">
       <label for="brInput">BR Code</label>
-      <input id="brInput" type="text" placeholder="e.g., BR0101 or 101" autocomplete="off">
       <div class="br-help">Accepts: BR0101, BR101, br101, BR 101, or 101</div>
       <div class="branch-info" id="branchInfo"></div>
     </div>
