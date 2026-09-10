@@ -429,7 +429,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
       'Hello <strong>' + escapeHtml(userName) + '</strong>!<br><br>' +
       'You are connected to <strong>' + escapeHtml(branchName) + '</strong> ' +
       '(' + escapeHtml(brCode) + ').<br><br>' +
-      'How can I help you today?'
+        ' (Default answers will be related to '+
+      '(' + escapeHtml(brCode)+')'+'<br><br>'+
+      'How can I help you today? '
     );
   }
 
