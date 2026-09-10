@@ -96,16 +96,71 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   .input-wrapper{min-width:0;width:auto;flex:1;border-radius:14px;box-shadow:none;overflow:visible}
   .question-input{min-width:0;width:100%;font-size:14px;min-height:44px;padding:10px 12px}
   .send-btn{width:44px;height:44px;margin:0;border-radius:11px;font-size:18px}
+  .mic-btn{width:36px;height:36px;margin:4px}
   .modal{padding:24px;margin:12px}
 }
 @media (max-width:400px){
   .header{padding:0 12px}.header-actions button,.header-actions a{font-size:16px;padding:6px 8px}.header-actions .btn-change{font-size:12px;padding:4px 10px}
-  .question-input{font-size:13px;padding:8px 10px;min-height:38px}.send-btn{width:38px;height:38px;font-size:15px}.composer{padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px));gap:6px}.chat{padding:68px 12px 130px}
+  .question-input{font-size:13px;padding:8px 10px;min-height:38px}.mic-btn{width:32px;height:32px;margin:3px}.send-btn{width:38px;height:38px;font-size:15px}.composer{padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px));gap:6px}.chat{padding:68px 12px 130px}
 }
 @media (prefers-reduced-motion: reduce){.input-wrapper::before,.input-wrapper::after{animation:none}}
 
 @supports (-webkit-touch-callout:none){.app{height:-webkit-fill-available}.composer{bottom:env(safe-area-inset-bottom,0px)}}
 @media (max-height:500px) and (orientation:landscape){.header{height:52px;padding:0 16px}.bot-icon{width:32px;height:32px}.bot-title{font-size:14px}.chat{padding:62px 16px 110px}.question-input{min-height:34px;/*padding:6px 10px;*/font-size:13px}.send-btn{width:34px;height:34px;font-size:14px}.bubble{padding:8px 12px;font-size:12px}.composer{padding:6px 12px}}
+
+/* Premium visual polish */
+.header{
+  background:linear-gradient(135deg,#17181a 0%,#232427 55%,#1d2b29 100%);
+  box-shadow:0 8px 28px rgba(0,0,0,.16);
+}
+.bot-icon{box-shadow:0 0 0 1px rgba(255,255,255,.10),0 6px 18px rgba(0,0,0,.22)}
+.bot-status .status-dot{box-shadow:0 0 10px rgba(16,163,127,.75)}
+.chat{
+  background:
+    radial-gradient(circle at 15% 12%,rgba(16,163,127,.035),transparent 28%),
+    radial-gradient(circle at 88% 72%,rgba(80,110,255,.035),transparent 30%),var(--page);
+}
+.message.bot .bubble{box-shadow:0 5px 22px rgba(0,0,0,.045)}
+.message.user .bubble{background:linear-gradient(135deg,var(--user),color-mix(in srgb,var(--user) 82%,#fff))}
+.suggestion-item{box-shadow:0 2px 8px rgba(0,0,0,.035)}
+.suggestion-item:hover{
+  transform:translateY(-1px);border-color:rgba(16,163,127,.35);
+  box-shadow:0 5px 14px rgba(16,163,127,.10);
+}
+.send-btn{background:linear-gradient(135deg,#202123,#10a37f)}
+.send-btn:hover:not(:disabled){background:linear-gradient(135deg,#343541,#0d8f70)}
+.composer{isolation:isolate}
+.composer::before{
+  content:"";position:absolute;inset:-18px -28px;border-radius:32px;
+  background:radial-gradient(ellipse at 50% 100%,rgba(16,163,127,.10),transparent 62%);
+  filter:blur(16px);pointer-events:none;z-index:-3;
+}
+.composer-orb{
+  position:absolute;width:7px;height:7px;border-radius:50%;left:12px;top:10px;
+  background:#10a37f;box-shadow:0 0 12px rgba(16,163,127,.8);opacity:.75;
+  z-index:3;pointer-events:none;
+}
+.mic-btn{
+  width:38px;height:38px;border:0;border-radius:11px;background:transparent;color:var(--muted);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  margin:6px;transition:transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease;
+  position:relative;z-index:4;font-size:15px;
+}
+.mic-btn:hover{background:rgba(16,163,127,.10);color:#10a37f;transform:translateY(-1px)}
+.mic-btn.listening{background:rgba(220,53,69,.12);color:#dc3545;
+  box-shadow:0 0 0 5px rgba(220,53,69,.06);animation:micPulse 1.3s ease-in-out infinite}
+@keyframes micPulse{
+  0%,100%{box-shadow:0 0 0 4px rgba(220,53,69,.06)}
+  50%{box-shadow:0 0 0 9px rgba(220,53,69,.02)}
+}
+@media (prefers-color-scheme: dark){
+  .chat{
+    background:
+      radial-gradient(circle at 15% 12%,rgba(16,163,127,.07),transparent 28%),
+      radial-gradient(circle at 88% 72%,rgba(80,110,255,.06),transparent 30%),var(--page);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -147,18 +202,18 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <!-- ============================================================
        COMPOSER
   ============================================================ -->
-  <form class="composer" id="chatForm">
+  <form class="composer" id="chatForm" autocomplete="off">
     <div class="input-wrapper">
-      <textarea
-        id="questionInput"
-        class="question-input"
-        placeholder=" Ask a question..."
-        rows="1"
-        autocomplete="off"
-      ></textarea>
+      <div class="composer-orb" aria-hidden="true"></div>
+      <textarea id="questionInput" class="question-input"
+        placeholder="Ask anything about NOC..." rows="1" autocomplete="off"
+        aria-label="Type your question"></textarea>
+      <button class="mic-btn" id="micBtn" type="button" title="Voice input" aria-label="Voice input">
+        <i class="bi bi-mic-fill"></i>
+      </button>
     </div>
-    <button class="send-btn" id="sendBtn" type="submit" title="Send message">
-➤
+    <button class="send-btn" id="sendBtn" type="submit" title="Send message" aria-label="Send message">
+      <i class="bi bi-arrow-up"></i>
     </button>
   </form>
 
@@ -212,6 +267,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   const questionInput = document.getElementById('questionInput');
   const chatForm = document.getElementById('chatForm');
   const sendBtn = document.getElementById('sendBtn');
+  const micBtn = document.getElementById('micBtn');
   const userModal = document.getElementById('userModal');
   const nameInput = document.getElementById('nameInput');
   const brInput = document.getElementById('brInput');
@@ -244,12 +300,16 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   let isAwaitingSuggestionResponse = false;
   let pendingQuestion = '';
   let lastSubmittedQuestion = '';
+  let recognition = null;
+  let isListening = false;
+  let voiceBaseText = '';
 
   /* ============================================================
      INIT
   ============================================================ */
   document.addEventListener('DOMContentLoaded', function() {
     updateChatBottomPadding();
+    setupVoiceInput();
 
     const composer = document.getElementById('chatForm');
     if (window.ResizeObserver && composer) {
@@ -970,6 +1030,91 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     saveUserBtn.disabled = loading;
     saveUserBtn.textContent = loading ? 'Validating...' : 'Continue';
   }
+
+  /* ============================================================
+     VOICE INPUT
+     Browser Web Speech API - speech to text for the composer.
+  ============================================================ */
+  function setupVoiceInput() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      micBtn.title = 'Voice input is not supported in this browser';
+      micBtn.setAttribute('aria-label', 'Voice input is not supported');
+      micBtn.style.opacity = '.45';
+      micBtn.style.cursor = 'not-allowed';
+      return;
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = navigator.language || 'en-IN';
+
+    recognition.onstart = function() {
+      isListening = true;
+      voiceBaseText = questionInput.value.trim();
+      micBtn.classList.add('listening');
+      micBtn.innerHTML = '<i class="bi bi-stop-fill"></i>';
+      micBtn.title = 'Stop voice input';
+      questionInput.placeholder = 'Listening… speak now';
+    };
+
+    recognition.onresult = function(event) {
+      let transcript = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        transcript += event.results[i][0].transcript;
+      }
+      transcript = transcript.trim();
+      if (!transcript) return;
+      questionInput.value = voiceBaseText
+        ? voiceBaseText + (voiceBaseText.endsWith(' ') ? '' : ' ') + transcript
+        : transcript;
+      autoResize();
+    };
+
+    recognition.onerror = function(event) {
+      stopVoiceUI();
+      if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+        addBotMessage('Microphone access was blocked. Please allow microphone permission in your browser and try again.');
+      } else if (event.error !== 'aborted' && event.error !== 'no-speech') {
+        addBotMessage('Voice input could not be started. Please try again.');
+      }
+    };
+
+    recognition.onend = function() {
+      stopVoiceUI();
+      questionInput.focus();
+    };
+  }
+
+  function stopVoiceUI() {
+    isListening = false;
+    micBtn.classList.remove('listening');
+    micBtn.innerHTML = '<i class="bi bi-mic-fill"></i>';
+    micBtn.title = 'Voice input';
+    questionInput.placeholder = isAwaitingSuggestionResponse
+      ? 'Click a related question or type...'
+      : 'Ask anything about NOC...';
+  }
+
+  function toggleVoiceInput() {
+    if (!recognition) {
+      addBotMessage('Voice input is not supported by this browser. Please use a browser with Web Speech API support.');
+      return;
+    }
+    if (isListening) {
+      recognition.stop();
+      return;
+    }
+    try {
+      voiceBaseText = questionInput.value.trim();
+      recognition.start();
+    } catch (e) {
+      stopVoiceUI();
+    }
+  }
+
+  micBtn.addEventListener('click', toggleVoiceInput);
 
   /* ============================================================
      JSONP CLIENT
