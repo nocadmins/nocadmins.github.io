@@ -29,6 +29,21 @@
     <div class="mb-4">
         <span class="status-badge"><i class="bi bi-info-circle"></i> Awaiting confirmation will be shown after submit</span>
     </div>
+     
+<div class="alert alert-danger" role="alert">
+  <strong><i class="bi bi-exclamation-triangle-fill"></i> Important Warning:</strong>
+  Do not submit a shutdown request after manually switching off the FatPipe device.
+  This may damage the device and can cause a permanent disconnection between the
+  branch and the Head-End device.
+</div>
+
+<div class="alert alert-primary" role="alert">
+  <strong><i class="bi bi-info-circle-fill"></i> Proper Shutdown Procedure:</strong>
+  After initiating the remote shutdown request and receiving confirmation, wait a
+  few minutes for the device to shut down properly. Once all the device LEDs have
+  turned off, switch off the power supply to the FatPipe device.
+  <strong>This step is essential for a safe shutdown.</strong>
+</div>
 
     <form id="shutdownForm" autocomplete="off">
         <div class="row g-4">
