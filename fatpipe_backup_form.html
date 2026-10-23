@@ -17,7 +17,7 @@
   <header class="header">
     <div class="brand"><div class="brandmark" aria-hidden="true">▣</div><div><div class="eyebrow"></div></div></div>
     <h1>FatPipe Device Configuration Backup</h1>
-    <p class="subtitle">Select your Treasury/Branch and device, then upload the backup ZIP.</p>
+    <p class="subtitle">Select your Treasury/Branch and device, then upload the backup file.</p>
   </header>
   <form class="form" id="backupForm">
     <div class="field">
@@ -34,8 +34,8 @@
       <select class="control" id="deviceType" name="deviceType" required><option value="">Select device type</option><option value="Type 1">Type 1</option><option value="Type 2">Type 2</option></select>
     </div>
     <div class="field">
-      <label for="backupZip">Backup ZIP file <span class="required">*</span></label>
-      <div class="filebox"><input id="backupZip" name="backupZip" type="file" accept=".zip,application/zip,application/x-zip-compressed" required><div class="filemeta" id="fileMeta">ZIP archive only · Maximum 25 MB</div></div>
+      <label for="backupZip">Backup file <span class="required">*</span></label>
+      <div class="filebox"><input id="backupZip" name="backupZip" type="file" required><div class="filemeta" id="fileMeta">Any file type · Maximum 25 MB</div></div>
     </div>
     <button class="submit" id="submitBtn" type="submit">Submit</button>
   </form>
@@ -45,7 +45,7 @@
 </div>
 <script>
 // Replace this with the deployed Google Apps Script Web App URL ending in /exec.
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbySAe1ZtXMIZLfatwnbADU_h7MqVMhR1whfbhci_sRitQiERmCKCPRxPb5pfgqrJ7XA/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytbv_vi-5rhdpYVyrlq-kQyGz8ReGcjXFsujFz0w_3mgjXsCBL6RgMqfkGATkItJXo/exec';
 const BRANCH_LIST_ACTION = 'getBranches';
 const SUBMIT_ACTION = 'submitBackup';
 const STATUS_ACTION = 'getSubmissionStatus';
@@ -107,9 +107,9 @@ async function loadBranches(){
   try{const result=await jsonp({action:BRANCH_LIST_ACTION});if(!result||result.success!==true||!Array.isArray(result.branches))throw new Error(result?.message||'Branch list unavailable.');branches=[...new Set(result.branches.map(v=>String(v||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));branchListReady=true;branchSearch.placeholder=branches.length?'Search Treasury/Branch…':'No branches found';if(!branches.length)branchSearch.disabled=true;}
   catch(err){branchSearch.placeholder='Could not load branch list';branchSearch.disabled=true;popup(false,err.message||'Unable to load the Treasury/Branch list.');}
 }
-fileInput.addEventListener('change',()=>{const file=fileInput.files[0];if(!file){fileMeta.textContent='ZIP archive only · Maximum 25 MB';return;}fileMeta.textContent=file.name+' · '+(file.size/(1024*1024)).toFixed(2)+' MB';if(!file.name.toLowerCase().endsWith('.zip')){fileInput.value='';fileMeta.textContent='ZIP archive only · Maximum 25 MB';popup(false,'Only ZIP files are accepted.');}});
+fileInput.addEventListener('change',()=>{const file=fileInput.files[0];if(!file){fileMeta.textContent='Any file type · Maximum 25 MB';return;}fileMeta.textContent=file.name+' · '+(file.size/(1024*1024)).toFixed(2)+' MB';});
 function setBusy(busy){submitBtn.disabled=busy;submitBtn.innerHTML=busy?'<span class="spinner"></span>Uploading backup…':'Submit Backup';}
-function readAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('The ZIP file could not be read.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
+function readAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('The selected file could not be read.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
 function waitForStatus(requestId, maxWaitMs=90000){
   return new Promise((resolve,reject)=>{const started=Date.now();let stopped=false;const poll=async()=>{if(stopped)return;try{const result=await jsonp({action:STATUS_ACTION,requestId});if(result&&result.ready){stopped=true;resolve(result);return;}}catch(e){}if(Date.now()-started>=maxWaitMs){stopped=true;reject(new Error('The server did not return a final submission status. Please check the response sheet before retrying.'));return;}setTimeout(poll,1800);};poll();});
 }
@@ -121,17 +121,16 @@ form.addEventListener('submit',async event=>{
   branchSearch.setCustomValidity('');
   const deviceType=document.getElementById('deviceType').value;const file=fileInput.files[0];
   if(!deviceType||!file){form.reportValidity();return;}
-  if(!file.name.toLowerCase().endsWith('.zip')){popup(false,'Only ZIP files are accepted.');return;}
-  const MAX_MB=25;if(file.size>MAX_MB*1024*1024){popup(false,'The selected ZIP exceeds the 25 MB upload limit.');return;}
+  const MAX_MB=25;if(file.size>MAX_MB*1024*1024){popup(false,'The selected file exceeds the 25 MB upload limit.');return;}
   setBusy(true);
   try{
     const base64=await readAsBase64(file);
     const requestId=(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));activeRequestId=requestId;
-    const payload={action:SUBMIT_ACTION,requestId,treasuryBranch:selectedBranch,deviceType,fileName:file.name,mimeType:'application/zip',fileBase64:base64};
+    const payload={action:SUBMIT_ACTION,requestId,treasuryBranch:selectedBranch,deviceType,fileName:file.name,mimeType:(file.type||'application/octet-stream'),fileBase64:base64};
     // POST uses text/plain to avoid a CORS preflight. Final success/failure is retrieved by JSONP status polling.
     await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
     const result=await waitForStatus(requestId);
-    if(result.success){popup(true,'The backup ZIP was uploaded and the details was updated.');form.reset();selectedBranch='';fileMeta.textContent='ZIP archive only · Maximum 25 MB';}
+    if(result.success){popup(true,'The backup file was uploaded and the details were updated.');form.reset();selectedBranch='';fileMeta.textContent='Any file type · Maximum 25 MB';}
     else popup(false,result.message||'The server could not save this backup.');
   }catch(err){popup(false,err.message||'The backup could not be submitted. Please try again.');}
   finally{setBusy(false);}
