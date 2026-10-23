@@ -31,8 +31,15 @@
     </div>
     <div class="field">
       <label for="deviceType">Device Type <span class="required">*</span></label>
-      <select class="control" id="deviceType" name="deviceType" required><option value="">Select device type</option><option value="Type 1">Type 1</option><option value="Type 2">Type 2</option></select>
-    </div>
+      <select class="control" id="deviceType" name="deviceType" required>
+	  <option value="">Select device type</option>
+	  <option value="Type 1">Type 1- District Treasury Device</option>
+	  <option value="Type 2">Type 2- Sub Treasury Device</option>
+	  </select>
+    
+	   	<div class="hint">Choose 'Type 1' for District Treasuries and 'Type 2' for Sub Treasuries.</div>
+	</div>
+
     <div class="field">
       <label for="backupZip">Backup file <span class="required">*</span></label>
       <div class="filebox"><input id="backupZip" name="backupZip" type="file" required><div class="filemeta" id="fileMeta">Any file type · Maximum 25 MB</div></div>
