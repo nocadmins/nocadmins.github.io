@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FatPipe Device Configuration Backup</title>
+<style>
+:root{--blue:#174a8b;--blue-hover:#103b73;--ink:#172b4d;--muted:#68778d;--line:#dbe3ee;--pale:#f5f8fc;--red:#b42318;--green:#067647}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:24px;background:#f5f7fb;color:var(--ink);font:15px/1.45 "Segoe UI",Arial,sans-serif;display:grid;place-items:center}
+.card{width:min(100%,540px);background:#fff;border:1px solid #e4eaf2;border-radius:18px;box-shadow:0 12px 36px #183b6510;overflow:visible}.header{padding:25px 28px 20px;border-bottom:1px solid #edf1f6}.brand{display:flex;align-items:center;gap:11px}.brandmark{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:#eaf1fb;color:var(--blue);font-size:21px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.1px;text-transform:uppercase;color:var(--blue)}h1{font-size:22px;line-height:1.25;margin:15px 0 7px;letter-spacing:-.35px}.subtitle{margin:0;color:var(--muted);font-size:13px}.form{padding:24px 28px 28px}.field{margin-bottom:20px}label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}.required{color:#c12d35}.control{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:#fff;color:var(--ink);font:inherit;outline:none}.control:focus,.search:focus{border-color:#6e98d0;box-shadow:0 0 0 3px #2468b414}.branch-picker{position:relative}.search{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 40px 0 12px;background:#fff;color:var(--ink);font:inherit;outline:none}.chevron{position:absolute;right:14px;top:12px;color:#77869a;pointer-events:none}.suggestions{display:none;position:absolute;z-index:10;top:49px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 24px #183b6518;padding:5px}.suggestions.open{display:block}.suggestion{display:block;width:100%;text-align:left;border:0;border-radius:7px;padding:10px;background:#fff;color:var(--ink);font:inherit;cursor:pointer}.suggestion:hover,.suggestion:focus{background:#edf4ff;outline:none}.empty{padding:12px;color:var(--muted);font-size:13px}.filebox{border:1px dashed #b7c6da;border-radius:11px;background:#fafcff;padding:14px}.filebox input{width:100%;font:13px "Segoe UI",Arial,sans-serif;color:var(--muted)}.filemeta{font-size:12px;color:var(--muted);margin-top:9px;overflow-wrap:anywhere}.hint{font-size:12px;color:var(--muted);margin-top:7px}.submit{width:100%;height:46px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:14px;font-weight:750;cursor:pointer;transition:background .15s,transform .15s}.submit:hover{background:var(--blue-hover)}.submit:active{transform:translateY(1px)}.submit:disabled{opacity:.65;cursor:wait}.spinner{display:inline-block;width:14px;height:14px;border:2px solid #ffffff70;border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:8px}@keyframes spin{to{transform:rotate(360deg)}}
+.overlay{position:fixed;inset:0;z-index:50;background:#14243d66;display:none;place-items:center;padding:20px}.overlay.show{display:grid}.dialog{width:min(100%,360px);border-radius:17px;background:#fff;box-shadow:0 24px 80px #081b3440;padding:27px 24px 23px;text-align:center;animation:pop .18s ease-out}@keyframes pop{from{opacity:0;transform:translateY(7px) scale(.98)}to{opacity:1;transform:none}}.result-icon{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px;font-size:25px;font-weight:700}.dialog.success .result-icon{background:#e8f7ef;color:var(--green)}.dialog.error .result-icon{background:#fff0ef;color:var(--red)}.dialog h2{font-size:19px;margin:0 0 7px}.dialog p{font-size:13px;color:var(--muted);margin:0 0 21px;overflow-wrap:anywhere}.dialog button{height:41px;min-width:110px;padding:0 20px;border:0;border-radius:9px;background:var(--blue);color:white;font-weight:700;cursor:pointer}.dialog button:focus-visible{outline:3px solid #9cbce8;outline-offset:2px}
+@media(max-width:520px){body{padding:12px;align-items:start}.card{margin:auto 0}.header{padding:22px 20px 18px}.form{padding:21px 20px 23px}h1{font-size:20px}}
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="header">
+    <div class="brand"><div class="brandmark" aria-hidden="true">▣</div><div><div class="eyebrow"></div></div></div>
+    <h1>FatPipe Device Configuration Backup</h1>
+    <p class="subtitle">Select your Treasury/Branch and device, then upload the backup ZIP.</p>
+  </header>
+  <form class="form" id="backupForm">
+    <div class="field">
+      <label for="branchSearch">Treasury / Branch <span class="required">*</span></label>
+      <div class="branch-picker" id="branchPicker">
+        <input class="search" id="branchSearch" type="text" placeholder="Loading Treasury/Branch list…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="branchSuggestions" required>
+        <span class="chevron" aria-hidden="true">⌵</span>
+        <div class="suggestions" id="branchSuggestions" role="listbox"></div>
+      </div>
+      <div class="hint">Type to search, then select the matching branch.</div>
+    </div>
+    <div class="field">
+      <label for="deviceType">Device Type <span class="required">*</span></label>
+      <select class="control" id="deviceType" name="deviceType" required><option value="">Select device type</option><option value="Type 1">Type 1</option><option value="Type 2">Type 2</option></select>
+    </div>
+    <div class="field">
+      <label for="backupZip">Backup ZIP file <span class="required">*</span></label>
+      <div class="filebox"><input id="backupZip" name="backupZip" type="file" accept=".zip,application/zip,application/x-zip-compressed" required><div class="filemeta" id="fileMeta">ZIP archive only · Maximum 25 MB</div></div>
+    </div>
+    <button class="submit" id="submitBtn" type="submit">Submit</button>
+  </form>
+</main>
+<div class="overlay" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultTitle" aria-describedby="resultMessage">
+  <div class="dialog" id="resultDialog"><div class="result-icon" id="resultIcon">✓</div><h2 id="resultTitle">Submission successful</h2><p id="resultMessage">Your backup has been saved.</p><button id="closeDialog" type="button">OK</button></div>
+</div>
+<script>
+// Replace this with the deployed Google Apps Script Web App URL ending in /exec.
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbySAe1ZtXMIZLfatwnbADU_h7MqVMhR1whfbhci_sRitQiERmCKCPRxPb5pfgqrJ7XA/exec';
+const BRANCH_LIST_ACTION = 'getBranches';
+const SUBMIT_ACTION = 'submitBackup';
+const STATUS_ACTION = 'getSubmissionStatus';
+const form = document.getElementById('backupForm');
+const branchSearch = document.getElementById('branchSearch');
+const suggestions = document.getElementById('branchSuggestions');
+const fileInput = document.getElementById('backupZip');
+const fileMeta = document.getElementById('fileMeta');
+const submitBtn = document.getElementById('submitBtn');
+const overlay = document.getElementById('resultOverlay');
+const resultDialog = document.getElementById('resultDialog');
+let branches = [];
+let selectedBranch = '';
+let branchListReady = false;
+let activeRequestId = '';
+
+function validEndpoint(){return APPS_SCRIPT_URL.startsWith('https://script.google.com/macros/s/') && APPS_SCRIPT_URL.endsWith('/exec');}
+function popup(success, message){
+  resultDialog.className='dialog '+(success?'success':'error');
+  document.getElementById('resultIcon').textContent=success?'✓':'!';
+  document.getElementById('resultTitle').textContent=success?'Submission successful':'Submission failed';
+  document.getElementById('resultMessage').textContent=message || (success?'Your backup has been saved.':'The backup could not be submitted. Please try again.');
+  overlay.classList.add('show');
+  document.getElementById('closeDialog').focus();
+}
+function closePopup(){overlay.classList.remove('show');}
+document.getElementById('closeDialog').addEventListener('click',closePopup);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closePopup();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closePopup();});
+function jsonp(params, timeoutMs=20000){
+  return new Promise((resolve,reject)=>{
+    const cb='__fatpipeCb_'+Math.random().toString(36).slice(2);
+    const script=document.createElement('script');let finished=false;
+    const timer=setTimeout(()=>finish(new Error('Request timed out.')),timeoutMs);
+    function finish(err,value){if(finished)return;finished=true;clearTimeout(timer);delete window[cb];script.remove();err?reject(err):resolve(value);}
+    window[cb]=data=>finish(null,data);
+    script.onerror=()=>finish(new Error('Could not contact Apps Script.'));
+    const query=new URLSearchParams({...params,callback:cb,_:Date.now().toString()});
+    script.src=APPS_SCRIPT_URL+'?'+query.toString();document.head.appendChild(script);
+  });
+}
+function renderSuggestions(query=''){
+  const q=query.trim().toLocaleLowerCase();
+  const filtered=branches.filter(name=>name.toLocaleLowerCase().includes(q)).slice(0,150);
+  suggestions.innerHTML='';
+  if(!filtered.length){const empty=document.createElement('div');empty.className='empty';empty.textContent=branchListReady?'No matching Treasury/Branch':'Loading branch list…';suggestions.appendChild(empty);}
+  filtered.forEach(name=>{const button=document.createElement('button');button.type='button';button.className='suggestion';button.role='option';button.textContent=name;button.addEventListener('click',()=>chooseBranch(name));suggestions.appendChild(button);});
+}
+function openSuggestions(){renderSuggestions(branchSearch.value);suggestions.classList.add('open');branchSearch.setAttribute('aria-expanded','true');}
+function hideSuggestions(){suggestions.classList.remove('open');branchSearch.setAttribute('aria-expanded','false');}
+function chooseBranch(name){selectedBranch=name;branchSearch.value=name;branchSearch.setCustomValidity('');hideSuggestions();}
+branchSearch.addEventListener('focus',openSuggestions);
+branchSearch.addEventListener('click',openSuggestions);
+branchSearch.addEventListener('input',()=>{selectedBranch='';branchSearch.setCustomValidity('Select a Treasury/Branch from the suggestions.');openSuggestions();});
+branchSearch.addEventListener('keydown',e=>{if(e.key==='Escape')hideSuggestions();if(e.key==='ArrowDown'){e.preventDefault();const first=suggestions.querySelector('button');if(first)first.focus();}});
+document.addEventListener('click',e=>{if(!document.getElementById('branchPicker').contains(e.target))hideSuggestions();});
+async function loadBranches(){
+  if(!validEndpoint()){branchSearch.placeholder='Configure Apps Script URL first';branchSearch.disabled=true;popup(false,'Add your deployed Apps Script Web App URL to APPS_SCRIPT_URL in this HTML file.');return;}
+  try{const result=await jsonp({action:BRANCH_LIST_ACTION});if(!result||result.success!==true||!Array.isArray(result.branches))throw new Error(result?.message||'Branch list unavailable.');branches=[...new Set(result.branches.map(v=>String(v||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));branchListReady=true;branchSearch.placeholder=branches.length?'Search Treasury/Branch…':'No branches found';if(!branches.length)branchSearch.disabled=true;}
+  catch(err){branchSearch.placeholder='Could not load branch list';branchSearch.disabled=true;popup(false,err.message||'Unable to load the Treasury/Branch list.');}
+}
+fileInput.addEventListener('change',()=>{const file=fileInput.files[0];if(!file){fileMeta.textContent='ZIP archive only · Maximum 25 MB';return;}fileMeta.textContent=file.name+' · '+(file.size/(1024*1024)).toFixed(2)+' MB';if(!file.name.toLowerCase().endsWith('.zip')){fileInput.value='';fileMeta.textContent='ZIP archive only · Maximum 25 MB';popup(false,'Only ZIP files are accepted.');}});
+function setBusy(busy){submitBtn.disabled=busy;submitBtn.innerHTML=busy?'<span class="spinner"></span>Uploading backup…':'Submit Backup';}
+function readAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('The ZIP file could not be read.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
+function waitForStatus(requestId, maxWaitMs=90000){
+  return new Promise((resolve,reject)=>{const started=Date.now();let stopped=false;const poll=async()=>{if(stopped)return;try{const result=await jsonp({action:STATUS_ACTION,requestId});if(result&&result.ready){stopped=true;resolve(result);return;}}catch(e){}if(Date.now()-started>=maxWaitMs){stopped=true;reject(new Error('The server did not return a final submission status. Please check the response sheet before retrying.'));return;}setTimeout(poll,1800);};poll();});
+}
+form.addEventListener('submit',async event=>{
+  event.preventDefault();
+  if(!validEndpoint()){popup(false,'Configure the Apps Script Web App URL before submitting.');return;}
+  if(!branchListReady){popup(false,'The Treasury/Branch list is not ready. Refresh the page and try again.');return;}
+  if(!selectedBranch||selectedBranch!==branchSearch.value){branchSearch.setCustomValidity('Select a Treasury/Branch from the suggestions.');branchSearch.reportValidity();openSuggestions();return;}
+  branchSearch.setCustomValidity('');
+  const deviceType=document.getElementById('deviceType').value;const file=fileInput.files[0];
+  if(!deviceType||!file){form.reportValidity();return;}
+  if(!file.name.toLowerCase().endsWith('.zip')){popup(false,'Only ZIP files are accepted.');return;}
+  const MAX_MB=25;if(file.size>MAX_MB*1024*1024){popup(false,'The selected ZIP exceeds the 25 MB upload limit.');return;}
+  setBusy(true);
+  try{
+    const base64=await readAsBase64(file);
+    const requestId=(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));activeRequestId=requestId;
+    const payload={action:SUBMIT_ACTION,requestId,treasuryBranch:selectedBranch,deviceType,fileName:file.name,mimeType:'application/zip',fileBase64:base64};
+    // POST uses text/plain to avoid a CORS preflight. Final success/failure is retrieved by JSONP status polling.
+    await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+    const result=await waitForStatus(requestId);
+    if(result.success){popup(true,'The backup ZIP was uploaded and the details was updated.');form.reset();selectedBranch='';fileMeta.textContent='ZIP archive only · Maximum 25 MB';}
+    else popup(false,result.message||'The server could not save this backup.');
+  }catch(err){popup(false,err.message||'The backup could not be submitted. Please try again.');}
+  finally{setBusy(false);}
+});
+loadBranches();
+</script>
+</body>
+</html>
