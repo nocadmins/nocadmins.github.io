@@ -137,7 +137,7 @@ form.addEventListener('submit',async event=>{
     // POST uses text/plain to avoid a CORS preflight. Final success/failure is retrieved by JSONP status polling.
     await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
     const result=await waitForStatus(requestId);
-    if(result.success){popup(true,'The backup file was uploaded and the details were updated.');form.reset();selectedBranch='';fileMeta.textContent='Any file type · Maximum 25 MB';}
+    if(result.success){popup(true,'The backup file was uploaded and the details were updated.');form.reset();selectedBranch='';fileMeta.textContent='';}
     else popup(false,result.message||'The server could not save this backup.');
   }catch(err){popup(false,err.message||'The backup could not be submitted. Please try again.');}
   finally{setBusy(false);}
