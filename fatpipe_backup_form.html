@@ -114,7 +114,7 @@ async function loadBranches(){
   try{const result=await jsonp({action:BRANCH_LIST_ACTION});if(!result||result.success!==true||!Array.isArray(result.branches))throw new Error(result?.message||'Branch list unavailable.');branches=[...new Set(result.branches.map(v=>String(v||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));branchListReady=true;branchSearch.placeholder=branches.length?'Search Treasury/Branch…':'No branches found';if(!branches.length)branchSearch.disabled=true;}
   catch(err){branchSearch.placeholder='Could not load branch list';branchSearch.disabled=true;popup(false,err.message||'Unable to load the Treasury/Branch list.');}
 }
-fileInput.addEventListener('change',()=>{const file=fileInput.files[0];if(!file){fileMeta.textContent='Any file type · Maximum 25 MB';return;}fileMeta.textContent=file.name+' · '+(file.size/(1024*1024)).toFixed(2)+' MB';});
+fileInput.addEventListener('change',()=>{const file=fileInput.files[0];if(!file){fileMeta.textContent='';return;}fileMeta.textContent=file.name+' · '+(file.size/(1024*1024)).toFixed(2)+' MB';});
 function setBusy(busy){submitBtn.disabled=busy;submitBtn.innerHTML=busy?'<span class="spinner"></span>Uploading backup…':'Submit Backup';}
 function readAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('The selected file could not be read.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
 function waitForStatus(requestId, maxWaitMs=90000){
