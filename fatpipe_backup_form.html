@@ -7,7 +7,7 @@
 <style>
 :root{--primary:#0756b8;--primary-hover:#064799;--primary-soft:#eaf2ff;--ink:#0756b8;--muted:#62758e;--line:#c9d8ec;--surface:#ffffff;--page:#eef4fc;--red:#b42318;--green:#067647;--blue:var(--primary);--blue-hover:var(--primary-hover);--pale:var(--page)}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;padding:24px;background:var(--page);color:var(--ink);font:15px/1.45 "Segoe UI",Arial,sans-serif;display:grid;place-items:center}
-.card{width:min(100%,540px);background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 36px #183b6510;overflow:visible}.header{padding:25px 28px 20px;border-bottom:1px solid #edf1f6}.brand{display:flex;align-items:center;gap:11px}.brandmark{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:var(--primary-soft);color:var(--primary);font-size:21px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.1px;text-transform:uppercase;color:var(--blue)}h1{font-size:22px;line-height:1.25;margin:15px 0 7px;letter-spacing:-.35px}.subtitle{margin:0;color:var(--muted);font-size:13px}.form{padding:24px 28px 28px}.field{margin-bottom:20px}label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}.required{color:#c12d35}.control{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:#fff;color:var(--ink);font:inherit;outline:none}.control:focus,.search:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}.branch-picker{position:relative}.search{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 40px 0 12px;background:#fff;color:var(--ink);font:inherit;outline:none}.chevron{position:absolute;right:14px;top:12px;color:#77869a;pointer-events:none}.suggestions{display:none;position:absolute;z-index:10;top:49px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 24px #183b6518;padding:5px}.suggestions.open{display:block}.suggestion{display:block;width:100%;text-align:left;border:0;border-radius:7px;padding:10px;background:#fff;color:var(--ink);font:inherit;cursor:pointer}.suggestion:hover,.suggestion:focus{background:var(--primary-soft);outline:none}.empty{padding:12px;color:var(--muted);font-size:13px}.filebox{border:1px dashed var(--line);border-radius:11px;background:var(--page);padding:14px}.filebox input{width:100%;font:13px "Segoe UI",Arial,sans-serif;color:var(--muted)}.filemeta{font-size:12px;color:var(--muted);margin-top:9px;overflow-wrap:anywhere}.hint{font-size:12px;color:var(--muted);margin-top:7px}.submit{width:100%;height:46px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:14px;font-weight:750;cursor:pointer;transition:background .15s,transform .15s}.submit:hover{background:var(--blue-hover)}.submit:active{transform:translateY(1px)}.submit:disabled{opacity:.65;cursor:wait}.spinner{display:inline-block;width:14px;height:14px;border:2px solid #ffffff70;border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:8px}@keyframes spin{to{transform:rotate(360deg)}}
+.card{width:min(100%,540px);background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 36px #183b6510;overflow:visible}.header{padding:25px 28px 20px;border-bottom:1px solid #edf1f6}.brand{display:flex;align-items:center;gap:11px}.brandmark{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:var(--primary-soft);color:var(--primary);font-size:21px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.1px;text-transform:uppercase;color:var(--blue)}h1{font-size:22px;line-height:1.25;margin:15px 0 7px;letter-spacing:-.35px}.subtitle{margin:0;color:var(--muted);font-size:13px}.form{padding:24px 28px 28px}.field{margin-bottom:22px}.required{color:#c12d35}.floating-field{position:relative}.floating-field>.floating-label{position:absolute;z-index:2;left:12px;top:15px;margin:0;padding:0 4px;background:#fff;color:var(--muted);font-size:14px;font-weight:500;pointer-events:none;transition:all .16s ease}.control,.search{width:100%;height:50px;border:1px solid var(--line);border-radius:10px;padding:17px 12px 5px;background:#fff;color:var(--ink);font:inherit;outline:none}.control:focus,.search:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}.floating-field:focus-within>.floating-label,.floating-field.has-value>.floating-label,.floating-field>.search:not(:placeholder-shown)~.floating-label,.floating-field>.control:valid~.floating-label{top:-8px;font-size:11px;font-weight:700;color:var(--primary)}.branch-picker{position:relative}.search{padding-right:40px}.chevron{position:absolute;right:14px;top:15px;color:#77869a;pointer-events:none}.suggestions{display:none;position:absolute;z-index:10;top:55px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 24px #183b6518;padding:5px}.suggestions.open{display:block}.suggestion{display:block;width:100%;text-align:left;border:0;border-radius:7px;padding:10px;background:#fff;color:var(--ink);font:inherit;cursor:pointer}.suggestion:hover,.suggestion:focus{background:var(--primary-soft);outline:none}.empty{padding:12px;color:var(--muted);font-size:13px}.filebox{position:relative;border:1.5px dashed var(--line);border-radius:11px;background:var(--page);padding:20px 14px;text-align:center;transition:border-color .18s,background .18s}.filebox.dragover{border-color:var(--primary);background:var(--primary-soft)}.drop-label{display:block;margin:0 0 8px;color:var(--ink);font-size:13px;font-weight:700}.drop-prompt{font-size:13px;color:var(--muted);line-height:1.6}.browse-label{display:inline-block;margin:7px 0 0;padding:7px 12px;border-radius:7px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700;cursor:pointer}.filebox input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.filebox:focus-within{outline:3px solid var(--primary-soft)}.filemeta{font-size:12px;color:var(--muted);margin-top:9px;overflow-wrap:anywhere}.hint{font-size:12px;color:var(--muted);margin-top:7px}.submit{width:100%;height:46px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:14px;font-weight:750;cursor:pointer;transition:background .15s,transform .15s}.submit:hover{background:var(--blue-hover)}.submit:active{transform:translateY(1px)}.submit:disabled{opacity:.65;cursor:wait}.spinner{display:inline-block;width:14px;height:14px;border:2px solid #ffffff70;border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:8px}@keyframes spin{to{transform:rotate(360deg)}}
 .overlay{position:fixed;inset:0;z-index:50;background:#173b6866;display:none;place-items:center;padding:20px}.overlay.show{display:grid}.dialog{width:min(100%,360px);border-radius:17px;background:#fff;box-shadow:0 24px 80px #081b3440;padding:27px 24px 23px;text-align:center;animation:pop .18s ease-out}@keyframes pop{from{opacity:0;transform:translateY(7px) scale(.98)}to{opacity:1;transform:none}}.result-icon{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px;font-size:25px;font-weight:700}.dialog.success .result-icon{background:#e8f7ef;color:var(--green)}.dialog.error .result-icon{background:#fff0ef;color:var(--red)}.dialog h2{font-size:19px;margin:0 0 7px}.dialog p{font-size:13px;color:var(--muted);margin:0 0 21px;overflow-wrap:anywhere}.dialog button{height:41px;min-width:110px;padding:0 20px;border:0;border-radius:9px;background:var(--blue);color:white;font-weight:700;cursor:pointer}.dialog button:focus-visible{outline:3px solid var(--line);outline-offset:2px}
 @media(max-width:520px){body{padding:12px;align-items:start}.card{margin:auto 0}.header{padding:22px 20px 18px}.form{padding:21px 20px 23px}h1{font-size:20px}}
 </style>
@@ -21,28 +21,34 @@
   </header>
   <form class="form" id="backupForm">
     <div class="field">
-      <label for="branchSearch">Treasury / Branch <span class="required">*</span></label>
-      <div class="branch-picker" id="branchPicker">
-        <input class="search" id="branchSearch" type="text" placeholder="Search or enter Treasury/Branch…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="branchSuggestions" required>
+      <div class="branch-picker floating-field" id="branchPicker">
+        <input class="search" id="branchSearch" type="text" placeholder=" " autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="branchSuggestions" required>
+        <label class="floating-label" for="branchSearch">Treasury / Branch <span class="required">*</span></label>
         <span class="chevron" aria-hidden="true">⌵</span>
         <div class="suggestions" id="branchSuggestions" role="listbox"></div>
       </div>
       <div class="hint">Choose a listed Treasury/Branch or type any other branch name and keep the entered value.</div>
     </div>
     <div class="field">
-      <label for="deviceType">Device Type <span class="required">*</span></label>
-      <select class="control" id="deviceType" name="deviceType" required>
-	  <option value="">Select device type</option>
-	  <option value="Type 1">1- District Treasury Device</option>
-	  <option value="Type 2">2- Sub Treasury Device</option>
-	  </select>
-    
-	   	<div class="hint">Choose 'Type 1' for District Treasuries and 'Type 2' for Sub Treasuries.</div>
-	</div>
-
+      <div class="floating-field">
+        <select class="control" id="deviceType" name="deviceType" required>
+          <option value="" selected disabled></option>
+          <option value="Type 1">1- District Treasury Device</option>
+          <option value="Type 2">2- Sub Treasury Device</option>
+        </select>
+        <label class="floating-label" for="deviceType">Device Type <span class="required">*</span></label>
+      </div>
+      <div class="hint">Choose 'Type 1' for District Treasuries and 'Type 2' for Sub Treasuries.</div>
+    </div>
     <div class="field">
-      <label for="backupZip">Backup file <span class="required">*</span></label>
-      <div class="filebox"><input id="backupZip" name="backupZip" type="file" required><div class="filemeta" id="fileMeta"></div></div>
+      <div class="filebox" id="fileDropZone">
+        <div class="drop-label">Backup file <span class="required">*</span></div>
+        <div class="drop-prompt">Drag and drop your backup file here<br>or</div>
+        <label class="browse-label" for="backupZip"  style="border: solid 1px var(--primary);">Choose file</label>
+        <input id="backupZip" name="backupZip" type="file" required aria-label="Choose backup file">
+        <div class="filemeta" id="fileMeta" aria-live="polite">No file selected</div>
+      </div>
+      <div class="hint">Maximum file size: 25 MB.</div>
     </div>
     <button class="submit" id="submitBtn" type="submit">Submit</button>
   </form>
@@ -362,7 +368,18 @@ function loadBranches(){
   branchSearch.disabled=false;
   branchSearch.placeholder='Search or enter Treasury/Branch…';
 }
-fileInput.addEventListener('change',()=>{const file=fileInput.files[0];if(!file){fileMeta.textContent='';return;}fileMeta.textContent=file.name+' · '+(file.size/(1024*1024)).toFixed(2)+' MB';});
+const fileDropZone=document.getElementById('fileDropZone');
+function showSelectedFile(file){fileMeta.textContent=file?file.name+' · '+(file.size/(1024*1024)).toFixed(2)+' MB':'No file selected';}
+fileInput.addEventListener('change',()=>showSelectedFile(fileInput.files[0]));
+['dragenter','dragover'].forEach(type=>fileDropZone.addEventListener(type,event=>{event.preventDefault();event.stopPropagation();fileDropZone.classList.add('dragover');}));
+['dragleave','drop'].forEach(type=>fileDropZone.addEventListener(type,event=>{event.preventDefault();event.stopPropagation();fileDropZone.classList.remove('dragover');}));
+fileDropZone.addEventListener('drop',event=>{
+  const files=event.dataTransfer&&event.dataTransfer.files;
+  if(!files||!files.length)return;
+  try{fileInput.files=files;}catch(err){popup(false,'Could not attach the dropped file. Please use Choose file instead.');return;}
+  showSelectedFile(fileInput.files[0]);
+  if(!fileInput.files.length)popup(false,'Could not attach the dropped file. Please use Choose file instead.');
+});
 function setBusy(busy){submitBtn.disabled=busy;submitBtn.innerHTML=busy?'<span class="spinner"></span>Uploading backup…':'Submit Backup';}
 function readAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('The selected file could not be read.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
 function waitForStatus(requestId, maxWaitMs=90000){
@@ -385,7 +402,7 @@ form.addEventListener('submit',async event=>{
     // POST uses text/plain to avoid a CORS preflight. Final success/failure is retrieved by JSONP status polling.
     await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
     const result=await waitForStatus(requestId);
-    if(result.success){popup(true,'The backup file was uploaded and the details were updated.');form.reset();selectedBranch='';fileMeta.textContent='';}
+    if(result.success){popup(true,'The backup file was uploaded and the details were updated.');form.reset();selectedBranch='';showSelectedFile(null);}
     else popup(false,result.message||'The server could not save this backup.');
   }catch(err){popup(false,err.message||'The backup could not be submitted. Please try again.');}
   finally{setBusy(false);}
