@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Details of Treasury Administrators</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap-icons.min.css">
+<link rel="stylesheet" href="../css/select2.min.css">
+<link rel="stylesheet" href="../css/select2-bootstrap-5-theme.min.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/select2.min.js"></script>
+<style>
+:root{--navy:#173b70;--blue:#2463a6;--pale:#edf4ff;--ink:#1e293b;--muted:#64748b;--line:#e4eaf2}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f4f7fc,#eef4fb);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh}
+.page-header{background:linear-gradient(115deg,#123260,#2869ad);color:white;padding:28px clamp(18px,5vw,64px);box-shadow:0 8px 28px #163c6c22}
+.header-inner{max-width:1100px;margin:auto;display:flex;align-items:center;gap:16px}.header-icon{width:56px;height:56px;border-radius:17px;background:#ffffff20;display:grid;place-items:center;font-size:28px}.page-header h1{font-size:clamp(1.35rem,3vw,2rem);font-weight:750;margin:0}.page-header p{margin:5px 0 0;color:#dbeafe}
+.container-main{max-width:1000px;margin:28px auto;padding:0 16px 48px}.picker-card,.contact-card{background:#fff;border:1px solid #e7edf5;border-radius:22px;box-shadow:0 12px 34px #193b6810;overflow:hidden}
+.picker-card{padding:22px 24px;margin-bottom:22px}.field-label{font-weight:700;color:#334155;margin-bottom:10px;display:block}.select2-container--bootstrap-5 .select2-selection{min-height:48px!important;border-radius:12px!important;border-color:#d7e0ed!important;padding-top:7px!important}.select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered{line-height:30px!important}.hint{font-size:.88rem;color:var(--muted);margin:10px 0 0}
+.empty-state{background:#fff;border:1px dashed #cbd5e1;border-radius:22px;padding:44px 20px;text-align:center;color:var(--muted)}.empty-state i{font-size:42px;color:#8aa5c9}.empty-state h2{font-size:1.2rem;color:#334155;margin:14px 0 6px}
+.contact-card{margin-bottom:20px}.card-top{padding:21px 24px;background:linear-gradient(110deg,#f0f6ff,#fff);border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:center}.avatar{width:54px;height:54px;flex:0 0 54px;border-radius:17px;background:linear-gradient(135deg,#1d4f91,#4792dc);display:grid;place-items:center;color:white;font-size:25px}.card-top h2{font-size:1.18rem;margin:0;font-weight:750}.role-tag{display:inline-block;margin-top:6px;padding:4px 9px;border-radius:30px;background:#e2edff;color:#1e4f8a;font-size:.76rem;font-weight:700}.card-body{padding:22px 24px}.person{padding:0 0 19px;margin:0 0 19px;border-bottom:1px solid #edf1f6}.person:last-child{border:0;margin:0;padding:0}.person-name{font-size:1.05rem;font-weight:750;margin-bottom:4px}.person-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:#64748b;font-weight:800;margin-bottom:8px}.contact-row{display:flex;align-items:center;gap:10px;min-height:42px;padding:7px 0}.contact-value{min-width:0;overflow-wrap:anywhere;flex:1;color:#334155}.contact-value a{color:#245b99;text-decoration:none}.contact-value a:hover{text-decoration:underline}.action-group{display:flex;gap:7px;flex-shrink:0}.action-btn{width:35px;height:35px;border:1px solid #dbe5f1;border-radius:10px;display:inline-grid;place-items:center;background:#fff;color:#245b99;text-decoration:none;font-size:17px;cursor:pointer;transition:.15s}.action-btn:hover{background:#edf5ff;border-color:#a9c8ef;transform:translateY(-1px)}.action-btn.whatsapp{color:#16864a}.action-btn.email{color:#245b99}.action-btn.save{color:#7654a5}.section-title{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#53739a;font-weight:800;margin-bottom:18px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}.status{font-size:.86rem;color:var(--muted);margin-top:12px}.footer-note{text-align:center;color:#8290a3;font-size:.8rem;margin-top:18px}
+@media(max-width:600px){.picker-card{padding:18px}.card-top{padding:18px}.card-body{padding:19px}.two-col{grid-template-columns:1fr}.action-btn{width:33px;height:33px}.container-main{margin-top:18px}}
+</style>
+</head>
+<body>
+<header class="page-header"><div class="header-inner"><div class="header-icon"><i class="bi bi-person-vcard-fill"></i></div><div><h1>Contact Details of Treasury Administrators</h1><p>Search a treasury to view administrator and officer contacts</p></div></div></header>
+<main class="container-main">
+  <section class="picker-card">
+    <label class="field-label" for="treasurySelect"><i class="bi bi-search me-2"></i>Search and select treasury</label>
+    <select id="treasurySelect" style="width:100%"><option value=""></option></select>
+    <p class="hint">Type the treasury code or name, then select a result to display its contact card.</p>
+    <div id="loadStatus" class="status" role="status">Loading treasury contact details…</div>
+  </section>
+  <div id="results" aria-live="polite">
+    <section class="empty-state"><i class="bi bi-person-lines-fill"></i><h2>Select a treasury to get started</h2><p class="mb-0">Administrator and office contact details will appear here.</p></section>
+  </div>
+  <div class="footer-note">Treasury contact directory</div>
+</main>
+<script>
+(function(){
+'use strict';
+const API_KEY='AIzaSyBB1V3vJpNZ9X1GIF-YOwoa6YSt_iXMLo0';
+const SPREADSHEET_ID_ALL='1HvCqLHC8IyllKskBXX1MtMfjQMGUyhMP7KuTuJxDhmU';
+const SHEET_ADMIN='Admin Contact Details', RANGE_ALL='A2:H';
+const SPREADSHEET_ID_DISTRICT='1JxwLKphMWM9fqV43Tt0jQpQjlQC-6DaSlYQ66Fjq7rA';
+const SHEET_DATA='Data', RANGE_DISTRICT='A:I';
+let adminRows=[], officerRows=[], treasuryOptions=[];
+const $select=$('#treasurySelect');
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function clean(v){return String(v==null?'':v).trim();}
+function norm(v){return clean(v).toLocaleLowerCase().replace(/\s+/g,' ');}
+function treasuryCode(v){const m=clean(v).match(/^\s*(\d{3,})\s*[-–—]/);return m?m[1]:'';}
+function keyFor(v){const code=treasuryCode(v);return code?'code:'+code:'name:'+norm(v);}
+function digits(v){return clean(v).replace(/\D/g,'');}
+function phoneActions(number,name,email){
+ const n=clean(number); if(!n)return '<span class="text-secondary">—</span>';
+ const d=digits(n),tel=n.replace(/[^\d+]/g,'');
+ const safeName=clean(name)||'Treasury Contact';
+ const vcard=['BEGIN:VCARD','VERSION:3.0','FN:'+safeName,'TEL;TYPE=WORK,VOICE:'+tel,email&&email.includes('@')?'EMAIL;TYPE=INTERNET:'+email:'','END:VCARD'].filter(Boolean).join('\r\n');
+ const encoded=encodeURIComponent(vcard);
+ const wa=d?`https://wa.me/${d.startsWith('91')?d:(d.length===10?'91'+d:d)}`:'';
+ return `<div class="contact-row"><div class="contact-value">${esc(n)}</div><div class="action-group">
+ <a class="action-btn" href="tel:${esc(tel)}" title="Call ${esc(n)}" aria-label="Call ${esc(n)}"><i class="bi bi-telephone-fill"></i></a>
+ ${wa?`<a class="action-btn whatsapp" href="${wa}" target="_blank" rel="noopener" title="Message on WhatsApp" aria-label="WhatsApp ${esc(n)}"><i class="bi bi-whatsapp"></i></a>`:''}
+ <a class="action-btn save" href="data:text/vcard;charset=utf-8,${encoded}" download="${esc(safeName.replace(/[^a-z0-9_-]+/gi,'_'))}.vcf" title="Save contact to device" aria-label="Save contact"><i class="bi bi-person-vcard"></i></a>
+ </div></div>`;
+}
+function emailActions(email){
+ const e=clean(email);if(!e)return '<div class="contact-row"><div class="contact-value text-secondary">—</div></div>';
+ if(!e.includes('@'))return `<div class="contact-row"><div class="contact-value">${esc(e)}</div></div>`;
+ return `<div class="contact-row"><div class="contact-value"><a href="mailto:${esc(e)}">${esc(e)}</a></div><div class="action-group"><a class="action-btn email" href="mailto:${esc(e)}" title="Send email" aria-label="Send email to ${esc(e)}"><i class="bi bi-envelope-fill"></i></a></div></div>`;
+}
+function field(label,value,kind='text',name='',email=''){
+ let body;
+ if(kind==='phone')body=phoneActions(value,name,email);
+ else if(kind==='email')body=emailActions(value);
+ else body=`<div class="contact-row"><div class="contact-value">${esc(clean(value)||'—')}</div></div>`;
+ return `<div><div class="person-label">${esc(label)}</div>${body}</div>`;
+}
+function personBlock(title,name,phone,email=''){
+ return `<div class="person"><div class="person-label">${esc(title)}</div><div class="person-name">${esc(clean(name)||'Name not provided')}</div>
+ ${field('Contact number',phone,'phone',name,email)}
+ ${email?field('Email address',email,'email'):''}</div>`;
+}
+function renderCard(selected){
+ const admin=adminRows.find(r=>keyFor(r[0])===keyFor(selected))||[];
+ const officer=officerRows.find(r=>keyFor(r[1])===keyFor(selected))||[];
+ const treasury=clean(admin[0]||officer[1]||selected);
+ const networkName=clean(admin[1]||officer[5]),networkPhone=clean(admin[2]||officer[6]);
+ const treasuryAdminName=clean(admin[3]||officer[7]),treasuryAdminPhone=clean(admin[4]||officer[8]);
+ const officeEmail=clean(admin[5]||officer[2]),officePhone=clean(admin[6]||officer[3]),officeMobile=clean(admin[7]||officer[4]);
+ const hasAny=[networkName,networkPhone,treasuryAdminName,treasuryAdminPhone,officeEmail,officePhone,officeMobile].some(Boolean);
+ if(!hasAny){$('#results').html(`<section class="empty-state"><i class="bi bi-person-exclamation"></i><h2>No contact details found</h2><p class="mb-0">No matching contact information was found for ${esc(treasury)}.</p></section>`);return;}
+ const adminHtml=`<section class="contact-card"><div class="card-top"><div class="avatar"><i class="bi bi-shield-check"></i></div><div><h2>${esc(treasury)}</h2><span class="role-tag">Administrator details</span></div></div><div class="card-body"><div class="section-title">Administrators</div>
+ ${personBlock('Network / SD-WAN Admin',networkName,networkPhone)}
+ ${personBlock('Treasury Administrator',treasuryAdminName,treasuryAdminPhone)}</div></section>`;
+ const officerHtml=`<section class="contact-card"><div class="card-top"><div class="avatar"><i class="bi bi-building"></i></div><div><h2>Office & Officer Details</h2><span class="role-tag">Treasury office contacts</span></div></div><div class="card-body"><div class="two-col">
+ ${field('Office email ID',officeEmail,'email')}
+ ${field('Office contact number',officePhone,'phone','Treasury Office',officeEmail)}
+ ${field('Office mobile number',officeMobile,'phone','Treasury Office',officeEmail)}
+ </div></div></section>`;
+ $('#results').html(adminHtml+officerHtml);
+}
+async function fetchSheet(id,sheet,range){
+ const url=`https://sheets.googleapis.com/v4/spreadsheets/${id}/values/${encodeURIComponent(sheet)}!${range}?key=${API_KEY}`;
+ const res=await fetch(url);if(!res.ok)throw new Error('Google Sheets returned HTTP '+res.status);
+ const data=await res.json();if(data.error)throw new Error(data.error.message||'Unable to read sheet');
+ return data.values||[];
+}
+function buildOptions(){
+ const byKey=new Map();
+ adminRows.forEach(r=>{const n=clean(r[0]);if(n){const k=keyFor(n);if(!byKey.has(k))byKey.set(k,n);}});
+ officerRows.forEach(r=>{const n=clean(r[1]);if(n){const k=keyFor(n);if(!byKey.has(k))byKey.set(k,n);}});
+ treasuryOptions=[...byKey.values()].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true,sensitivity:'base'}));
+ $select.empty().append(new Option('', '', true, true));
+ treasuryOptions.forEach(n=>$select.append(new Option(n,n,false,false)));
+ $select.select2({theme:'bootstrap-5',width:'100%',placeholder:'Type treasury code or name…',allowClear:true});
+ $select.on('select2:open',()=>setTimeout(()=>document.querySelector('.select2-search__field')?.focus(),50));
+ $select.on('change',function(){const v=$(this).val();if(v)renderCard(v);else $('#results').html(`<section class="empty-state"><i class="bi bi-person-lines-fill"></i><h2>Select a treasury to get started</h2><p class="mb-0">Administrator and office contact details will appear here.</p></section>`);});
+}
+async function init(){
+ try{
+  const results=await Promise.allSettled([fetchSheet(SPREADSHEET_ID_ALL,SHEET_ADMIN,RANGE_ALL),fetchSheet(SPREADSHEET_ID_DISTRICT,SHEET_DATA,RANGE_DISTRICT)]);
+  if(results[0].status==='fulfilled')adminRows=results[0].value;
+  if(results[1].status==='fulfilled')officerRows=results[1].value;
+  if(results.every(r=>r.status==='rejected'))throw new Error('Could not load either contact sheet. Check network access and Google Sheets API permissions.');
+  buildOptions();
+  const notes=[];
+  if(results[0].status==='rejected')notes.push('administrator sheet unavailable');
+  if(results[1].status==='rejected')notes.push('office details sheet unavailable');
+  $('#loadStatus').text(`${treasuryOptions.length} treasuries loaded${notes.length?' ('+notes.join('; ')+')':''}.`);
+ }catch(e){console.error(e);$('#loadStatus').text('Unable to load contact details: '+e.message);$('#results').html(`<section class="empty-state"><i class="bi bi-exclamation-triangle"></i><h2>Contact list could not be loaded</h2><p class="mb-0">Check the connection, spreadsheet access, and API key.</p></section>`);}
+}
+$(init);
+})();
+</script>
+</body>
+</html>
