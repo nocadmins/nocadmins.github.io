@@ -1,5 +1,5 @@
 // Service Worker for NOC Mobile PWA
-const CACHE_NAME = 'noc-mobile-v3';
+const CACHE_NAME = 'noc-mobile-v6';
 const BASE_PATH = '.';
 
 // Core assets to cache for offline support

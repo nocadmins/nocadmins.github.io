@@ -101,6 +101,9 @@
                         Remote Shutdown initiated from DoT, you can switch off the device after 2 min
                     </p>
                 </div>
+                <div id="queueInfo" class="mt-3 text-danger fw-bold small" role="status" aria-live="polite">
+                    Checking current request queue...
+                </div>
                 <div id="checkingInfo" class="mt-2">
                     <small class="text-muted">Checking every 5 seconds...</small>
                 </div>
@@ -377,6 +380,43 @@ async function checkConfirmStatus(branch, deviceType, serial, date, time12h) {
 }
 
 // ============================================================
+//  PENDING QUEUE ESTIMATE (Data!A:F; Confirm is column F)
+//  Each unconfirmed, non-empty request is estimated at 18 seconds.
+// ============================================================
+async function updatePendingQueueInfo() {
+    const $queueInfo = $('#queueInfo');
+    try {
+        const range = `${TARGET_SHEET_NAME}!A:F`;
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${TARGET_SHEET_ID}/values/${range}?key=${TARGET_API_KEY}`;
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+        const data = await resp.json();
+        const rows = (data.values || []).slice(1); // Skip header row
+        const pendingCount = rows.filter(row => {
+            const hasRequest = row.slice(0, 5).some(value => String(value || '').trim() !== '');
+            const confirmValue = String(row[5] || '').trim();
+            return hasRequest && confirmValue === '';
+        }).length;
+
+        const totalSeconds = pendingCount * 18;
+        let approximateTime;
+        if (totalSeconds < 60) {
+            approximateTime = `${totalSeconds} seconds`;
+        } else {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            approximateTime = seconds ? `${minutes} min ${seconds} sec` : `${minutes} min`;
+        }
+
+        $queueInfo.text(`Currently ${pendingCount} no. of request(s) under processing, approximate time to be taken: ${approximateTime}.`);
+    } catch (err) {
+        console.error('updatePendingQueueInfo error:', err);
+        $queueInfo.text('Currently unable to retrieve the request queue estimate. Retrying shortly.');
+    }
+}
+
+// ============================================================
 //  START CONFIRMATION CHECKING (every 5 seconds)
 // ============================================================
 function startConfirmCheck(branch, deviceType, serial, date, time) {
@@ -397,6 +437,8 @@ function startConfirmCheck(branch, deviceType, serial, date, time) {
     $('#closeWaitingBtn').prop('disabled', true);
     $('#checkingInfo').show();
     $('#checkingInfo').html('<small class="text-muted">Checking every 5 seconds...</small>');
+    $('#queueInfo').show();
+    updatePendingQueueInfo();
     
     if (!waitingModalInstance) {
         waitingModalInstance = new bootstrap.Modal(document.getElementById('waitingModal'), {
@@ -412,6 +454,7 @@ function startConfirmCheck(branch, deviceType, serial, date, time) {
     async function performCheck() {
         checkCount++;
         $('#checkingInfo').html(`<small class="text-muted">Checking every 5 seconds... (${checkCount})</small>`);
+        await updatePendingQueueInfo();
         const result = await checkConfirmStatus(branch, deviceType, serial, date, time);
         if (result.confirmed) {
             clearInterval(confirmCheckInterval);
@@ -431,6 +474,7 @@ function startConfirmCheck(branch, deviceType, serial, date, time) {
             confirmCheckInterval = null;
             $('#waitingStatusText').html('<span class="text-warning"><i class="bi bi-clock"></i> Still awaiting confirmation...</span>');
             $('#checkingInfo').html('<small class="text-muted">Checking timed out. Please refresh or check manually.</small>');
+            $('#queueInfo').hide();
             $('#closeWaitingBtn').prop('disabled', false);
         }
     }

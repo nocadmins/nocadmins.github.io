@@ -280,30 +280,27 @@ function setDefaultDateTime() {
 // ============================================================
 //  CHECK FOR CONFIRMED REQUEST ON SAME DATE
 // ============================================================
-async function checkExistingConfirmedRequest(branch, date) {
-    try {
-        const range = `${TARGET_SHEET_NAME}!A:F`;
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${TARGET_SHEET_ID}/values/${range}?key=${TARGET_API_KEY}`;
-        const resp = await fetch(url);
-        if (!resp.ok) return { hasConfirmed: false };
-        const data = await resp.json();
-        if (!data.values || data.values.length < 2) return { hasConfirmed: false };
-        const rows = data.values.slice(1);
-        for (let row of rows) {
-            if (row.length >= 6) {
-                const rowBranch = (row[0] || '').toString().trim();
-                const rowDate = (row[3] || '').toString().trim();
-                const confirmVal = (row[5] || '').toString().trim();
-                if (rowBranch === branch.trim() && rowDate === date.trim() && confirmVal === 'Yes') {
-                    return { hasConfirmed: true };
-                }
-            }
-        }
-        return { hasConfirmed: false };
-    } catch (err) {
-        console.error('checkExistingConfirmedRequest error:', err);
-        return { hasConfirmed: false };
+async function checkExistingRequest(branch, date) {
+    // A request is considered existing whether it is pending or confirmed.
+    // Data sheet columns: A = Branch, D = Date.
+    const range = `${TARGET_SHEET_NAME}!A:F`;
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${TARGET_SHEET_ID}/values/${range}?key=${TARGET_API_KEY}`;
+
+    const resp = await fetch(url);
+    if (!resp.ok) {
+        throw new Error(`Unable to verify existing requests (HTTP ${resp.status})`);
     }
+
+    const data = await resp.json();
+    const rows = (data.values || []).slice(1);
+
+    return rows.some(row => {
+        const rowBranch = String(row[0] || '').trim();
+        const rowDate = String(row[3] || '').trim();
+        return rowBranch === String(branch).trim() &&
+               rowDate === String(date).trim() &&
+               row.slice(0, 5).some(value => String(value || '').trim() !== '');
+    });
 }
 
 // ============================================================
@@ -486,8 +483,22 @@ function startConfirmCheck(branch, deviceType, serial, date, time) {
 async function submitShutdownRequest() {
     if (isSubmitting) return;
 
+    // Lock immediately, before any asynchronous checks, to stop rapid/double clicks.
+    isSubmitting = true;
+    const $btn = $('#submitShutdownBtn');
+    const originalHtml = $btn.html();
+    $btn.prop('disabled', true)
+        .html('<i class="bi bi-arrow-repeat"></i> Checking...')
+        .addClass('btn-loading');
+
+    const unlockBeforeSubmission = () => {
+        isSubmitting = false;
+        $btn.prop('disabled', false).html(originalHtml).removeClass('btn-loading');
+    };
+
     const branch = $('#branchId').val();
     if (!branch || branch.includes('No branch')) {
+        unlockBeforeSubmission();
         Swal.fire({ icon: 'warning', title: 'Branch missing', text: 'Branch ID is required. Please login again.', confirmButtonColor: '#0b2b4a' });
         return;
     }
@@ -495,6 +506,7 @@ async function submitShutdownRequest() {
     const deviceType = $('#deviceType').val();
     const serial = $('#deviceSerial').val();
     if (!deviceType || deviceType === '—' || deviceType === 'Not found' || deviceType === 'Error') {
+        unlockBeforeSubmission();
         Swal.fire({ icon: 'error', title: 'Device info missing', text: 'Could not fetch Device Type.', confirmButtonColor: '#0b2b4a' });
         return;
     }
@@ -502,30 +514,49 @@ async function submitShutdownRequest() {
     const dateVal = $('#requestDate').val();
     const timeVal = $('#requestTime').val();
     if (!dateVal || !timeVal) {
+        unlockBeforeSubmission();
         Swal.fire({ icon: 'warning', title: 'Incomplete', text: 'Date and Time are required.', confirmButtonColor: '#0b2b4a' });
         return;
     }
 
-    // NEW: Check if there's already a confirmed request on the same date
-    const existingConfirmed = await checkExistingConfirmedRequest(branch, dateVal);
-    if (existingConfirmed.hasConfirmed) {
+    // Browser-level protection for this branch/date (also survives page refresh).
+    const lockKey = `shutdownRequest:${String(branch).trim()}:${String(dateVal).trim()}`;
+    if (localStorage.getItem(lockKey) === 'sent') {
+        unlockBeforeSubmission();
         Swal.fire({
             icon: 'info',
-            title: 'Remote Shutdown Already Confirmed',
-            html: 'Remote Shut down is already with your Previous Request, and you can shut down the device after 1 min',
-            confirmButtonColor: '#0b2b4a',
-            confirmButtonText: 'OK'
+            title: 'Request Already Submitted',
+            text: 'A shutdown request has already been submitted from this branch today. Another request is not allowed.',
+            confirmButtonColor: '#0b2b4a'
         });
         return;
     }
 
-    // Check for duplicate (same branch + date + time)
-    const duplicate = await checkDuplicateRequest(branch, dateVal, timeVal);
-    if (duplicate) {
+    // Always verify the Google Sheet before submission. If verification fails,
+    // do not submit: this avoids creating a duplicate when the sheet is unreachable.
+    let existingRequest;
+    try {
+        existingRequest = await checkExistingRequest(branch, dateVal);
+    } catch (err) {
+        console.error('Existing request check failed:', err);
+        unlockBeforeSubmission();
+        Swal.fire({
+            icon: 'error',
+            title: 'Unable to Verify Existing Request',
+            text: 'The request sheet could not be checked. No request was submitted. Please try again later.',
+            confirmButtonColor: '#0b2b4a'
+        });
+        return;
+    }
+
+    if (existingRequest) {
+        // Remember the existing request locally as well, preventing repeated checks.
+        localStorage.setItem(lockKey, 'sent');
+        unlockBeforeSubmission();
         Swal.fire({
             icon: 'warning',
-            title: 'Duplicate Request',
-            text: 'A request with the same Branch, Date, and Time already exists. Please choose a different time or date.',
+            title: 'Request Already Exists',
+            html: 'A shutdown request for this branch has already been recorded today, whether pending or confirmed. <strong>You cannot submit another request today.</strong>',
             confirmButtonColor: '#0b2b4a'
         });
         return;
@@ -541,12 +572,7 @@ async function submitShutdownRequest() {
         time: time24h
     };
 
-    const $btn = $('#submitShutdownBtn');
-    const originalHtml = $btn.html();
-    $btn.html('<i class="bi bi-arrow-repeat"></i> Sending...');
-    $btn.prop('disabled', true);
-    $btn.addClass('btn-loading');
-    isSubmitting = true;
+    $btn.html('<i class="bi bi-send"></i> Sending...');
 
     try {
         await fetch(APPS_SCRIPT_URL, {
@@ -556,55 +582,42 @@ async function submitShutdownRequest() {
             body: JSON.stringify(payload)
         });
 
-        // Record this submission
+        // Keep a permanent same-day browser lock. Do not re-enable the button.
+        localStorage.setItem(lockKey, 'sent');
         lastSubmission = {
             date: dateVal,
             time: timeVal,
             timestamp: Date.now()
         };
 
+        $btn.html('<i class="bi bi-check-circle-fill"></i> Request Submitted');
+        $btn.prop('disabled', true).removeClass('btn-loading');
+
         await Swal.fire({
             icon: 'success',
-            title: '✅ Request Submitted Successfully!',
-            text: 'Your shutdown request has been logged.',
+            title: 'Request Submitted',
+            text: 'Your shutdown request has been sent. Another request from this branch today is not allowed.',
             confirmButtonColor: '#0b2b4a',
-            timer: 2000,
-            timerProgressBar: true,
-            showConfirmButton: true
+            allowOutsideClick: false
         });
 
-        // Disable button for 1 minute (60 seconds) - simple timer, no cooldown UI
-        $btn.prop('disabled', true);
-        $btn.html('<i class="bi bi-clock"></i> Wait 60s');
-
-        // Clear any existing timer
-        if (buttonDisableTimer) {
-            clearTimeout(buttonDisableTimer);
-            buttonDisableTimer = null;
-        }
-
-        // Set timer to re-enable after 60 seconds
-        buttonDisableTimer = setTimeout(function() {
-            $btn.prop('disabled', false);
-            $btn.html(originalHtml);
-            buttonDisableTimer = null;
-        }, 60000);
-
-        // Start confirmation check
         startConfirmCheck(branch, deviceType, serial, dateVal, timeVal);
 
     } catch (err) {
         console.error('Submit error:', err);
+        // The request outcome may be uncertain after a network failure.
+        // Keep the button locked to avoid accidentally sending a second request.
+        localStorage.setItem(lockKey, 'sent');
+        $btn.html('<i class="bi bi-exclamation-circle"></i> Submission Status Unknown');
+        $btn.prop('disabled', true).removeClass('btn-loading');
+
         Swal.fire({
-            icon: 'error',
-            title: 'Submission failed',
-            text: 'Network or Apps Script error. Please try again.',
+            icon: 'warning',
+            title: 'Submission Status Unknown',
+            text: 'The network interrupted the submission. To prevent a duplicate, this page is locked. Please check the request sheet or contact the administrator before retrying.',
             confirmButtonColor: '#0b2b4a'
         });
-        $btn.prop('disabled', false);
-        $btn.html(originalHtml);
     } finally {
-        $btn.removeClass('btn-loading');
         isSubmitting = false;
     }
 }
