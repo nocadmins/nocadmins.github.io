@@ -27,7 +27,7 @@ window.HELP_MENU = [
     subOrder: 1,
     topicOrder: 2,
     contentType: "DOCX",
-    file: "help/Treasury -SDWAN - Migration Check List.docx"
+    file: "help/Treasury-SDWAN-Migration-Check-List.docx"
   },
 
   {
@@ -36,10 +36,22 @@ window.HELP_MENU = [
     subMenu: "Configuration",
     topicTitle: "Juniper Configuration ",
     mainOrder: 1,
-    subOrder: 2,
-    topicOrder: 2,
+    subOrder: 1,
+    topicOrder: 3,
     contentType: "DOCX",
     file: "help/Juniper-configuration.docx"
+  },
+  
+  {
+    topicId: "SDWAN3",
+    mainMenu: "SDWAN",
+    subMenu: "Configuration",
+    topicTitle: "FatPipe Configuration ",
+    mainOrder: 1,
+    subOrder: 1,
+    topicOrder: 4,
+    contentType: "HTML",
+    file: "help/device-configuration.html"
   },
 
   {
