@@ -7,10 +7,10 @@
 window.HELP_MENU = [
 
   {
-    topicId: "huge-attachments",
-    mainMenu: "Sending emails",
-    subMenu: "Attachments",
-    topicTitle: "Huge Attachments",
+    topicId: "Getting Started",
+    mainMenu: "Getting Started",
+    subMenu: "",
+    topicTitle: "Introduction",
     mainOrder: 1,
     subOrder: 1,
     topicOrder: 1,
