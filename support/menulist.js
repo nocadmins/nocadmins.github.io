@@ -17,7 +17,17 @@ window.HELP_MENU = [
     contentType: "HTML",
     file: "help/noc-helpdesk-introduction.html"
   },
-
+ {
+    topicId: "Know your devices",
+    mainMenu: "SDWAN",
+    subMenu: "Devices",
+    topicTitle: "Know your SDWAN Devices",
+    mainOrder: 1,
+    subOrder: 1,
+    topicOrder: 1,
+    contentType: "HTML",
+    file: "help/Branch_Location_Network_Devices_and_Configuration_Guide.htm"
+  },
   {
     topicId: "Check List for SDWAN Migration",
     mainMenu: "SDWAN",
