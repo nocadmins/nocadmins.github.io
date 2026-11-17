@@ -19,7 +19,7 @@ window.HELP_MENU = [
   },
 
   {
-    topicId: "SDWAN",
+    topicId: "Check List for SDWAN Migration",
     mainMenu: "SDWAN",
     subMenu: "Migration",
     topicTitle: "Check List for SDWAN Migration",
@@ -31,10 +31,10 @@ window.HELP_MENU = [
   },
 
   {
-    topicId: "SDWAN2",
+    topicId: "Juniper Configuration",
     mainMenu: "SDWAN",
     subMenu: "Configuration",
-    topicTitle: "Juniper Configuration ",
+    topicTitle: "Juniper Configuration",
     mainOrder: 1,
     subOrder: 1,
     topicOrder: 3,
@@ -43,51 +43,17 @@ window.HELP_MENU = [
   },
   
   {
-    topicId: "SDWAN3",
+    topicId: "FatPipe Configuration",
     mainMenu: "SDWAN",
     subMenu: "Configuration",
-    topicTitle: "FatPipe Configuration ",
+    topicTitle: "FatPipe Configuration",
     mainOrder: 1,
     subOrder: 1,
     topicOrder: 4,
     contentType: "HTML",
     file: "help/device-configuration.html"
-  },
-
-  {
-    topicId: "track-email-delivery",
-    mainMenu: "Sending emails",
-    subMenu: "Email Options",
-    topicTitle: "Track Email Delivery Status",
-    mainOrder: 1,
-    subOrder: 2,
-    topicOrder: 2,
-    contentType: "PDF",
-    file: "help/track-email-delivery.pdf"
-  },
-
-  {
-    topicId: "manage-accounts",
-    mainMenu: "Manage Accounts",
-    subMenu: "",
-    topicTitle: "Manage Accounts",
-    mainOrder: 2,
-    subOrder: 1,
-    topicOrder: 1,
-    contentType: "HTML",
-    file: "help/manage-accounts.html"
-  },
-
-  {
-    topicId: "external-policy",
-    mainMenu: "Resources",
-    subMenu: "External Documents",
-    topicTitle: "External Policy Document",
-    mainOrder: 3,
-    subOrder: 1,
-    topicOrder: 1,
-    contentType: "PDF",
-    file: "https://example.com/policy.pdf"
   }
+
+  
 
 ];
