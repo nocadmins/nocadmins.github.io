@@ -27,7 +27,7 @@ window.HELP_MENU = [
     subOrder: 1,
     topicOrder: 2,
     contentType: "DOCX",
-    file: "Treasury -SDWAN - Migration Check List.docx"
+    file: "help/Treasury -SDWAN - Migration Check List.docx"
   },
 
   {
@@ -38,8 +38,8 @@ window.HELP_MENU = [
     mainOrder: 1,
     subOrder: 2,
     topicOrder: 2,
-    contentType: "HTML",
-    file: "help/Juniper-configuration.html"
+    contentType: "DOCX",
+    file: "help/Juniper-configuration.docx"
   },
 
   {
