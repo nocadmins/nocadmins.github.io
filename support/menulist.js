@@ -27,7 +27,7 @@ window.HELP_MENU = [
     subOrder: 1,
     topicOrder: 2,
     contentType: "HTML",
-    file: "help/Treasury-SDWAN-Migration-Check-List.html"
+    file: "help/Treasury-SDWAN-Migration-Check-List.htm"
   },
 
   {
@@ -39,7 +39,7 @@ window.HELP_MENU = [
     subOrder: 1,
     topicOrder: 3,
     contentType: "HTML",
-    file: "help/Juniper-configuration.html"
+    file: "help/Juniper-configuration.htm"
   },
   
   {
