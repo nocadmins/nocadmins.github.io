@@ -31,15 +31,15 @@ window.HELP_MENU = [
   },
 
   {
-    topicId: "schedule-emails",
-    mainMenu: "Sending emails",
-    subMenu: "Email Options",
-    topicTitle: "Schedule Emails",
+    topicId: "SDWAN",
+    mainMenu: "SDWAN",
+    subMenu: "Configuration",
+    topicTitle: "Juniper Configuration ",
     mainOrder: 1,
     subOrder: 2,
     topicOrder: 1,
     contentType: "HTML",
-    file: "help/schedule-emails.html"
+    file: "help/Juniper-configuration.html"
   },
 
   {
