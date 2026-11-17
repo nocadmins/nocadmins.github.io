@@ -575,85 +575,26 @@
 
   <div class="scrim" id="scrim"></div>
 
+  <!-- Local menu configuration: edit menulist.js to update topics and document links. -->
+  <script src="./menulist.js"></script>
+
   <script>
     /* =========================================================
-       CONFIGURATION
+       LOCAL MENU CONFIGURATION
        ========================================================= */
 
     const HELP_CONFIG = {
-      // Paste your deployed Google Apps Script /exec URL here.
-      API_URL: "https://script.google.com/macros/s/AKfycbxduhlcnVmVzLs-ggcIUUjaHGXZlVXI-kxRp5DJr_i7JczNzR2cOfsANehVklTrF5yHRQ/exec",
-
-      // Relative to this index.html. Example: help/my-file.html
-      HELP_DIRECTORY: "help/",
-
-      // Keep this true if the HTML documents are trusted files
-      // maintained by your own help portal administrators.
-      ALLOW_TRUSTED_HTML: true
+      // All relative document paths are resolved from this index.html.
+      // Example: "help/email/huge-attachments.html"
+      DEFAULT_DOCUMENT_FOLDER: "help/"
     };
 
     let allTopics = [];
     let currentTopicId = null;
     let currentTopicData = null;
     let currentHeadings = [];
-    let currentObjectUrl = null;
 
-    const $ = (selector) => document.querySelector(selector);
-
-    /* =========================================================
-       JSONP API CLIENT
-       ========================================================= */
-
-    function apiRequest(params = {}) {
-      return new Promise((resolve, reject) => {
-        if (!HELP_CONFIG.API_URL ||
-            HELP_CONFIG.API_URL.includes("YOUR_GOOGLE")) {
-          reject(new Error("Please configure HELP_CONFIG.API_URL in index.html."));
-          return;
-        }
-
-        const callbackName = "__help_cb_" +
-          Date.now() + "_" + Math.random().toString(36).slice(2);
-
-        const script = document.createElement("script");
-        let settled = false;
-
-        const cleanup = () => {
-          delete window[callbackName];
-          script.remove();
-          clearTimeout(timeout);
-        };
-
-        const timeout = setTimeout(() => {
-          if (settled) return;
-          settled = true;
-          cleanup();
-          reject(new Error("The Help API did not respond. Please try again."));
-        }, 20000);
-
-        window[callbackName] = (data) => {
-          if (settled) return;
-          settled = true;
-          cleanup();
-          resolve(data);
-        };
-
-        const query = new URLSearchParams({
-          ...params,
-          callback: callbackName
-        });
-
-        script.onerror = () => {
-          if (settled) return;
-          settled = true;
-          cleanup();
-          reject(new Error("Unable to connect to the Help API."));
-        };
-
-        script.src = HELP_CONFIG.API_URL + "?" + query.toString();
-        document.head.appendChild(script);
-      });
-    }
+    const $ = selector => document.querySelector(selector);
 
     /* =========================================================
        INITIALIZATION
@@ -665,37 +606,66 @@
       bindInterfaceEvents();
 
       try {
-        const response = await apiRequest({ action: "topics" });
-
-        if (!response.success) {
-          throw new Error(response.message || "Unable to load topics.");
+        if (!Array.isArray(window.HELP_MENU)) {
+          throw new Error("menulist.js did not load or HELP_MENU is not defined.");
         }
 
-        allTopics = Array.isArray(response.topics) ? response.topics : [];
+        allTopics = normalizeMenu(window.HELP_MENU);
 
         if (!allTopics.length) {
           $("#sidebarNavigation").innerHTML =
-            '<div class="empty-search">No published help topics found.</div>';
+            '<div class="empty-search">No help topics have been configured.</div>';
           $("#articleContent").innerHTML =
-            '<div class="status">No help documents have been published yet.</div>';
+            '<div class="status">Add topics to menulist.js to get started.</div>';
           return;
         }
 
         renderSidebar();
 
         const requestedId = new URLSearchParams(location.search).get("topic");
-        const firstTopic = allTopics[0];
-        const initialTopic = allTopics.find(t => t.topicId === requestedId) || firstTopic;
+        const initialTopic = allTopics.find(t => t.topicId === requestedId) || allTopics[0];
 
         await openTopic(initialTopic.topicId, false);
-
       } catch (error) {
         showError(error.message);
       }
     }
 
+    function normalizeMenu(menu) {
+      return menu.map((item, index) => {
+        const topic = {
+          topicId: String(item.topicId || item.id || `topic-${index + 1}`),
+          mainMenu: String(item.mainMenu || "General"),
+          subMenu: String(item.subMenu || ""),
+          topicTitle: String(item.topicTitle || item.title || "Untitled topic"),
+          mainOrder: Number(item.mainOrder ?? 0),
+          subOrder: Number(item.subOrder ?? 0),
+          topicOrder: Number(item.topicOrder ?? item.order ?? index + 1),
+          file: String(item.file || item.path || item.url || ""),
+          contentType: String(item.contentType || item.type || "").toUpperCase()
+        };
+
+        if (!topic.file) {
+          throw new Error(`No document path or URL configured for "${topic.topicTitle}".`);
+        }
+
+        if (!topic.contentType) {
+          const cleanUrl = topic.file.split("?")[0].split("#")[0];
+          const extension = cleanUrl.split(".").pop().toUpperCase();
+          topic.contentType = extension === "DOCX" ? "DOCX" :
+                              extension === "PDF" ? "PDF" : "HTML";
+        }
+
+        return topic;
+      }).sort((a, b) =>
+        a.mainOrder - b.mainOrder ||
+        a.subOrder - b.subOrder ||
+        a.topicOrder - b.topicOrder
+      );
+    }
+
     /* =========================================================
-       SIDEBAR: MAIN MENU > SUBMENU > TOPICS
+       SIDEBAR: MAIN MENU > SUBMENU > DOCUMENT TITLE
        ========================================================= */
 
     function groupTopics(topics) {
@@ -703,10 +673,11 @@
 
       topics.forEach(topic => {
         const mainName = topic.mainMenu || "General";
+
         if (!mainGroups.has(mainName)) {
           mainGroups.set(mainName, {
             name: mainName,
-            order: Number(topic.mainOrder) || 0,
+            order: topic.mainOrder,
             submenus: new Map()
           });
         }
@@ -717,7 +688,7 @@
         if (!main.submenus.has(subName)) {
           main.submenus.set(subName, {
             name: subName,
-            order: Number(topic.subOrder) || 0,
+            order: topic.subOrder,
             topics: []
           });
         }
@@ -739,7 +710,6 @@
       const normalized = filterText.trim().toLowerCase();
       const groups = groupTopics(allTopics);
       let html = "";
-      let visibleCount = 0;
 
       groups.forEach((main, mainIndex) => {
         const matchingSubmenus = [];
@@ -754,7 +724,6 @@
 
           if (matchingTopics.length) {
             matchingSubmenus.push({ ...sub, topics: matchingTopics });
-            visibleCount += matchingTopics.length;
           }
         });
 
@@ -763,12 +732,12 @@
         const isCurrentGroup = matchingSubmenus.some(sub =>
           sub.topics.some(t => t.topicId === currentTopicId)
         );
-        const expanded = normalized || isCurrentGroup || mainIndex === 0;
+        const expanded = !!normalized || isCurrentGroup || mainIndex === 0;
 
         html += `
           <div class="main-nav-item">
             <button class="main-nav-button" type="button"
-              data-main-index="${mainIndex}" aria-expanded="${!!expanded}">
+              data-main-index="${mainIndex}" aria-expanded="${expanded}">
               <span>${escapeHtml(main.name)}</span>
               <span class="chevron" aria-hidden="true"></span>
             </button>
@@ -819,7 +788,7 @@
     }
 
     /* =========================================================
-       OPEN TOPIC
+       OPEN DOCUMENT
        ========================================================= */
 
     async function openTopic(topicId, updateUrl = true) {
@@ -829,6 +798,7 @@
       currentTopicId = topicId;
       currentTopicData = topic;
 
+      // Re-render the navigation so the current document is highlighted.
       renderSidebar($("#topicSearch").value);
 
       $("#articleTitle").textContent = topic.topicTitle;
@@ -845,30 +815,17 @@
       if (updateUrl) {
         const url = new URL(location.href);
         url.searchParams.set("topic", topicId);
+        url.hash = "";
         history.pushState({ topicId }, "", url);
       }
 
+      renderPreviousNext(
+        allTopics[allTopics.indexOf(topic) - 1] || null,
+        allTopics[allTopics.indexOf(topic) + 1] || null
+      );
+
       try {
-        const response = await apiRequest({
-          action: "topic",
-          id: topicId
-        });
-
-        if (!response.success) {
-          throw new Error(response.message || "Topic could not be loaded.");
-        }
-
-        // Ignore an older request if the user selected another topic meanwhile.
-        if (currentTopicId !== topicId) return;
-
-        renderPreviousNext(response.previous, response.next);
-
-        const contentUrl = resolveContentUrl(
-          response.topic && response.topic.contentPath
-            ? response.topic.contentPath
-            : topic.contentPath
-        );
-
+        const contentUrl = resolveContentUrl(topic.file);
         await renderDocument(contentUrl, topic.contentType);
 
         if (currentTopicId !== topicId) return;
@@ -879,7 +836,6 @@
         buildTableOfContents();
         $("#articleContent").scrollTop = 0;
         window.scrollTo({ top: 0, behavior: "smooth" });
-
       } catch (error) {
         if (currentTopicId !== topicId) return;
         $("#articleMeta").textContent = "Document unavailable";
@@ -889,13 +845,21 @@
       }
     }
 
-    function resolveContentUrl(contentPath) {
-      if (!contentPath) throw new Error("No document filename is configured.");
+    function resolveContentUrl(filePath) {
+      if (!filePath) throw new Error("No document filename or URL is configured.");
 
-      // Prevent a sheet entry from navigating outside the website's help folder.
-      const cleanPath = String(contentPath).replace(/^\/+/, "");
-      if (cleanPath.split("/").includes("..")) {
-        throw new Error("Invalid document path.");
+      const value = String(filePath).trim();
+
+      // Absolute external links are allowed. Relative paths are resolved from index.html.
+      if (/^https?:\/\//i.test(value)) return value;
+
+      if (/^(javascript:|data:|file:)/i.test(value)) {
+        throw new Error("Unsupported document URL scheme.");
+      }
+
+      const cleanPath = value.replace(/^\.?\//, "");
+      if (cleanPath.split(/[\\/]/).includes("..")) {
+        throw new Error("Invalid relative document path.");
       }
 
       return new URL(cleanPath, document.baseURI).href;
@@ -907,12 +871,7 @@
 
     async function renderDocument(url, type) {
       const container = $("#articleContent");
-      const extension = String(type || url.split("?")[0].split(".").pop()).toUpperCase();
-
-      if (currentObjectUrl) {
-        URL.revokeObjectURL(currentObjectUrl);
-        currentObjectUrl = null;
-      }
+      const extension = String(type || "").toUpperCase();
 
       if (extension === "PDF") {
         container.innerHTML = "";
@@ -936,7 +895,28 @@
     }
 
     async function renderHtmlDocument(url, container) {
-      const response = await fetch(url, { cache: "no-cache" });
+      let response;
+
+      try {
+        response = await fetch(url, { cache: "no-cache" });
+      } catch (error) {
+        // A remote HTML host may not permit cross-origin fetch (CORS).
+        // Display it in an iframe instead; its internal headings cannot
+        // be read by this page because of browser same-origin security.
+        if (isExternalUrl(url)) {
+          container.innerHTML = "";
+          const iframe = document.createElement("iframe");
+          iframe.className = "pdf-frame";
+          iframe.title = "External help document";
+          iframe.src = url;
+          container.appendChild(iframe);
+          $("#tocList").innerHTML =
+            '<li class="toc-empty">Contents are unavailable for this external page.</li>';
+          return;
+        }
+        throw new Error("Unable to fetch the HTML document. Check the file path.");
+      }
+
       if (!response.ok) {
         throw new Error(`Unable to load HTML document (${response.status}).`);
       }
@@ -944,7 +924,7 @@
       const source = await response.text();
       const parsed = new DOMParser().parseFromString(source, "text/html");
 
-      // Remove active content and unsafe embedded elements.
+      // Remove scripts and active embedded content from imported HTML.
       parsed.querySelectorAll("script, iframe, object, embed, form, base").forEach(el => el.remove());
 
       const root = parsed.body || parsed.documentElement;
@@ -962,7 +942,8 @@
           ) {
             el.removeAttribute(attr.name);
           } else if (["src", "href"].includes(name) && value &&
-                     !value.startsWith("#") && !/^(data:|blob:|https?:|mailto:|tel:)/i.test(value)) {
+                     !value.startsWith("#") &&
+                     !/^(data:|blob:|https?:|mailto:|tel:)/i.test(value)) {
             try {
               el.setAttribute(attr.name, new URL(value, url).href);
             } catch (_) {
@@ -972,8 +953,6 @@
         });
       });
 
-      // Keep the article's body content. Prefer content inside <main> or <article>
-      // if the source file is a complete webpage with its own site navigation.
       const articleRoot = root.querySelector("article, main") || root;
       const fragment = document.createDocumentFragment();
 
@@ -984,7 +963,15 @@
       container.replaceChildren(fragment);
 
       if (!container.childNodes.length) {
-        container.innerHTML = '<p>This help document is empty.</p>';
+        container.innerHTML = "<p>This help document is empty.</p>";
+      }
+    }
+
+    function isExternalUrl(url) {
+      try {
+        return new URL(url).origin !== location.origin;
+      } catch (_) {
+        return false;
       }
     }
 
@@ -993,7 +980,13 @@
         throw new Error("DOCX preview library did not load. Check your internet connection.");
       }
 
-      const response = await fetch(url);
+      let response;
+      try {
+        response = await fetch(url);
+      } catch (_) {
+        throw new Error("Unable to fetch this DOCX file. External DOCX hosting must allow CORS; consider hosting it in this site's help folder.");
+      }
+
       if (!response.ok) {
         throw new Error(`Unable to load DOCX document (${response.status}).`);
       }
@@ -1077,19 +1070,11 @@
       prevButton.disabled = !previous;
       nextButton.disabled = !next;
 
-      $("#previousTitle").textContent =
-        previous ? previous.topicTitle : "Previous topic";
+      $("#previousTitle").textContent = previous ? previous.topicTitle : "Previous topic";
+      $("#nextTitle").textContent = next ? next.topicTitle : "Next topic";
 
-      $("#nextTitle").textContent =
-        next ? next.topicTitle : "Next topic";
-
-      prevButton.onclick = previous
-        ? () => openTopic(previous.topicId)
-        : null;
-
-      nextButton.onclick = next
-        ? () => openTopic(next.topicId)
-        : null;
+      prevButton.onclick = previous ? () => openTopic(previous.topicId) : null;
+      nextButton.onclick = next ? () => openTopic(next.topicId) : null;
     }
 
     /* =========================================================
@@ -1105,7 +1090,6 @@
         const term = event.target.value.trim();
         const article = $("#articleContent");
 
-        // Clear previous marks before applying a new search.
         article.querySelectorAll("mark.help-search-mark").forEach(mark => {
           mark.replaceWith(document.createTextNode(mark.textContent));
         });
@@ -1136,6 +1120,7 @@
 
           const fragment = document.createDocumentFragment();
           let lastIndex = 0;
+
           node.nodeValue.replace(regex, (match, offset) => {
             fragment.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex, offset)));
             const mark = document.createElement("mark");
@@ -1145,6 +1130,7 @@
             lastIndex = offset + match.length;
             return match;
           });
+
           fragment.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex)));
           node.parentNode.replaceChild(fragment, node);
         });
@@ -1169,6 +1155,8 @@
         const id = new URLSearchParams(location.search).get("topic");
         if (id && allTopics.some(t => t.topicId === id)) {
           await openTopic(id, false);
+        } else if (!id && allTopics.length) {
+          await openTopic(allTopics[0].topicId, false);
         }
       });
 
@@ -1204,7 +1192,7 @@
       $("#articleContent").innerHTML =
         `<div class="status error">${escapeHtml(message)}</div>`;
       $("#articleTitle").textContent = "Unable to load Help Centre";
-      $("#articleMeta").textContent = "Please check your API configuration.";
+      $("#articleMeta").textContent = "Please check menulist.js.";
     }
   </script>
 </body>
