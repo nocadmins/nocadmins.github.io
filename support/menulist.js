@@ -15,7 +15,7 @@ window.HELP_MENU = [
     subOrder: 1,
     topicOrder: 1,
     contentType: "HTML",
-    file: "help/huge-attachments.html"
+    file: "help/noc-helpdesk-introduction.html"
   },
 
   {
