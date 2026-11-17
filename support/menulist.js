@@ -27,7 +27,7 @@ window.HELP_MENU = [
     subOrder: 1,
     topicOrder: 2,
     contentType: "DOCX",
-    file: "https://docs.google.com/document/d/1s4rs5MXFi88MEeZcfFJr6lmzaDSQeWauFJ1IiIbptzU/edit?tab=t.lb6lubj0tz4o"
+    file: "Treasury -SDWAN - Migration Check List.docx"
   },
 
   {
