@@ -1,0 +1,1403 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 15">
+<meta name=Originator content="Microsoft Word 15">
+<link rel=File-List href="Juniper-configuration_files/filelist.xml">
+<link rel=Edit-Time-Data href="Juniper-configuration_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>NMS-PC</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Admin SDWAN</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>1</o:TotalTime>
+  <o:Created>2026-11-17T08:36:00Z</o:Created>
+  <o:LastSaved>2026-11-17T08:36:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>335</o:Words>
+  <o:Characters>1912</o:Characters>
+  <o:Lines>15</o:Lines>
+  <o:Paragraphs>4</o:Paragraphs>
+  <o:CharactersWithSpaces>2243</o:CharactersWithSpaces>
+  <o:Version>16.00</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<link rel=themeData href="Juniper-configuration_files/themedata.thmx">
+<link rel=colorSchemeMapping
+href="Juniper-configuration_files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:EmbedTrueTypeFonts/>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-IN</w:LidThemeOther>
+  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>
+  <w:LidThemeComplexScript>ML</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:EnableOpenTypeKerning/>
+   <w:DontFlipMirrorIndents/>
+   <w:OverrideTableStyleHps/>
+  </w:Compatibility>
+  <w:DoNotOptimizeForBrowser/>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="&#45;-"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="false"
+  DefSemiHidden="false" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="376">
+  <w:LsdException Locked="false" Priority="0" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 9"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="header"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footer"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index heading"/>
+  <w:LsdException Locked="false" Priority="35" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of figures"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope return"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="line number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="page number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of authorities"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="macro"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="toa heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 5"/>
+  <w:LsdException Locked="false" Priority="10" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Closing"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Signature"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Message Header"/>
+  <w:LsdException Locked="false" Priority="11" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Salutation"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Date"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Block Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Hyperlink"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="FollowedHyperlink"/>
+  <w:LsdException Locked="false" Priority="22" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Document Map"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Plain Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="E-mail Signature"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Top of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Bottom of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal (Web)"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Acronym"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Cite"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Code"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Definition"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Keyboard"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Preformatted"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Sample"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Typewriter"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Variable"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Table"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation subject"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="No List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Contemporary"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Elegant"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Professional"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Balloon Text"/>
+  <w:LsdException Locked="false" Priority="39" Name="Table Grid"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Theme"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" QFormat="true"
+   Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" QFormat="true"
+   Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" QFormat="true"
+   Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" QFormat="true"
+   Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" QFormat="true"
+   Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" QFormat="true"
+   Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="TOC Heading"/>
+  <w:LsdException Locked="false" Priority="41" Name="Plain Table 1"/>
+  <w:LsdException Locked="false" Priority="42" Name="Plain Table 2"/>
+  <w:LsdException Locked="false" Priority="43" Name="Plain Table 3"/>
+  <w:LsdException Locked="false" Priority="44" Name="Plain Table 4"/>
+  <w:LsdException Locked="false" Priority="45" Name="Plain Table 5"/>
+  <w:LsdException Locked="false" Priority="40" Name="Grid Table Light"/>
+  <w:LsdException Locked="false" Priority="46" Name="Grid Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="Grid Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="Grid Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="46" Name="List Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="List Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="List Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Mention"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Smart Hyperlink"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Hashtag"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Unresolved Mention"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Smart Link"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:-536869121 1107305727 33554432 0 415 0;
+	mso-font-src:0;}
+@font-face
+	{font-family:Georgia;
+	panose-1:2 4 5 2 5 4 5 2 3 3;
+	mso-font-charset:0;
+	mso-generic-font-family:auto;
+	mso-font-pitch:auto;
+	mso-font-signature:0 0 0 0 0 0;
+	mso-font-src:1;}
+@font-face
+	{font-family:"Open Sans Medium";
+	mso-font-charset:0;
+	mso-generic-font-family:auto;
+	mso-font-pitch:auto;
+	mso-font-signature:0 0 0 0 0 0;
+	mso-font-src:2;}
+@font-face
+	{font-family:"Open Sans Light";
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-536870161 1073750107 40 0 415 0;
+	mso-font-src:3;}
+@font-face
+	{font-family:"Open Sans";
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-536870161 1073750107 40 0 415 0;
+	mso-font-src:4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	line-height:150%;
+	mso-pagination:none;
+	font-size:11.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	mso-fareast-font-family:"Open Sans Light";
+	color:#666666;
+	mso-ansi-language:EN;}
+h1
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin-top:7.55pt;
+	margin-right:52.35pt;
+	margin-bottom:0cm;
+	margin-left:5.5pt;
+	line-height:127%;
+	mso-pagination:none;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	color:blue;
+	mso-font-kerning:0pt;
+	mso-ansi-language:EN;
+	font-weight:normal;}
+h2
+	{mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin-top:9.4pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:5.5pt;
+	line-height:150%;
+	mso-pagination:none;
+	mso-outline-level:2;
+	font-size:14.5pt;
+	font-family:"Open Sans Medium";
+	mso-fareast-font-family:"Open Sans Medium";
+	mso-bidi-font-family:"Open Sans Medium";
+	color:#666666;
+	mso-ansi-language:EN;
+	font-weight:normal;}
+h3
+	{mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin-top:14.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	line-height:150%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:14.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	color:#666666;
+	mso-ansi-language:EN;}
+h4
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:0cm;
+	line-height:150%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	color:#666666;
+	mso-ansi-language:EN;}
+h5
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin-top:11.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:0cm;
+	line-height:150%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	font-size:11.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	color:#666666;
+	mso-ansi-language:EN;}
+h6
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:0cm;
+	line-height:150%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:6;
+	font-size:10.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	color:#666666;
+	mso-ansi-language:EN;}
+p.MsoTof, li.MsoTof, div.MsoTof
+	{mso-style-unhide:no;
+	mso-style-next:Normal;
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	line-height:150%;
+	mso-pagination:none;
+	font-size:11.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	mso-fareast-font-family:"Open Sans Light";
+	color:#666666;
+	mso-ansi-language:EN;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{mso-style-priority:10;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin-top:4.25pt;
+	margin-right:102.55pt;
+	margin-bottom:0cm;
+	margin-left:59.65pt;
+	text-align:center;
+	line-height:150%;
+	mso-pagination:none;
+	font-size:26.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	mso-fareast-font-family:"Open Sans Light";
+	color:#666666;
+	mso-ansi-language:EN;}
+p.MsoSubtitle, li.MsoSubtitle, div.MsoSubtitle
+	{mso-style-priority:11;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin-top:18.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	line-height:150%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	font-size:24.0pt;
+	font-family:Georgia;
+	mso-fareast-font-family:Georgia;
+	mso-bidi-font-family:Georgia;
+	color:#666666;
+	mso-ansi-language:EN;
+	font-style:italic;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-size:11.0pt;
+	mso-ansi-font-size:11.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	mso-ascii-font-family:"Open Sans Light";
+	mso-fareast-font-family:"Open Sans Light";
+	mso-hansi-font-family:"Open Sans Light";
+	mso-bidi-font-family:"Open Sans Light";
+	color:#666666;
+	mso-font-kerning:0pt;
+	mso-ligatures:none;
+	mso-ansi-language:EN;}
+.MsoPapDefault
+	{mso-style-type:export-only;
+	margin-top:10.0pt;
+	line-height:150%;
+	mso-pagination:none;}
+ /* Page Definitions */
+ @page
+	{mso-footnote-separator:url("Juniper-configuration_files/header.htm") fs;
+	mso-footnote-continuation-separator:url("Juniper-configuration_files/header.htm") fcs;
+	mso-endnote-separator:url("Juniper-configuration_files/header.htm") es;
+	mso-endnote-continuation-separator:url("Juniper-configuration_files/header.htm") ecs;}
+@page WordSection1
+	{size:595.5pt 842.0pt;
+	margin:45.35pt 0cm 28.8pt 43.15pt;
+	mso-header-margin:0cm;
+	mso-footer-margin:19.9pt;
+	mso-page-numbers:1;
+	mso-columns:2 not-even 275.0pt 2.0pt 275.0pt;
+	mso-footer:url("Juniper-configuration_files/header.htm") f1;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin-top:10.0pt;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:0cm;
+	mso-para-margin-left:0cm;
+	line-height:150%;
+	mso-pagination:none;
+	font-size:11.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	color:#666666;
+	mso-ansi-language:EN;}
+table.TableNormal
+	{mso-style-name:TableNormal;
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-unhide:no;
+	mso-style-parent:"";
+	mso-padding-alt:5.0pt 5.0pt 5.0pt 5.0pt;
+	mso-para-margin-top:10.0pt;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:0cm;
+	mso-para-margin-left:0cm;
+	line-height:150%;
+	mso-pagination:none;
+	font-size:11.0pt;
+	font-family:"Open Sans Light",sans-serif;
+	color:#666666;
+	mso-ansi-language:EN;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2051"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-IN style='tab-interval:36.0pt;word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal style='margin-top:.15pt;line-height:normal;border:none;
+mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;mso-border-shadow:yes'><span
+lang=EN style='font-size:9.5pt;color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoTitle style='line-height:normal'><b><span lang=EN style='font-size:
+28.0pt;font-family:"Open Sans",sans-serif;mso-fareast-font-family:"Open Sans"'>Juniper
+Configuration</span></b><span lang=EN style='mso-no-proof:yes'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1041" type="#_x0000_t75" style='width:426.75pt;
+ height:1in;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image001.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=569 height=96
+src="Juniper-configuration_files/image002.gif" v:shapes="_x0000_i1041"><![endif]></span></p>
+
+<p class=MsoNormal><span lang=EN style='font-size:14.0pt;line-height:150%;
+color:#4A86E8'>Juniper Initial reset Command<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>Goto Command Prompt &gt;</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>ssh root@10.165.x.x</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>Password: TR12345$#</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>&gt;cli</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>&gt;configure</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>&gt;load factory-default</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>&gt;set system root-authentication
+plain-text-password</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>&gt;Enter New password (<span class=GramE>example:Admin</span>@123)</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;
+margin-left:0cm'><span lang=EN>&gt;commit</span></p>
+
+<p class=MsoNormal><span lang=EN><o:p>&nbsp;</o:p></span></p>
+
+<h1 style='margin-left:0cm;tab-stops:23.35pt'><span lang=EN style='font-size:
+18.0pt;line-height:127%'>Phase A — Initial Juniper Setup<o:p></o:p></span></h1>
+
+<h2 style='margin-left:0cm'><span lang=EN>Device and account setup</span></h2>
+
+<p class=MsoNormal><span lang=EN style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image5.png" o:spid="_x0000_i1040" type="#_x0000_t75" style='width:479.25pt;
+ height:292.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image003.png" o:title=""
+  croptop="23120f" cropbottom="2508f" cropleft="19099f" cropright="17480f"/>
+</v:shape><![endif]--><![if !vml]><img width=639 height=390
+src="Juniper-configuration_files/image004.gif" v:shapes="image5.png"><![endif]></span></p>
+
+<p class=MsoNormal><span class=GramE><span lang=EN>Address :</span></span><span
+lang=EN><a href="http://192.168.1.1"><span style='color:#1155CC'>http://192.168.1.1</span></a></span></p>
+
+<p class=MsoNormal><span lang=EN>User Guided Basic Setup - </span></p>
+
+<p class=MsoNormal><span lang=EN>Device name- enter the branch <span
+class=GramE>code ,</span> </span></p>
+
+<p class=MsoNormal><span lang=EN>username –</span><b><span lang=EN
+style='font-family:"Open Sans",sans-serif;mso-fareast-font-family:"Open Sans"'>
+<span class=GramE>root <span style='font-family:"Open Sans Light",sans-serif;
+mso-fareast-font-family:"Open Sans Light";font-weight:normal'>,</span></span></span></b><span
+lang=EN> </span></p>
+
+<p class=MsoNormal><span lang=EN>password – </span><b><span lang=EN
+style='font-family:"Open Sans",sans-serif;mso-fareast-font-family:"Open Sans"'>Admin@123<o:p></o:p></span></b></p>
+
+<h1 style='margin-left:0cm;tab-stops:23.35pt'><a name="_ck98wixghqk1"></a><span
+lang=EN style='font-size:18.0pt;line-height:127%;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image7.jpg" o:spid="_x0000_i1039" type="#_x0000_t75" style='width:489.75pt;
+ height:343.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image005.jpg" o:title=""
+  croptop="16173f" cropbottom="11929f" cropleft="19438f" cropright="17935f"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=653 height=458
+src="Juniper-configuration_files/image006.jpg" v:shapes="image7.jpg"><![endif]></span></h1>
+
+<p class=MsoNormal style='margin-top:.3pt;line-height:normal;border:none;
+mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;mso-border-shadow:yes'><span
+lang=EN style='font-size:9.5pt;color:black'><o:p>&nbsp;</o:p></span></p>
+
+<h2><a name="_bijvbynrsesr"></a><span lang=EN>Device Time zone</span><span
+lang=EN style='font-size:9.5pt;line-height:150%;color:black'><o:p></o:p></span></h2>
+
+<p class=MsoNormal style='tab-stops:23.35pt'><span lang=EN style='mso-no-proof:
+yes'><!--[if gte vml 1]><v:shape id="image14.png" o:spid="_x0000_i1038" type="#_x0000_t75"
+ style='width:486pt;height:366pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image007.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=648 height=488
+src="Juniper-configuration_files/image008.gif" v:shapes="image14.png"><![endif]></span><span
+lang=EN style='font-size:9.5pt;line-height:150%;color:black'><o:p></o:p></span></p>
+
+<h2 style='text-indent:5.5pt'><span lang=EN>Internet zone — static addressing</span></h2>
+
+<p class=MsoNormal style='margin-top:7.35pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt'><span lang=EN>The wizard is
+configuring the Internet zone. Enter Respective <span class=GramE>branch’s<span
+style='mso-spacerun:yes'>  </span>BSNL</span> - <span class=SpellE>Mpls</span>
+IP Details &amp; <br>
+DNS – 10.5.141.72 and 10.5.141.73,<span style='mso-spacerun:yes'>   </span></span></p>
+
+<p class=MsoNormal style='margin-top:.3pt;line-height:normal'><span lang=EN
+style='font-size:9.5pt;color:black;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image12.png" o:spid="_x0000_i1037" type="#_x0000_t75" style='width:482.25pt;
+ height:363pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image009.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=643 height=484
+src="Juniper-configuration_files/image010.gif" v:shapes="image12.png"><![endif]></span><span
+lang=EN style='font-size:9.5pt;color:black'><o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal><span lang=EN>Configuration Details available on <a
+href="https://docs.google.com/spreadsheets/d/1AXVMlG6E5z5VpZ_Q42_R8wEa2f-gd3jS5vnOm4nEq1g/edit?gid=152633278#gid=152633278"><span
+style='color:#1155CC'>https://docs.google.com/spreadsheets/d/1AXVMlG6E5z5VpZ_Q42_R8wEa2f-gd3jS5vnOm4nEq1g/edit?gid=152633278#gid=152633278</span></a></span></p>
+
+<div class=MsoNormal align=center style='margin-top:.4pt;text-align:center;
+line-height:normal'><span lang=EN>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal style='line-height:127%'><span lang=EN style='mso-no-proof:
+yes'><!--[if gte vml 1]><v:shape id="image8.png" o:spid="_x0000_i1036" type="#_x0000_t75"
+ style='width:481.5pt;height:362.25pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image011.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=642 height=483
+src="Juniper-configuration_files/image012.gif" v:shapes="image8.png"><![endif]></span></p>
+
+<p class=MsoNormal style='line-height:127%'><span lang=EN>Choose port 0, Choose
+Check box </span><b><span lang=EN style='font-family:"Open Sans",sans-serif;
+mso-fareast-font-family:"Open Sans"'>‘Respond to ping interface?’</span></b><span
+lang=EN> <span class=GramE>then<span style='mso-spacerun:yes'>  </span>click</span>
+next.</span></p>
+
+<p class=MsoNormal style='line-height:127%'><span lang=EN><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='line-height:127%'><span lang=EN style='mso-no-proof:
+yes'><!--[if gte vml 1]><v:shape id="image9.png" o:spid="_x0000_i1035" type="#_x0000_t75"
+ style='width:484.5pt;height:348pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image013.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=646 height=464
+src="Juniper-configuration_files/image014.gif" v:shapes="image9.png"><![endif]></span></p>
+
+<p class=MsoNormal style='line-height:127%'><span lang=EN>Choose the above
+selected</span><b><span lang=EN style='font-family:"Open Sans",sans-serif;
+mso-fareast-font-family:"Open Sans"'> SRX <span class=GramE>Model<span
+style='font-family:"Open Sans Light",sans-serif;mso-fareast-font-family:"Open Sans Light";
+font-weight:normal'><span style='mso-spacerun:yes'>  </span>and</span></span></span></b><span
+lang=EN> click next.</span></p>
+
+<h2 style='margin-top:3.4pt;margin-right:0cm;margin-bottom:0cm;margin-left:
+0cm;margin-bottom:.0001pt'><a name="_bnmf1jsv4klm"></a><span lang=EN>Internal
+zone</span></h2>
+
+<h2 style='margin-top:3.4pt;margin-right:0cm;margin-bottom:0cm;margin-left:
+0cm;margin-bottom:.0001pt'><a name="_nnnxx9iido0z"></a><span lang=EN
+style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="image15.png" o:spid="_x0000_i1034"
+ type="#_x0000_t75" style='width:484.5pt;height:371.25pt;visibility:visible;
+ mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image015.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=646 height=495
+src="Juniper-configuration_files/image016.gif" v:shapes="image15.png"><![endif]></span></h2>
+
+<p class=MsoNormal style='margin-top:7.35pt'><span lang=EN>Enter LAN <span
+class=GramE>IP<span style='mso-spacerun:yes'>  </span>same</span> as <span
+class=SpellE>fatpipe</span> gateway <span class=SpellE>ip</span> and subnet
+mask.<br>
+Choose </span><b><span lang=EN style='font-family:"Open Sans",sans-serif;
+mso-fareast-font-family:"Open Sans"'>Port 7 </span></b><span lang=EN>check box
+to respond to the ping interface and uncheck DHCP Server and click on
+next.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<h2 style='margin-left:0cm'><span lang=EN>Management interface</span></h2>
+
+<h3 style='margin-top:3.4pt'><a name="_9knjduxa0w24"></a><span lang=EN
+style='font-size:12.0pt;line-height:150%;font-family:"Open Sans",sans-serif;
+mso-fareast-font-family:"Open Sans";font-weight:normal'>Remote worker / VPN
+option<o:p></o:p></span></h3>
+
+<p class=MsoNormal style='margin-top:7.35pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt'><span lang=EN style='font-size:
+8.0pt;line-height:150%;mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="image2.png"
+ o:spid="_x0000_i1033" type="#_x0000_t75" style='width:474pt;height:334.5pt;
+ visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image017.png" o:title=""
+  croptop="2394f" cropbottom="1925f" cropleft="1747f" cropright="4006f"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=632 height=446
+src="Juniper-configuration_files/image018.gif" v:shapes="image2.png"><![endif]></span><span
+lang=EN style='font-size:8.0pt;line-height:150%'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN><span style='mso-spacerun:yes'>  </span>Click
+next until you see above screen in that click </span><b><span lang=EN
+style='font-family:"Open Sans",sans-serif;mso-fareast-font-family:"Open Sans"'>NO</span></b><span
+lang=EN>. </span></p>
+
+<p class=MsoNormal style='margin-top:7.55pt;margin-right:48.05pt;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt;line-height:127%;border:none;
+mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;mso-border-shadow:yes'><span
+lang=EN style='font-size:9.5pt;line-height:127%;color:black;mso-no-proof:yes'><!--[if gte vml 1]><v:shape
+ id="image11.png" o:spid="_x0000_i1032" type="#_x0000_t75" style='width:466.5pt;
+ height:329.25pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image019.png" o:title=""
+  croptop="1779f" cropbottom="2405f" cropleft="824f" cropright="2576f"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=622 height=439
+src="Juniper-configuration_files/image020.gif" v:shapes="image11.png"><![endif]></span><span
+lang=EN>Click next until you see above screen once reached this page uncheck
+internal option and click next.</span></p>
+
+<h2 style='margin-left:0cm'><span lang=EN>Apply configuration</span></h2>
+
+<p class=MsoNormal style='margin-top:7.35pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt'><span lang=EN style='mso-no-proof:
+yes'><!--[if gte vml 1]><v:shape id="image13.png" o:spid="_x0000_i1031" type="#_x0000_t75"
+ style='width:461.25pt;height:325.5pt;visibility:visible;mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image021.png" o:title=""
+  croptop="2030f" cropbottom="604f" cropleft="818f" cropright="2351f"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=615 height=434
+src="Juniper-configuration_files/image022.gif" v:shapes="image13.png"><![endif]></span><span
+lang=EN style='font-size:8.0pt;line-height:150%'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:7.35pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt'><span lang=EN>The wizard displays an
+'Applying configuration' stage. Allow the device to finish applying the
+configuration before testing connectivity.</span></p>
+
+<div class=MsoNormal align=center style='margin-top:7.35pt;margin-right:0cm;
+margin-bottom:0cm;margin-left:5.5pt;margin-bottom:.0001pt;text-align:center'><span
+lang=EN>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h1><a name="_5o0gr561sbct"></a><span lang=EN>Phase B — Connectivity
+Verification</span></h1>
+
+<h2 style='text-indent:5.5pt'><span lang=EN>Local gateway / LAN reachability<span
+style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="image6.jpg" o:spid="_x0000_i1030"
+ type="#_x0000_t75" style='width:480pt;height:270pt;visibility:visible;
+ mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image023.jpg" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=640 height=360
+src="Juniper-configuration_files/image024.jpg" v:shapes="image6.jpg"><![endif]></span></span><span
+lang=EN style='font-size:8.0pt;line-height:150%;font-family:"Open Sans Light",sans-serif;
+mso-fareast-font-family:"Open Sans Light"'><o:p></o:p></span></h2>
+
+<p class=MsoNormal><span lang=EN>Once 192.168.1.1 got time out change the cable
+to 7<sup>th</sup> port </span></p>
+
+<h2 style='margin-left:0cm'><span lang=EN>Target-address reachability test</span></h2>
+
+<p class=MsoNormal style='margin-top:7.35pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt'><!--[if gte vml 1]><o:wrapblock><v:shape
+  id="image4.jpg" o:spid="_x0000_s1028" type="#_x0000_t75" style='position:absolute;
+  left:0;text-align:left;margin-left:-37.95pt;margin-top:-267.85pt;width:480.1pt;
+  height:270pt;z-index:251658240;visibility:visible;mso-wrap-style:square;
+  mso-wrap-distance-left:0;mso-wrap-distance-top:0;mso-wrap-distance-right:0;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:absolute;
+  mso-position-vertical-relative:text'>
+  <v:imagedata src="Juniper-configuration_files/image025.jpg" o:title=""/>
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+ relative;z-index:251658240;left:-51px;top:0px;width:640px;height:360px'><img
+ width=640 height=360 src="Juniper-configuration_files/image026.jpg" v:shapes="image4.jpg"></span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span lang=EN style='font-size:8.0pt;line-height:150%'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;line-height:normal;border:none;
+mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;mso-border-shadow:yes'><span
+lang=EN><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN>Ping newly set IP once it got replay it ready
+to configure further</span></p>
+
+<p class=MsoNormal style='margin-top:0cm;line-height:normal;border:none;
+mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;mso-border-shadow:yes'><span
+lang=EN><o:p>&nbsp;</o:p></span></p>
+
+<div class=MsoNormal align=center style='margin-top:0cm;text-align:center;
+line-height:normal;border:none;mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;
+mso-border-shadow:yes'><span lang=EN>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h1 style='margin-left:0cm'><a name="_mbck5belrhu7"></a><span lang=EN>Phase C —
+Juniper Web Interface Review</span></h1>
+
+<h2 style='margin-left:0cm'><span lang=EN>Interface Configuration</span><!--[if gte vml 1]><o:wrapblock><v:shape
+  id="image3.jpg" o:spid="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-38.5pt;margin-top:23.4pt;width:480.1pt;height:270pt;z-index:251659264;
+  visibility:visible;mso-wrap-style:square;mso-wrap-distance-left:0;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:0;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:imagedata src="Juniper-configuration_files/image027.jpg" o:title=""/>
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+ relative;z-index:251659264;left:-51px;top:0px;width:640px;height:360px'><img
+ width=640 height=360 src="Juniper-configuration_files/image028.jpg" v:shapes="image3.jpg"></span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+</h2>
+
+<p class=MsoNormal><span lang=EN>The Juniper web interface is opened using the
+LAN IP that we <span class=GramE>provided .</span> reverify the IP once again</span></p>
+
+<h2 style='margin-top:7.55pt;margin-right:48.05pt;margin-bottom:0cm;margin-left:
+0cm;margin-bottom:.0001pt;line-height:127%'><a name="_owt64hk29k4r"></a><span
+lang=EN>Security Policy</span></h2>
+
+<p class=MsoNormal style='margin-top:7.35pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt'><!--[if gte vml 1]><o:wrapblock><v:shape
+  id="image10.jpg" o:spid="_x0000_s1026" type="#_x0000_t75" style='position:absolute;
+  left:0;text-align:left;margin-left:-38.5pt;margin-top:-270pt;width:480.1pt;
+  height:270pt;z-index:251660288;visibility:visible;mso-wrap-style:square;
+  mso-wrap-distance-left:0;mso-wrap-distance-top:0;mso-wrap-distance-right:0;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:absolute;
+  mso-position-vertical-relative:text'>
+  <v:imagedata src="Juniper-configuration_files/image029.jpg" o:title=""/>
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+ relative;z-index:251660288;left:-51px;top:0px;width:640px;height:360px'><img
+ width=640 height=360 src="Juniper-configuration_files/image030.jpg" v:shapes="image10.jpg"></span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span lang=EN style='font-size:8.0pt;line-height:150%'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:7.55pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt;line-height:127%;border:none;
+mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;mso-border-shadow:yes'><span
+lang=EN style='color:black'>In the Security Policy section – add inbound policy
+from zone -<span class=GramE>internet .</span> to zone- <span class=GramE>internal
+,policy</span> action <span class=GramE>permit ,change</span> all below
+configurations to any and save.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:7.55pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:5.5pt;margin-bottom:.0001pt;line-height:127%;border:none;
+mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;mso-border-shadow:yes'><span
+lang=EN style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN
+style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="image1.png" o:spid="_x0000_i1029"
+ type="#_x0000_t75" style='width:426.75pt;height:1in;visibility:visible;
+ mso-wrap-style:square'>
+ <v:imagedata src="Juniper-configuration_files/image001.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=569 height=96
+src="Juniper-configuration_files/image031.gif" v:shapes="image1.png"><![endif]></span><span
+lang=EN style='color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;line-height:normal;border:none;
+mso-padding-alt:31.0pt 31.0pt 31.0pt 31.0pt;mso-border-shadow:yes'><a
+style='mso-footnote-id:ftn1' href="#_ftn1" name="_ftnref1" title=""><sup><span
+lang=EN style='font-size:10.0pt;color:black'><span style='mso-special-character:
+footnote'><![if !supportFootnotes]><sup><span lang=EN style='font-size:10.0pt;
+line-height:150%;font-family:"Open Sans Light",sans-serif;mso-fareast-font-family:
+"Open Sans Light";color:black;mso-ansi-language:EN;mso-fareast-language:EN-IN;
+mso-bidi-language:ML'>[1]</span></sup><![endif]></span></span></sup></a><a
+style='mso-footnote-id:ftn2' href="#_ftn2" name="_ftnref2" title=""><sup><span
+lang=EN style='font-size:10.0pt;color:black'><span style='mso-special-character:
+footnote'><![if !supportFootnotes]><sup><span lang=EN style='font-size:10.0pt;
+line-height:150%;font-family:"Open Sans Light",sans-serif;mso-fareast-font-family:
+"Open Sans Light";color:black;mso-ansi-language:EN;mso-fareast-language:EN-IN;
+mso-bidi-language:ML'>[2]</span></sup><![endif]></span></span></sup></a></p>
+
+</div>
+
+<div style='mso-element:footnote-list'><![if !supportFootnotes]><br clear=all>
+
+<hr align=left size=1 width="33%">
+
+<![endif]>
+
+<div style='mso-element:footnote' id=ftn1>
+
+<p class=MsoNormal style='margin-top:0cm;line-height:normal'><a
+style='mso-footnote-id:ftn1' href="#_ftnref1" name="_ftn1" title=""><sup><span
+lang=EN><span style='mso-special-character:footnote'><![if !supportFootnotes]><sup><span
+lang=EN style='font-size:11.0pt;line-height:150%;font-family:"Open Sans Light",sans-serif;
+mso-fareast-font-family:"Open Sans Light";color:windowtext;mso-ansi-language:
+EN;mso-fareast-language:EN-IN;mso-bidi-language:ML'>[1]</span></sup><![endif]></span></span></sup></a><span
+lang=EN style='font-size:10.0pt'><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn2>
+
+<p class=MsoNormal style='margin-top:0cm;line-height:normal'><a
+style='mso-footnote-id:ftn2' href="#_ftnref2" name="_ftn2" title=""><sup><span
+lang=EN><span style='mso-special-character:footnote'><![if !supportFootnotes]><sup><span
+lang=EN style='font-size:11.0pt;line-height:150%;font-family:"Open Sans Light",sans-serif;
+mso-fareast-font-family:"Open Sans Light";color:windowtext;mso-ansi-language:
+EN;mso-fareast-language:EN-IN;mso-bidi-language:ML'>[2]</span></sup><![endif]></span></span></sup></a><span
+lang=EN style='font-size:10.0pt'><o:p></o:p></span></p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
