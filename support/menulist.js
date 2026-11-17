@@ -19,15 +19,15 @@ window.HELP_MENU = [
   },
 
   {
-    topicId: "insert-images",
-    mainMenu: "Sending emails",
-    subMenu: "Attachments",
-    topicTitle: "Insert Images",
+    topicId: "SDWAN",
+    mainMenu: "SDWAN",
+    subMenu: "Migration",
+    topicTitle: "Check List for SDWAN Migration",
     mainOrder: 1,
     subOrder: 1,
     topicOrder: 2,
-    contentType: "HTML",
-    file: "help/device-configuration.html"
+    contentType: "DOCX",
+    file: "https://docs.google.com/document/d/1s4rs5MXFi88MEeZcfFJr6lmzaDSQeWauFJ1IiIbptzU/edit?tab=t.lb6lubj0tz4o"
   },
 
   {
