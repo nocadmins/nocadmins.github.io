@@ -31,13 +31,13 @@ window.HELP_MENU = [
   },
 
   {
-    topicId: "SDWAN",
+    topicId: "SDWAN2",
     mainMenu: "SDWAN",
     subMenu: "Configuration",
     topicTitle: "Juniper Configuration ",
     mainOrder: 1,
     subOrder: 2,
-    topicOrder: 1,
+    topicOrder: 2,
     contentType: "HTML",
     file: "help/Juniper-configuration.html"
   },
