@@ -64,7 +64,7 @@ window.HELP_MENU = [
     file: "help/device-configuration.html"
   },
 {
-    topicId: "Troubleshoot",
+    topicId: "Treasury-Network-Troubleshooting-Guide",
     mainMenu: "SDWAN",
     subMenu: " Troubleshoot",
     topicTitle: "SDWAN Troubleshooting Guide",
