@@ -58,12 +58,22 @@ window.HELP_MENU = [
     subMenu: "Configuration",
     topicTitle: "FatPipe Configuration",
     mainOrder: 1,
-    subOrder: 2,
+    subOrder: 1,
     topicOrder: 4,
     contentType: "HTML",
     file: "help/device-configuration.html"
   },
-
+{
+    topicId: "Troubleshoot",
+    mainMenu: "SDWAN",
+    subMenu: " Troubleshoot",
+    topicTitle: "SDWAN Troubleshooting Guide",
+    mainOrder: 1,
+    subOrder: 2,
+    topicOrder: 5,
+    contentType: "HTML",
+    file: "help/treasury-sdwan-troubleshoot-guide.html"
+  },
  {
     topicId: "ManageEngine-SOP",
     mainMenu: "ManageEngine",
@@ -87,6 +97,6 @@ window.HELP_MENU = [
     contentType: "HTML",
     file: "help/ManageEngine-Linux-SOP.htm"
   },
-  
+   
 
 ];
