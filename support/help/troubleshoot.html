@@ -1,0 +1,1060 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treasury Branch Network Troubleshooting Guide</title>
+
+<style>
+:root {
+  --primary: #164b83;
+  --primary-dark: #10365f;
+  --accent: #2479bd;
+  --bg: #f3f6fa;
+  --surface: #ffffff;
+  --text: #263548;
+  --muted: #718096;
+  --border: #e1e8f0;
+  --success: #16845b;
+  --warning: #a86b13;
+  --danger: #c04444;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  color: var(--text);
+  line-height: 1.65;
+}
+
+button, input {
+  font: inherit;
+}
+
+header {
+ 
+  padding: 28px 24px;
+}
+
+.header-inner {
+  max-width: 1250px;
+  margin: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .7px;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ffffff55;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+}
+
+header h1 {
+  font-size: clamp(25px, 4vw, 36px);
+  margin: 25px 0 5px;
+  line-height: 1.2;
+}
+
+header p {
+
+  margin: 0;
+}
+
+.header-tag {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 5px 12px;
+  border: 1px solid #ffffff55;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+.layout {
+  max-width: 1250px;
+  margin: 26px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.sidebar {
+  position: sticky;
+  top: 15px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 17px 12px;
+}
+
+.sidebar h3 {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 10px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 9px 10px;
+  margin: 3px 0;
+  border-radius: 7px;
+  color: #40536a;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: #edf4fb;
+  color: var(--primary);
+}
+
+.sidebar a.active {
+  background: #e9f2fb;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+main {
+  min-width: 0;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 23px;
+  margin-bottom: 19px;
+  scroll-margin-top: 20px;
+}
+
+.card h2 {
+  font-size: 19px;
+  color: var(--primary-dark);
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.card h3 {
+  font-size: 15px;
+  margin: 20px 0 8px;
+  color: var(--primary);
+}
+
+.card p {
+  margin: 8px 0;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.info {
+  padding: 13px 16px;
+  background: #edf5fc;
+  border-left: 4px solid var(--accent);
+  border-radius: 7px;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.warning {
+  padding: 13px 16px;
+  background: #fff7e9;
+  border-left: 4px solid #d99a35;
+  border-radius: 7px;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.danger {
+  padding: 13px 16px;
+  background: #fff0f0;
+  border-left: 4px solid var(--danger);
+  border-radius: 7px;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 19px;
+}
+
+.stat {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.stat strong {
+  display: block;
+  color: var(--primary);
+  font-size: 17px;
+}
+
+.stat span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.network-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin: 20px 0;
+}
+
+.network-node {
+  width: min(100%, 440px);
+  padding: 13px;
+  text-align: center;
+  border: 1px solid #cbdbea;
+  background: #f5f9fd;
+  border-radius: 9px;
+}
+
+.network-node strong {
+  display: block;
+  color: var(--primary-dark);
+}
+
+.network-node small {
+  color: var(--muted);
+}
+
+.network-node.fatpipe {
+  background: #e8f2fc;
+  border-color: #8eb6da;
+}
+
+.arrow {
+  color: var(--accent);
+  font-size: 21px;
+  line-height: 1;
+}
+
+.wan-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.wan {
+  background: #f5f9fd;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  text-align: center;
+  padding: 14px 8px;
+}
+
+.wan strong {
+  color: var(--primary);
+  display: block;
+}
+
+.wan small {
+  color: var(--muted);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0;
+}
+
+th, td {
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+th {
+  background: #edf4fb;
+  color: var(--primary-dark);
+}
+
+.steps {
+  counter-reset: steps;
+  list-style: none;
+  padding: 0;
+}
+
+.steps li {
+  counter-increment: steps;
+  position: relative;
+  padding: 12px 12px 12px 48px;
+  margin: 10px 0;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.steps li::before {
+  content: counter(steps);
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e3eef9;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+code {
+  background: #edf2f7;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #164b83;
+  font-family: Consolas, monospace;
+}
+
+.command {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #172b42;
+  color: white;
+  padding: 14px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.command code {
+  color: #fff;
+  background: none;
+  overflow-wrap: anywhere;
+}
+
+.btn {
+  border: 0;
+  border-radius: 7px;
+  padding: 8px 13px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-light {
+  background: #e9f1fa;
+  color: var(--primary);
+}
+
+.btn:hover {
+  opacity: .85;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.check-item input {
+  margin-top: 5px;
+  accent-color: var(--success);
+  width: 16px;
+  height: 16px;
+}
+
+.progress {
+  background: #e8edf3;
+  height: 8px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0 18px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--success);
+  width: 0;
+  transition: width .2s;
+}
+
+.progress-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.template {
+  background: #f7f9fc;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 16px;
+  white-space: pre-wrap;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 22px;
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+}
+
+@media(max-width:850px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: relative;
+    top: 0;
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .sidebar h3 {
+    display: none;
+  }
+
+  .sidebar a {
+    flex-shrink: 0;
+  }
+}
+
+@media(max-width:600px) {
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  header {
+    padding: 23px 18px;
+  }
+
+  .layout {
+    padding: 0 12px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    font-size: 11px;
+  }
+
+  header {
+    background: #164b83 !important;
+    print-color-adjust: exact;
+  }
+
+  .layout {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar, .no-print {
+    display: none !important;
+  }
+
+  .card {
+    break-inside: avoid;
+    border: 1px solid #ddd;
+    box-shadow: none;
+  }
+
+  footer {
+    padding: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+     
+      <div>
+       
+        <div style="font-size:11px;font-weight:400">
+         
+        </div>
+      </div>
+    </div>
+
+    <h1>Treasury Branch Network-troubleshooting Guide</h1>
+    <p>Step-by-step guidelines for identifying and reporting network connectivity issues.</p>
+
+  </div>
+</header>
+
+<div class="layout">
+
+<nav class="sidebar no-print">
+  <h3>Contents</h3>
+  <a href="#overview" class="active">Overview</a>
+  <a href="#architecture">Network Architecture</a>
+  <a href="#identify">Identify Outage</a>
+  <a href="#single">Single PC Issues</a>
+  <a href="#complete">Complete Network Outage</a>
+  <a href="#gateway">Gateway IP Lookup</a>
+  <a href="#ping">Ping Testing</a>
+  <a href="#login">FatPipe Login Page</a>
+  <a href="#report">Report to NOC</a>
+  <a href="#noc">NOC Investigation</a>
+  <a href="#safety">Safety Precautions</a>
+  <a href="#checklist">Checklist</a>
+</nav>
+
+<main>
+
+<section class="stats" id="overview">
+  <div class="stat">
+    <strong>10 Mbps</strong>
+    <span>Primary BSNL MPLS</span>
+  </div>
+  <div class="stat">
+    <strong>2 Mbps</strong>
+    <span>Secondary WAN</span>
+  </div>
+  <div class="stat">
+    <strong>Port 2</strong>
+    <span>Primary WAN</span>
+  </div>
+  <div class="stat">
+    <strong>Port 3</strong>
+    <span>Secondary WAN</span>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Purpose and Scope</h2>
+  <p>
+    This guide helps Treasury branch staff perform basic network
+    troubleshooting before reporting an issue to the NOC team.
+  </p>
+  <div class="info">
+    Follow the troubleshooting steps in order. Record the observations
+    and submit the required screenshots and photographs to NOC.
+  </div>
+  <p>
+    This document covers individual PC problems, LAN switch issues,
+    WAN connectivity, FatPipe gateway reachability and complete
+    branch network outages.
+  </p>
+</section>
+
+<section class="card" id="architecture">
+  <h2>01. Treasury Branch Network Architecture</h2>
+
+  <p>Each branch has two ISP modem devices connected to the FatPipe SD-WAN device.</p>
+
+  <div class="network-flow">
+    <div class="wan-grid">
+      <div class="wan">
+        <strong>WAN 1 · Primary</strong>
+        <b>BSNL MPLS</b>
+        <small>10 Mbps · FatPipe Port 2</small>
+      </div>
+      <div class="wan">
+        <strong>WAN 2 · Secondary</strong>
+        <b>BSNL VPN over FTTH / RailTel MPLS</b>
+        <small>2 Mbps · FatPipe Port 3</small>
+      </div>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="network-node fatpipe">
+      <strong>FatPipe SD-WAN Device</strong>
+      <small>WAN connections: Port 2 and Port 3</small>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="network-node">
+      <strong>Main Network Switch</strong>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="network-node">
+      <strong>Distribution Switches</strong>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="network-node">
+      <strong>Treasury Branch PCs</strong>
+    </div>
+  </div>
+
+  <div class="info">
+    Primary BSNL MPLS modem must be connected to FatPipe Port 2.
+    Secondary WAN modem must be connected to FatPipe Port 3.
+  </div>
+</section>
+
+<section class="card" id="identify">
+  <h2>02. Identify the Type of Network Outage</h2>
+
+  <table>
+    <thead>
+      <tr><th>Observed issue</th><th>Possible affected component</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Only one PC affected</td><td>PC, LAN cable or switch port</td></tr>
+      <tr><td>Multiple PCs affected</td><td>Distribution switch or uplink</td></tr>
+      <tr><td>Entire branch affected</td><td>Main switch, FatPipe or WAN</td></tr>
+      <tr><td>Intermittent connectivity</td><td>ISP, cabling or IP conflict</td></tr>
+      <tr><td>Application unavailable</td><td>WAN, routing or application service</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card" id="single">
+  <h2>03. Troubleshooting – Single PC Issue</h2>
+
+  <ol class="steps">
+    <li>
+      <strong>Clear browser cache</strong>
+      <p>Close and reopen the browser. Clear cached images and files.
+      Retry the affected application or website.</p>
+    </li>
+    <li>
+      <strong>Check LAN cable</strong>
+      <p>Verify that the network cable is firmly connected to the PC
+      and wall network point. Check the link indicator.</p>
+    </li>
+    <li>
+      <strong>Check distribution switch port</strong>
+      <p>Check the corresponding switch port and its link/activity
+      indicator. Report any suspected port or cable fault.</p>
+    </li>
+    <li>
+      <strong>Check IP address conflict</strong>
+      <p>Look for IP conflict notifications or intermittent connectivity.
+      Record the PC IP address and report to NOC.</p>
+    </li>
+    <li>
+      <strong>Special attention – Ubuntu/Linux PCs</strong>
+      <p>An IP conflict involving a Linux PC may affect other devices,
+      depending on the network configuration. If multiple PCs are
+      affected, report this immediately to NOC.</p>
+    </li>
+    <li>
+      <strong>Compare with another PC</strong>
+      <p>Check whether another PC connected to the same distribution
+      switch is working. This helps identify whether the problem is
+      PC-specific or switch-related.</p>
+    </li>
+  </ol>
+
+  <div class="warning">
+    Do not manually change IP addresses, gateway or DNS settings.
+    Contact NOC for assistance.
+  </div>
+</section>
+
+<section class="card" id="complete">
+  <h2>04. Troubleshooting – Complete Network Outage</h2>
+
+  <ol class="steps">
+    <li>
+      <strong>Check both ISP modem devices</strong>
+      <p>Ensure both devices are powered ON. Check power and status
+      indicators. Take photographs of both modem front panels.</p>
+    </li>
+    <li>
+      <strong>Check WAN 1 – Primary</strong>
+      <p>Verify the BSNL MPLS modem connection to FatPipe Port 2.
+      Check cable seating and link indicators.</p>
+    </li>
+    <li>
+      <strong>Check WAN 2 – Secondary</strong>
+      <p>Verify the BSNL VPN over FTTH or RailTel MPLS modem
+      connection to FatPipe Port 3.</p>
+    </li>
+    <li>
+      <strong>Check FatPipe LAN connection</strong>
+      <p>Verify the LAN connection from FatPipe to the main
+      network switch.</p>
+    </li>
+    <li>
+      <strong>Check switch connectivity</strong>
+      <p>Verify main switch and distribution switch power,
+      uplink cables and link indicators.</p>
+    </li>
+    <li>
+      <strong>Test FatPipe gateway</strong>
+      <p>Obtain the branch gateway IP from NOC Admin and
+      perform a ping test.</p>
+    </li>
+    <li>
+      <strong>Open FatPipe login page</strong>
+      <p>Enter the gateway IP in a browser and check whether
+      the device login page is accessible.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="card" id="gateway">
+  <h2>05. How to Find the FatPipe Gateway IP</h2>
+
+  <p>Use the following navigation path in the NOC Admin portal:</p>
+
+  <ol class="steps">
+    <li>Open <strong>NOC Admin</strong>.</li>
+    <li>Select <strong>Treasury SDWAN Details</strong>.</li>
+    <li>Choose the relevant Treasury branch.</li>
+    <li>Locate <strong>Table 3 – FatPipe Device Configuration Details</strong>.</li>
+    <li>Find the <strong>FatPipe Device IP (Gateway)</strong> column.</li>
+    <li>Click the displayed IP address to open the FatPipe login page, if linked.</li>
+  </ol>
+
+  <div class="info">
+    Always use the gateway IP corresponding to the selected branch.
+    Do not use another branch's gateway address.
+  </div>
+</section>
+
+<section class="card" id="ping">
+  <h2>06. Ping Testing – FatPipe Gateway</h2>
+
+  <h3>Windows PCs</h3>
+  <ol class="steps">
+    <li>Press Windows + R.</li>
+    <li>Type cmd and press Enter.</li>
+    <li>Enter the command below, replacing the example with your branch IP.</li>
+  </ol>
+
+  <div class="command">
+    <code>ping &lt;FatPipe-Gateway-IP&gt;</code>
+    <button class="btn btn-light" onclick="copyText('ping &lt;FatPipe-Gateway-IP&gt;',this)">Copy</button>
+  </div>
+
+  <h3>Ubuntu / Linux PCs</h3>
+  <div class="command">
+    <code>ping -c 4 &lt;FatPipe-Gateway-IP&gt;</code>
+    <button class="btn btn-light" onclick="copyText('ping -c 4 &lt;FatPipe-Gateway-IP&gt;',this)">Copy</button>
+  </div>
+
+  <h3>Understanding Ping Results</h3>
+
+  <div class="info">
+    <strong style="color:var(--success)">Successful ping</strong>
+    <p>Reply from the gateway indicates that it is reachable from
+    the tested PC.</p>
+  </div>
+
+  <div class="danger">
+    <strong style="color:var(--danger)">Unsuccessful ping</strong>
+    <p>Request timed out, Destination host unreachable or 100%
+    packet loss indicates that the gateway did not respond to
+    the test.</p>
+  </div>
+
+  <div class="warning">
+    A successful ping confirms FatPipe gateway reachability only.
+    It does not confirm that both ISP connections or all applications
+    are functioning correctly.
+  </div>
+</section>
+
+<section class="card" id="login">
+  <h2>07. Check the FatPipe Login Page</h2>
+
+  <ol class="steps">
+    <li>Open Chrome, Edge or another browser.</li>
+    <li>Enter the gateway IP address in the address bar.</li>
+    <li>Use HTTPS where applicable.</li>
+    <li>Check whether the FatPipe login page is displayed.</li>
+    <li>Capture a screenshot if accessible.</li>
+  </ol>
+
+  <div class="command">
+    <code>https://&lt;FatPipe-Gateway-IP&gt;</code>
+    <button class="btn btn-light" onclick="copyText('https://&lt;FatPipe-Gateway-IP&gt;',this)">Copy</button>
+  </div>
+
+  Do not attempt configuration changes or share administrator credentials.
+</section>
+
+<section class="card" id="report">
+  <h2>08. Reporting the Issue to NOC</h2>
+
+  <p>Branches must share the following information and supporting evidence.</p>
+
+  <h3>Required information</h3>
+  <ul>
+    <li>Treasury Name and Branch Code.</li>
+    <li>Date and approximate time of outage.</li>
+    <li>Nature of issue – Single PC / Multiple PCs / Complete outage.</li>
+    <li>Primary and secondary WAN status.</li>
+    <li>FatPipe gateway IP address.</li>
+    <li>Ping test result.</li>
+    <li>FatPipe login page accessibility.</li>
+  </ul>
+
+  <h3>Required photographs</h3>
+  <ul>
+    <li>Ping test screenshot.</li>
+    <li>Primary WAN modem photograph.</li>
+    <li>Secondary WAN modem photograph.</li>
+    <li>FatPipe login page screenshot, if accessible.</li>
+    <li>Switch port photograph, if applicable.</li>
+  </ul>
+
+  <h3>Copy-ready reporting template</h3>
+
+  <div class="template" id="reportTemplate">Subject: Network Connectivity Issue – [Branch Code] – [Treasury Name]
+
+Branch Code:
+Treasury Name:
+Date and Time of Issue:
+
+Nature of Issue:
+Single PC / Multiple PCs / Complete Network Outage
+
+Primary WAN: BSNL MPLS – Status:
+Secondary WAN: BSNL VPN over FTTH / RailTel MPLS – Status:
+
+FatPipe Gateway IP:
+Ping Result: Successful / Unsuccessful
+FatPipe Login Page: Accessible / Not Accessible
+
+Additional Observations:
+
+Attachments:
+1. Ping test screenshot.
+2. Primary WAN modem photograph.
+3. Secondary WAN modem photograph.
+4. FatPipe login page screenshot, if accessible.
+
+Please investigate and resolve the connectivity issue at the earliest.</div>
+
+  <br>
+  <button class="btn btn-primary no-print" onclick="copyReport()">
+    Copy Reporting Template
+  </button>
+
+  <div id="copyMessage" class="progress-label"></div>
+</section>
+
+<section class="card" id="noc">
+  <h2>09. NOC Investigation and ISP Escalation</h2>
+
+  <ol class="steps">
+    <li>Verify the Branch Code and reported issue.</li>
+    <li>Examine FatPipe gateway ping results.</li>
+    <li>Review both ISP modem status photographs.</li>
+    <li>Identify possible LAN, FatPipe or WAN connectivity issues.</li>
+    <li>Report suspected ISP-related faults to the corresponding ISP.</li>
+    <li>Coordinate with BSNL or RailTel for investigation and restoration.</li>
+    <li>Follow up until connectivity is restored.</li>
+  </ol>
+
+  <div class="info">
+    If the FatPipe gateway is reachable but branch services are
+    unavailable, the NOC team will investigate possible ISP,
+    WAN, routing or upstream connectivity issues.
+  </div>
+
+  <div class="warning">
+    If the gateway is not reachable, the NOC team will also
+    investigate the local LAN path, switch connectivity and
+    FatPipe device reachability. A failed ping alone does not
+    identify the exact faulty device.
+  </div>
+</section>
+
+<section class="card" id="safety">
+  <h2>10. Important Safety Precautions</h2>
+
+  <div class="danger">
+    <strong>Do not perform unauthorised changes to network equipment.</strong>
+  </div>
+
+  <ol class="steps">
+    <li>Do not switch OFF or restart FatPipe without NOC instructions.</li>
+    <li>Do not restart or reset ISP modems without authorisation.</li>
+    <li>Do not interchange WAN 1 and WAN 2 cables.</li>
+    <li>Do not disconnect network cables unnecessarily.</li>
+    <li>Do not modify IP address, gateway or DNS settings.</li>
+    <li>Do not modify switch or FatPipe configurations.</li>
+    <li>Do not perform factory resets.</li>
+    <li>Do not share administrator credentials or passwords.</li>
+  </ol>
+</section>
+
+<section class="card" id="checklist">
+  <h2>11. Branch Troubleshooting Checklist</h2>
+
+  <p>Tick the completed checks before submitting a report to NOC.</p>
+
+  <div class="progress-label" id="progressText">0 of 13 checks completed</div>
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="checklist" id="checklistItems">
+    <label class="check-item"><input type="checkbox"> Identify whether one PC, multiple PCs or the entire branch is affected.</label>
+    <label class="check-item"><input type="checkbox"> Clear browser cache and retry, if one PC is affected.</label>
+    <label class="check-item"><input type="checkbox"> Check PC LAN cable and distribution switch port.</label>
+    <label class="check-item"><input type="checkbox"> Check for IP address conflicts, especially on Ubuntu/Linux PCs.</label>
+    <label class="check-item"><input type="checkbox"> Check whether both ISP modem devices are powered ON.</label>
+    <label class="check-item"><input type="checkbox"> Verify BSNL MPLS connection to FatPipe Port 2.</label>
+    <label class="check-item"><input type="checkbox"> Verify secondary WAN connection to FatPipe Port 3.</label>
+    <label class="check-item"><input type="checkbox"> Check FatPipe LAN connection to main network switch.</label>
+    <label class="check-item"><input type="checkbox"> Obtain FatPipe gateway IP from NOC Admin.</label>
+    <label class="check-item"><input type="checkbox"> Perform ping test to the FatPipe gateway.</label>
+    <label class="check-item"><input type="checkbox"> Check whether FatPipe login page opens.</label>
+    <label class="check-item"><input type="checkbox"> Capture ping results and both modem photographs.</label>
+    <label class="check-item"><input type="checkbox"> Send Branch Code and evidence to the NOC team.</label>
+  </div>
+
+  <br>
+  <button class="btn btn-light no-print" onclick="resetChecklist()">Reset Checklist</button>
+</section>
+
+
+
+</main>
+</div>
+
+
+
+<script>
+function copyText(value, button) {
+  const text = value.replaceAll('&lt;', '<').replaceAll('&gt;', '>');
+
+  navigator.clipboard.writeText(text).then(() => {
+    const old = button.textContent;
+    button.textContent = 'Copied!';
+    setTimeout(() => button.textContent = old, 1500);
+  }).catch(() => {
+    alert('Copy failed. Please select and copy the command manually.');
+  });
+}
+
+function copyReport() {
+  const text = document.getElementById('reportTemplate').innerText;
+
+  navigator.clipboard.writeText(text).then(() => {
+    document.getElementById('copyMessage').textContent =
+      'Reporting template copied successfully.';
+  }).catch(() => {
+    document.getElementById('copyMessage').textContent =
+      'Copy failed. Please copy the template manually.';
+  });
+}
+
+const checklistItems = document.querySelectorAll(
+  '#checklistItems input'
+);
+
+function updateProgress() {
+  const total = checklistItems.length;
+  const completed = [...checklistItems].filter(
+    item => item.checked
+  ).length;
+
+  document.getElementById('progressBar').style.width =
+    (completed / total * 100) + '%';
+
+  document.getElementById('progressText').textContent =
+    `${completed} of ${total} checks completed`;
+}
+
+checklistItems.forEach(item => {
+  item.addEventListener('change', updateProgress);
+});
+
+function resetChecklist() {
+  checklistItems.forEach(item => item.checked = false);
+  updateProgress();
+}
+
+const sections = document.querySelectorAll('main section[id]');
+const links = document.querySelectorAll('.sidebar a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 100) {
+      current = section.id;
+    }
+  });
+
+  links.forEach(link => {
+    link.classList.toggle(
+      'active',
+      link.getAttribute('href') === '#' + current
+    );
+  });
+});
+</script>
+
+</body>
+</html>
