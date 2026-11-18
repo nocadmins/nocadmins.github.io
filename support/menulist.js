@@ -58,12 +58,35 @@ window.HELP_MENU = [
     subMenu: "Configuration",
     topicTitle: "FatPipe Configuration",
     mainOrder: 1,
-    subOrder: 1,
+    subOrder: 2,
     topicOrder: 4,
     contentType: "HTML",
     file: "help/device-configuration.html"
-  }
+  },
 
+ {
+    topicId: "ManageEngine-SOP",
+    mainMenu: "ManageEngine",
+    subMenu: " Installation SOP",
+    topicTitle: "ManageEngine-Windows-SOP",
+    mainOrder: 1,
+    subOrder: 1,
+    topicOrder: 5,
+    contentType: "HTML",
+    file: "help/ManageEngine-Windows-SOP.htm"
+  },
+
+   {
+    topicId: "ManageEngine-SOP2",
+    mainMenu: "ManageEngine",
+    subMenu: " Installation SOP",
+    topicTitle: "ManageEngine-Linux-SOP",
+    mainOrder: 1,
+    subOrder: 2,
+    topicOrder: 6,
+    contentType: "HTML",
+    file: "help/ManageEngine-Linux-SOP.htm"
+  },
   
 
 ];
