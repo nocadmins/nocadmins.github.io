@@ -1,86 +1,324 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOC Help Desk - Introduction</title>
+  <title>Treasury Network - NOC Help Desk</title>
 </head>
+
 <body>
-  <section style="font-family:Arial,Helvetica,sans-serif;color:#24282c;line-height:1.7;max-width:100%;">
+<section style="font-family:Arial,Helvetica,sans-serif;color:#24282c;line-height:1.7;max-width:100%;">
 
-    <div style="padding:30px 28px;background:linear-gradient(135deg,#eaf4fc 0%,#f7fbff 100%);border:1px solid #d8e9f8;border-left:5px solid #1769aa;border-radius:8px;margin-bottom:28px;">
-      <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1769aa;margin-bottom:9px;">
+  <!-- INTRODUCTION -->
+  <div style="padding:30px 28px;background:linear-gradient(135deg,#eaf4fc 0%,#f7fbff 100%);border:1px solid #d8e9f8;border-left:5px solid #1769aa;border-radius:8px;margin-bottom:28px;">
+    <h1 style="font-size:clamp(27px,4vw,38px);line-height:1.2;color:#123b5d;margin:0 0 13px;">
+      Treasury Network Support Portal
+    </h1>
+    <p style="font-size:17px;color:#425466;margin:0;">
+      Welcome to the Treasury Network Support Portal. This portal provides
+      information about Treasury branch network infrastructure, administrative
+      responsibilities, technical guidelines and support services provided
+      by the Treasury Network Operations Centre (NOC).
+    </p>
+  </div>
 
+  <!-- TOPIC 1: TREASURY NETWORK -->
+  <div style="margin-bottom:30px;">
+    <h2 style="font-size:23px;color:#123b5d;margin:0 0 12px;border-bottom:2px solid #e3edf5;padding-bottom:9px;">
+      1. Treasury Network
+    </h2>
+
+    <p style="margin:0 0 16px;color:#505b65;">
+      Treasury branches are connected to the central network infrastructure
+      through dedicated internet and private network connectivity. The
+      infrastructure enables secure access to Treasury applications,
+      government services and other authorised resources.
+    </p>
+
+    <h3 style="font-size:18px;color:#1769aa;margin:18px 0 8px;">
+      Network Infrastructure at Treasury Branches
+    </h3>
+
+    <p style="margin:0 0 12px;color:#505b65;">
+      The typical network infrastructure at a Treasury branch consists of
+      the following devices:
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px;">
+
+      <div style="padding:17px;border:1px solid #dfe6ec;border-radius:8px;background:#fff;">
+        <strong style="color:#1769aa;">1. FatPipe SD-WAN Router</strong>
+        <p style="font-size:14px;color:#59636d;margin:7px 0 0;">
+          Manages WAN connectivity and provides network traffic management,
+          routing and failover between available network connections.
+        </p>
       </div>
-      <h1 style="font-size:clamp(27px,4vw,38px);line-height:1.2;color:#123b5d;margin:0 0 13px;">
-        NOC Help Desk
-      </h1>
-      <p style="font-size:17px;line-height:1.7;color:#425466;margin:0;">
-        Welcome to the Treasury Network Operations Centre (NOC) Help Desk.
-        This portal is intended to provide support information and guidance
-        for Treasury offices regarding network connectivity and related
-        technical services.
+
+      <div style="padding:17px;border:1px solid #dfe6ec;border-radius:8px;background:#fff;">
+        <strong style="color:#1769aa;">2. WAN Modems / ONUs</strong>
+        <p style="font-size:14px;color:#59636d;margin:7px 0 0;">
+          Provide connectivity from service providers. Branches generally
+          have two ISP connections, depending on the available services.
+        </p>
+      </div>
+
+      <div style="padding:17px;border:1px solid #dfe6ec;border-radius:8px;background:#fff;">
+        <strong style="color:#1769aa;">3. LAN and Distribution Switches</strong>
+        <p style="font-size:14px;color:#59636d;margin:7px 0 0;">
+          Juniper and D-Link switches distribute network connectivity
+          to different sections and systems within the Treasury office.
+        </p>
+      </div>
+
+      <div style="padding:17px;border:1px solid #dfe6ec;border-radius:8px;background:#fff;">
+        <strong style="color:#1769aa;">4. Access Switches</strong>
+        <p style="font-size:14px;color:#59636d;margin:7px 0 0;">
+          Smaller switches provide additional LAN connectivity for
+          computers and other authorised network devices.
+        </p>
+      </div>
+
+      <div style="padding:17px;border:1px solid #dfe6ec;border-radius:8px;background:#fff;">
+        <strong style="color:#1769aa;">5. Desktop Computers</strong>
+        <p style="font-size:14px;color:#59636d;margin:7px 0 0;">
+          End-user systems connected to the LAN for accessing Treasury
+          applications and authorised government services.
+        </p>
+      </div>
+
+    </div>
+
+    <h3 style="font-size:18px;color:#1769aa;margin:20px 0 8px;">
+      WAN Connectivity
+    </h3>
+
+    <p style="margin:0 0 10px;color:#505b65;">
+      Treasury branches generally use the following connectivity arrangements:
+    </p>
+
+    <ul style="padding-left:22px;color:#505b65;">
+      <li>
+        <strong>Primary WAN:</strong> BSNL MPLS connectivity, generally
+        provisioned with 10 Mbps bandwidth.
+      </li>
+      <li>
+        <strong>Secondary WAN:</strong> BSNL VPN over FTTH at locations
+        where the service is available. Other branches may have different
+        secondary ISP arrangements.
+      </li>
+      <li>
+        <strong>SD-WAN:</strong> FatPipe manages available WAN links and
+        supports connectivity failover based on the configured policies.
+      </li>
+    </ul>
+
+    <div style="padding:14px 17px;background:#eef6fc;border-left:4px solid #1769aa;border-radius:5px;margin-top:15px;">
+      <strong style="color:#123b5d;">Important:</strong>
+      <span style="font-size:14px;color:#465563;">
+        All network devices, WAN connections and LAN cabling should remain
+        properly connected and powered on. Any changes to network
+        configuration or physical connectivity should be coordinated
+        with the authorised Network Administrator and NOC team.
+      </span>
+    </div>
+  </div>
+
+  <!-- TOPIC 2: ADMINISTRATIVE RESPONSIBILITIES -->
+  <div style="margin-bottom:32px;">
+    <h2 style="font-size:23px;color:#123b5d;margin:0 0 12px;border-bottom:2px solid #e3edf5;padding-bottom:9px;">
+      2. Treasury Admin / Network Admin and Their Duties
+    </h2>
+
+    <p style="margin:0 0 17px;color:#505b65;">
+      Effective network maintenance requires coordination between the
+      Treasury Administrator, Network Administrator and the NOC team.
+      Each role has specific responsibilities to ensure uninterrupted
+      network services at the Treasury branch.
+    </p>
+
+    <!-- TREASURY ADMIN -->
+    <div style="border:1px solid #dfe6ec;border-radius:8px;margin-bottom:16px;overflow:hidden;">
+      <div style="padding:13px 18px;background:#eaf3fc;border-bottom:1px solid #d7e6f3;">
+        <h3 style="font-size:18px;color:#14558a;margin:0;">
+          A. Treasury Administrator
+        </h3>
+      </div>
+
+      <div style="padding:17px 20px;background:#fff;">
+        <p style="margin:0 0 10px;color:#59636d;font-size:14px;">
+          The Treasury Administrator is responsible for coordinating
+          branch-level administrative activities and ensuring that
+          network-related issues are properly reported to the NOC.
+        </p>
+
+        <ul style="padding-left:21px;margin:8px 0;color:#505b65;font-size:14px;">
+          <li>Ensure that network devices, modems and switches are properly powered on and maintained.</li>
+          <li>Coordinate with the Network Administrator for network-related troubleshooting and maintenance.</li>
+          <li>Report internet connectivity interruptions and other network issues to the NOC promptly.</li>
+          <li>Provide accurate Treasury details, contact information and relevant technical information when reporting complaints.</li>
+          <li>Ensure that network devices are not switched off, disconnected or physically relocated without proper coordination.</li>
+          <li>Coordinate with the NOC and concerned service providers whenever ISP-related issues are reported.</li>
+          <li>Ensure that physical access to network racks and equipment is restricted to authorised personnel.</li>
+          <li>Inform the NOC in advance regarding office shifting, renovation or any activity that may affect network infrastructure.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- NETWORK ADMIN -->
+    <div style="border:1px solid #dfe6ec;border-radius:8px;margin-bottom:16px;overflow:hidden;">
+      <div style="padding:13px 18px;background:#eaf6ef;border-bottom:1px solid #d8ecdf;">
+        <h3 style="font-size:18px;color:#187448;margin:0;">
+          B. Network Administrator
+        </h3>
+      </div>
+
+      <div style="padding:17px 20px;background:#fff;">
+        <p style="margin:0 0 10px;color:#59636d;font-size:14px;">
+          The Network Administrator is responsible for assisting with
+          branch-level network infrastructure, physical connectivity and
+          first-level technical troubleshooting in coordination with the NOC.
+        </p>
+
+        <ul style="padding-left:21px;margin:8px 0;color:#505b65;font-size:14px;">
+          <li>Monitor the operational status of FatPipe devices, WAN modems, LAN switches and other network equipment.</li>
+          <li>Check physical connectivity, LAN cables, power adapters and port status during network interruptions.</li>
+          <li>Assist in identifying whether a connectivity issue originates from the ISP, WAN modem, FatPipe device, switch or end-user computer.</li>
+          <li>Verify LAN connectivity and perform basic troubleshooting, including IP configuration and ping tests.</li>
+          <li>Coordinate with the NOC before making any changes to network configurations, device connections or routing arrangements.</li>
+          <li>Assist the NOC team during device installation, replacement, configuration and maintenance activities.</li>
+          <li>Maintain details of network devices, serial numbers, IP addresses, ISP connections and physical port connections.</li>
+          <li>Ensure proper cable identification and documentation of network connections.</li>
+          <li>Report faulty devices, abnormal LED indications and repeated connectivity interruptions to the NOC.</li>
+          <li>Assist in safely shutting down, relocating and reconnecting network equipment whenever required.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- COORDINATION -->
+    <div style="padding:16px 18px;background:#f6f8fa;border:1px solid #e2e8ed;border-radius:7px;">
+      <strong style="color:#303b45;">Coordination with NOC:</strong>
+      <p style="font-size:14px;color:#59636d;margin:6px 0 0;">
+        The Treasury Administrator and Network Administrator should
+        coordinate with the NOC for technical assistance, configuration
+        changes, device replacements and service restoration. Unauthorised
+        configuration changes, factory resets or disconnection of network
+        devices should be avoided.
+      </p>
+    </div>
+  </div>
+
+  <!-- NOC HELP DESK -->
+  <div style="padding:25px 24px;background:linear-gradient(135deg,#eaf4fc 0%,#f7fbff 100%);border:1px solid #d8e9f8;border-left:5px solid #1769aa;border-radius:8px;margin-bottom:24px;">
+    <h2 style="font-size:25px;color:#123b5d;margin:0 0 10px;">
+      3. NOC Help Desk
+    </h2>
+    <p style="font-size:15px;color:#425466;margin:0;">
+      The Treasury Network Operations Centre (NOC) provides technical
+      assistance and support for Treasury branch network connectivity,
+      WAN services, SD-WAN devices and related network infrastructure.
+    </p>
+  </div>
+
+  <h2 style="font-size:23px;color:#172b3a;margin:0 0 10px;">
+    How can we help?
+  </h2>
+
+  <p style="margin:0 0 22px;color:#505b65;">
+    Browse the help topics in the navigation panel to find instructions,
+    reference documents and troubleshooting guidance. If you need further
+    assistance, please contact the NOC team using the details below.
+  </p>
+
+  <h2 style="font-size:23px;color:#172b3a;margin:0 0 15px;">
+    Contact the NOC Team
+  </h2>
+
+  <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:22px;">
+    <tbody>
+      <tr style="background:#eef4f9;">
+        <td style="padding:11px;border:1px solid #dfe6ec;font-weight:700;width:36%;">
+          Primary Support Unit
+        </td>
+        <td style="padding:11px;border:1px solid #dfe6ec;">
+          Treasury Network Operations Center (NOC)
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:11px;border:1px solid #dfe6ec;font-weight:600;">Contact Person 1</td>
+        <td style="padding:11px;border:1px solid #dfe6ec;">
+          Gokul G &nbsp; | &nbsp; +91 8078491708
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:11px;border:1px solid #dfe6ec;font-weight:600;">Contact Person 2</td>
+        <td style="padding:11px;border:1px solid #dfe6ec;">
+          Divya P.V &nbsp; | &nbsp; +91 8129271451
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:11px;border:1px solid #dfe6ec;font-weight:600;">NOC Email Address</td>
+        <td style="padding:11px;border:1px solid #dfe6ec;">
+          <a href="mailto:network.treasury@supportgov.nic.in" style="color:#1769aa;text-decoration:none;">
+            network.treasury@supportgov.nic.in
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:11px;border:1px solid #dfe6ec;font-weight:600;">NOC Helpdesk / Phone</td>
+        <td style="padding:11px;border:1px solid #dfe6ec;">
+          0471 - 2322533 (Extension No: 410)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SUPPORT CARDS -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:25px;">
+
+    <div style="border:1px solid #dfe6ec;border-radius:8px;padding:21px;background:#fff;box-shadow:0 3px 12px rgba(20,45,65,.05);">
+      <div style="width:42px;height:42px;border-radius:9px;background:#e8f2fc;color:#1769aa;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:13px;">
+        &#9993;
+      </div>
+      <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#78838d;margin-bottom:7px;">
+        Email Support
+      </div>
+      <a href="mailto:network.treasury@supportgov.nic.in" style="font-size:15px;font-weight:700;color:#1769aa;text-decoration:none;overflow-wrap:anywhere;">
+        network.treasury@supportgov.nic.in
+      </a>
+      <p style="font-size:13px;color:#69747e;margin:9px 0 0;">
+        Send your queries and support requests by email.
       </p>
     </div>
 
-    <h2 style="font-size:23px;color:#172b3a;margin:0 0 10px;">How can we help?</h2>
-    <p style="margin:0 0 22px;color:#505b65;">
-      Browse the help topics in the navigation panel to find instructions,
-      reference documents and troubleshooting guidance. If you need further
-      assistance, please contact the NOC team using the details below.
-    </p>
-
-    <h2 style="font-size:23px;color:#172b3a;margin:0 0 15px;">Contact the NOC Team</h2>
-	
-	<table class="c18"><tbody><tr class="c8"><td class="c7" colspan="1" rowspan="1"><p class="c6"><span class="c0">Primary Support Unit</span><span class="c4">:</span><span class="c1">&nbsp;</span></p></td><td class="c17" colspan="4" rowspan="1"><p class="c6"><span class="c0">Treasury Network Operations Center (NOC)</span></p></td></tr><tr class="c8"><td class="c7" colspan="1" rowspan="1"><p class="c6"><span class="c4">Contact Person &nbsp;1</span><span class="c1">&nbsp;</span></p></td><td class="c11" colspan="1" rowspan="1"><p class="c6"><span class="c10">:</span></p></td><td class="c15" colspan="1" rowspan="1"><p class="c6"><span class="c0">Gokul G</span><span class="c10">&nbsp;</span></p></td><td class="c19" colspan="2" rowspan="1"><p class="c6"><span class="c4">+91 8078491708</span><span class="c1">&nbsp;</span></p></td></tr><tr class="c8"><td class="c7" colspan="1" rowspan="1"><p class="c6"><span class="c4">Contact Person &nbsp;2</span></p></td><td class="c11" colspan="1" rowspan="1"><p class="c6"><span class="c10">:</span></p></td><td class="c15" colspan="1" rowspan="1"><p class="c6"><span class="c0">Divya P.V</span><span class="c10">&nbsp;</span></p></td><td class="c19" colspan="2" rowspan="1"><p class="c6"><span class="c4">+91 8129271451</span><span class="c1">&nbsp;</span></p></td></tr><tr class="c2"><td class="c7" colspan="1" rowspan="1"><p class="c6"><span class="c0">NOC Email Address</span></p></td><td class="c11" colspan="1" rowspan="1"><p class="c6"><span class="c10">:</span></p></td><td class="c13" colspan="3" rowspan="1"><p class="c6"><span class="c4 c14"><a class="c20" href="mailto:network.treasury@supportgov.nic.in">network.treasury@supportgov.nic.in </a></span></p></td></tr><tr class="c2"><td class="c7" colspan="1" rowspan="1"><p class="c6"><span class="c0">NOC Helpdesk/Phone</span><span class="c3">&nbsp;</span></p></td><td class="c11" colspan="1" rowspan="1"><p class="c6"><span class="c10">:</span></p></td><td class="c13" colspan="3" rowspan="1"><p class="c6"><span class="c3">&nbsp;0471 - 2322533 (extension no: 410) </span></p></td></tr></tbody></table>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:25px;">
-      
-	  
-	  
-	  
-	  
-      <div style="border:1px solid #dfe6ec;border-radius:8px;padding:21px;background:#fff;box-shadow:0 3px 12px rgba(20,45,65,.05);">
-        <div style="width:42px;height:42px;border-radius:9px;background:#e8f2fc;color:#1769aa;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:13px;">
-          ✉
-        </div>
-        <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#78838d;margin-bottom:7px;">
-          Email Support
-        </div>
-        <a href="mailto:network.treasury@supportgov.nic.in" style="font-size:15px;font-weight:700;color:#1769aa;text-decoration:none;overflow-wrap:anywhere;">
-          network.treasury@supportgov.nic.in
-        </a>
-        <p style="font-size:13px;color:#69747e;margin:9px 0 0;">
-          Send your queries and support requests by email.
-        </p>
+    <div style="border:1px solid #dfe6ec;border-radius:8px;padding:21px;background:#fff;box-shadow:0 3px 12px rgba(20,45,65,.05);">
+      <div style="width:42px;height:42px;border-radius:9px;background:#e9f6ef;color:#218653;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:13px;">
+        &#9742;
       </div>
-
-      <div style="border:1px solid #dfe6ec;border-radius:8px;padding:21px;background:#fff;box-shadow:0 3px 12px rgba(20,45,65,.05);">
-        <div style="width:42px;height:42px;border-radius:9px;background:#e9f6ef;color:#218653;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:13px;">
-          ☎
-        </div>
-        <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#78838d;margin-bottom:7px;">
-          Telephone Support
-        </div>
-        <a href="tel:+914712322533" style="font-size:21px;font-weight:700;color:#1769aa;text-decoration:none;">
-          0471 - 2322533
-        </a>
-        <div style="display:inline-block;margin-top:7px;padding:4px 9px;border-radius:4px;background:#f1f5f8;color:#465563;font-size:13px;font-weight:700;">
-          Extension: 410
-        </div>
-        <p style="font-size:13px;color:#69747e;margin:9px 0 0;">
-          Contact the NOC team by telephone.
-        </p>
+      <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#78838d;margin-bottom:7px;">
+        Telephone Support
       </div>
-
+      <a href="tel:+914712322533" style="font-size:21px;font-weight:700;color:#1769aa;text-decoration:none;">
+        0471 - 2322533
+      </a>
+      <div style="display:inline-block;margin-top:7px;padding:4px 9px;border-radius:4px;background:#f1f5f8;color:#465563;font-size:13px;font-weight:700;">
+        Extension: 410
+      </div>
+      <p style="font-size:13px;color:#69747e;margin:9px 0 0;">
+        Contact the NOC team by telephone.
+      </p>
     </div>
 
-    <div style="padding:16px 18px;border-radius:6px;background:#f6f8fa;border:1px solid #e6eaee;color:#59636d;font-size:13px;">
-      <strong style="color:#303b45;">For faster assistance:</strong>
-      When reporting a network issue, please mention your Treasury name,
-      a brief description of the issue and the time it was observed.
-    </div>
+  </div>
 
-  </section>
+  <!-- SUPPORT NOTE -->
+  <div style="padding:16px 18px;border-radius:6px;background:#f6f8fa;border:1px solid #e6eaee;color:#59636d;font-size:13px;">
+    <strong style="color:#303b45;">For faster assistance:</strong>
+    When reporting a network issue, please mention your Treasury name,
+    a brief description of the issue and the time it was observed.
+    Include relevant device details and screenshots wherever applicable.
+  </div>
+
+</section>
 </body>
 </html>
