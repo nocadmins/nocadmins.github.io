@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Treasury Admin Details - Updation Form</title>
+  <link rel="icon" type="image/svg+xml" href="../../images/favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg:#f4f6fb; --surface:#fff; --surface-2:#f8f9fc; --text:#172033;
+      --muted:#687386; --line:#dce2ec; --accent:#465ee8; --accent-hover:#354bd0;
+      --accent-soft:#eef0ff; --danger:#c53b4b; --success:#16845b;
+      --shadow:0 18px 55px rgba(26,39,75,.10); --input:#fff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme:dark; --bg:#111522; --surface:#1a2030; --surface-2:#222a3c;
+        --text:#edf1fb; --muted:#a4aec2; --line:#354057; --accent:#8795ff;
+        --accent-hover:#a0aaff; --accent-soft:#2b3150; --danger:#ff7d8a;
+        --success:#55d6a0; --shadow:0 18px 55px rgba(0,0,0,.30); --input:#171d2b;
+      }
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;padding:28px 16px;display:grid;place-items:center;
+      background:radial-gradient(circle at 10% 0%,rgba(91,111,255,.12),transparent 32%),var(--bg);
+      color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .shell{width:min(100%,690px)}
+    .top{display:flex;align-items:center;gap:14px;margin:0 0 20px 4px}
+    .brand{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
+      color:white;background:linear-gradient(145deg,#697cff,#4054d8);font-size:22px;
+      box-shadow:0 9px 22px rgba(70,94,232,.25)}
+    .top h1{font-size:clamp(21px,4vw,27px);letter-spacing:-.6px;margin:0;font-weight:750}
+    .top p{margin:2px 0 0;color:var(--muted);font-size:13px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:23px;
+      padding:clamp(20px,4vw,34px);box-shadow:var(--shadow)}
+    .section-title{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;margin:0 0 18px}
+    .section-title i{color:var(--accent);font-size:17px}
+    .field{position:relative;margin:0 0 18px}
+    .field input{width:100%;height:58px;padding:22px 15px 8px;border:1px solid var(--line);
+      border-radius:13px;background:var(--input);color:var(--text);font:inherit;outline:none;
+      transition:border-color .18s,box-shadow .18s}
+    .field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+    .field label{position:absolute;left:15px;top:7px;font-size:11px;font-weight:650;
+      color:var(--muted);pointer-events:none}
+    .field input[readonly]{background:var(--surface-2);color:var(--text);cursor:default}
+    .select-wrap{position:relative;margin-bottom:18px}
+    .float-label{position:absolute;z-index:2;left:14px;top:6px;font-size:11px;font-weight:650;color:var(--muted);pointer-events:none}
+    .select2-container{width:100%!important}
+    .select2-container--default .select2-selection--single{height:58px!important;border:1px solid var(--line)!important;
+      border-radius:13px!important;background:var(--input)!important}
+    .select2-container--default .select2-selection--single .select2-selection__rendered{
+      color:var(--text)!important;line-height:68px!important;padding-left:14px!important;padding-right:38px!important}
+    .select2-container--default .select2-selection--single .select2-selection__arrow{height:56px!important;right:10px!important}
+    .select2-container--default.select2-container--open .select2-selection--single,
+    .select2-container--default.select2-container--focus .select2-selection--single{
+      border-color:var(--accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+    .select2-dropdown{background:var(--surface)!important;border:1px solid var(--line)!important;color:var(--text)!important;overflow:hidden}
+    .select2-search--dropdown .select2-search__field{background:var(--input)!important;color:var(--text)!important;border:1px solid var(--line)!important;border-radius:8px!important;padding:8px!important}
+    .select2-results__option{padding:10px 12px!important}
+    .select2-container--default .select2-results__option--highlighted[aria-selected]{background:var(--accent)!important}
+    .select2-container--default .select2-results__option[aria-selected=true]{background:var(--accent-soft)!important;color:var(--text)!important}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    button{border:0;border-radius:12px;min-height:45px;padding:0 17px;font:650 14px inherit;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s}
+    button:disabled{opacity:.45;cursor:not-allowed}
+    .primary{background:var(--accent);color:white}.primary:hover:not(:disabled){background:var(--accent-hover)}
+    .secondary{background:var(--surface-2);border:1px solid var(--line);color:var(--text)}
+    .ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
+    .danger{background:color-mix(in srgb,var(--danger) 12%,transparent);color:var(--danger)}
+    .details{border-top:1px solid var(--line);margin-top:26px;padding-top:24px;display:none}
+    .details.show{display:block;animation:rise .22s ease}
+    @keyframes rise{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+    .details-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px}
+    .details-head h2{font-size:16px;margin:0}
+    .status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+    .status i{color:var(--success)}
+    .detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:5px}
+    .hint{font-size:12px;color:var(--muted);margin:13px 2px 0}
+    .message{display:none;margin:0 0 17px;padding:11px 13px;border-radius:11px;font-size:13px}
+    .message.show{display:flex;gap:9px;align-items:flex-start}
+    .message.error{background:color-mix(in srgb,var(--danger) 11%,transparent);color:var(--danger)}
+    .message.success{background:color-mix(in srgb,var(--success) 11%,transparent);color:var(--success)}
+    .message.info{background:var(--accent-soft);color:var(--text)}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(5,10,25,.58);display:none;place-items:center;padding:16px;z-index:50}
+    .modal-backdrop.show{display:grid}
+    .modal{width:min(100%,440px);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:23px;box-shadow:var(--shadow)}
+    .modal h3{margin:0 0 5px;font-size:19px}.modal p{margin:0 0 17px;color:var(--muted);font-size:13px}
+    .preview{background:var(--surface-2);border:1px solid var(--line);border-radius:13px;padding:14px;margin:15px 0}
+    .preview-row+.preview-row{margin-top:12px}.preview small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+    .preview strong{display:block;overflow-wrap:anywhere;font-size:14px}
+    .modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px;flex-wrap:wrap}
+    .spinner{width:15px;height:15px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:520px){body{padding:18px 12px}.card{border-radius:18px}.actions button,.detail-actions button{flex:1}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <div class="brand"><i class="bi bi-person-vcard"></i></div>
+      <div><h1>Treasury Admin Details - Updation Form</h1><p>View and maintain treasury administrator contacts</p></div>
+    </header>
+
+    <section class="card">
+      <div class="section-title"><i class="bi bi-buildings"></i> Select Treasury</div>
+      <div id="message" class="message" role="status" aria-live="polite"></div>
+
+      <div class="select-wrap">
+        <span class="float-label">Treasury</span>
+        <select id="treasurySelect" aria-label="Select Treasury" style="width:100%">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="actions">
+        <button id="viewBtn" class="primary" disabled><i class="bi bi-eye"></i> View Details</button>
+        <button id="reloadBtn" class="ghost" type="button"><i class="bi bi-arrow-clockwise"></i> Reload List</button>
+      </div>
+
+      <section id="details" class="details" aria-live="polite">
+        <div class="details-head">
+          <h2>Administrator information</h2>
+          <span id="modeStatus" class="status"><i class="bi bi-lock-fill"></i> Read-only</span>
+        </div>
+        <div class="field">
+          <label for="adminName">Treasury Admin Name</label>
+          <input id="adminName" type="text" readonly autocomplete="off" maxlength="100">
+        </div>
+        <div class="field">
+          <label for="adminContact">Contact Number</label>
+          <input id="adminContact" type="tel" readonly inputmode="tel" autocomplete="tel" maxlength="18">
+        </div>
+        <div class="detail-actions">
+          <button id="editBtn" class="primary"><i class="bi bi-pencil-square"></i> Change Details</button>
+          <button id="cancelBtn" class="secondary" style="display:none"><i class="bi bi-x-lg"></i> Cancel</button>
+          <button id="updateBtn" class="primary" style="display:none"><i class="bi bi-check2-circle"></i> Review Update</button>
+        </div>
+        <p class="hint">Coordinators; Please update the administrator details if any changes have occurred.</p>
+      </section>
+    </section>
+  </main>
+
+  <div id="previewBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+    <div class="modal">
+      <h3 id="previewTitle">Review your changes</h3>
+      <p>Please verify the details below before submitting them to the spreadsheet.</p>
+      <div class="preview">
+        <div class="preview-row"><small>Treasury</small><strong id="previewTreasury"></strong></div>
+        <div class="preview-row"><small>Admin name</small><strong id="previewName"></strong></div>
+        <div class="preview-row"><small>Contact number</small><strong id="previewContact"></strong></div>
+      </div>
+      <div class="modal-actions">
+        <button id="backBtn" class="secondary">Go back</button>
+        <button id="confirmBtn" class="primary"><i class="bi bi-cloud-arrow-up"></i> Confirm &amp; Update</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    // Paste the deployed Apps Script Web App URL here (must end in /exec).
+    const API_URL = 'https://script.google.com/macros/s/AKfycby20nVx0IOdgT7n_V37R9FdXRxIdKpLbPOjNyiTkauQjT-6TUxGxnRLM0y9En8SsYnEpg/exec';
+
+    const $treasury = $('#treasurySelect');
+    const message = document.getElementById('message');
+    const details = document.getElementById('details');
+    const nameInput = document.getElementById('adminName');
+    const contactInput = document.getElementById('adminContact');
+    let currentTreasury = '';
+    let original = {name:'', contact:''};
+    let editing = false;
+
+    $treasury.select2({
+      placeholder: 'Search or select a treasury',
+      allowClear: true,
+      width: '100%',
+      minimumResultsForSearch: 0
+    });
+
+    function showMessage(text, type='info') {
+      message.className = 'message show ' + type;
+      message.innerHTML = '';
+      const icon = document.createElement('i');
+      icon.className = type === 'error' ? 'bi bi-exclamation-circle' :
+                       type === 'success' ? 'bi bi-check-circle' : 'bi bi-info-circle';
+      const span = document.createElement('span');
+      span.textContent = text;
+      message.append(icon, span);
+    }
+    function clearMessage(){ message.className='message'; message.textContent=''; }
+
+    // JSONP avoids browser CORS restrictions when this page is hosted separately.
+    function apiGet(params) {
+      return new Promise((resolve, reject) => {
+        const callbackName = 'treasuryApi_' + Date.now() + '_' + Math.floor(Math.random()*100000);
+        const script = document.createElement('script');
+        const timeout = setTimeout(() => finish(new Error('The server did not respond. Please try again.')), 20000);
+        function finish(error, data) {
+          clearTimeout(timeout);
+          delete window[callbackName];
+          script.remove();
+          error ? reject(error) : resolve(data);
+        }
+        window[callbackName] = data => finish(null, data);
+        const query = new URLSearchParams({...params, callback:callbackName, _:Date.now()});
+        script.src = API_URL + '?' + query.toString();
+        script.onerror = () => finish(new Error('Unable to connect to the Apps Script API. Check the Web App URL and deployment access.'));
+        document.body.appendChild(script);
+      });
+    }
+
+    function setBusy(button, busy, label) {
+      if (busy) { button.dataset.label = button.innerHTML; button.disabled = true; button.innerHTML = '<span class="spinner"></span> ' + label; }
+      else { button.disabled = false; button.innerHTML = button.dataset.label || label; }
+    }
+
+    async function loadTreasuries() {
+      clearMessage();
+      details.classList.remove('show');
+      $('#viewBtn').prop('disabled', true);
+      setBusy(document.getElementById('reloadBtn'), true, 'Loading');
+      try {
+        const result = await apiGet({action:'list'});
+        if (!result.success) throw new Error(result.message || 'Could not load treasury list.');
+        $treasury.empty().append(new Option('', '', true, true));
+        result.treasuries.forEach(value => $treasury.append(new Option(value, value, false, false)));
+        $treasury.val(null).trigger('change');
+        showMessage('Treasury list loaded successfully.', 'success');
+        setTimeout(clearMessage, 2600);
+      } catch (error) { showMessage(error.message, 'error'); }
+      finally { setBusy(document.getElementById('reloadBtn'), false, 'Reload List'); }
+    }
+
+    $treasury.on('change', function() {
+      $('#viewBtn').prop('disabled', !this.value);
+      details.classList.remove('show');
+      currentTreasury = '';
+      clearMessage();
+    });
+
+    async function viewDetails() {
+      const treasury = $treasury.val();
+      if (!treasury) return;
+      clearMessage();
+      setBusy(document.getElementById('viewBtn'), true, 'Loading details');
+      try {
+        const result = await apiGet({action:'get', treasury});
+        if (!result.success) throw new Error(result.message || 'No admin details found.');
+        currentTreasury = treasury;
+        original = {name:result.name || '', contact:result.contact || ''};
+        nameInput.value = original.name;
+        contactInput.value = original.contact;
+        setEditMode(false);
+        details.classList.add('show');
+      } catch (error) { showMessage(error.message, 'error'); }
+      finally { setBusy(document.getElementById('viewBtn'), false, 'View Details'); }
+    }
+
+    function setEditMode(value) {
+      editing = value;
+      nameInput.readOnly = !value;
+      contactInput.readOnly = !value;
+      document.getElementById('modeStatus').innerHTML = value
+        ? '<i class="bi bi-pencil-fill"></i> Editing'
+        : '<i class="bi bi-lock-fill"></i> Read-only';
+      document.getElementById('editBtn').style.display = value ? 'none' : '';
+      document.getElementById('cancelBtn').style.display = value ? '' : 'none';
+      document.getElementById('updateBtn').style.display = value ? '' : 'none';
+      if (value) nameInput.focus();
+    }
+
+    function validateDetails() {
+      const name = nameInput.value.trim().replace(/\s+/g, ' ').toUpperCase();
+      const contact = contactInput.value.trim();
+      if (name.length < 2 || name.length > 100) return {error:'Admin name must contain 2 to 100 characters.'};
+      if (!/^[A-Z][A-Z .'-]*$/.test(name)) return {error:'Enter a valid name using letters, spaces, dot, apostrophe or hyphen only.'};
+      // Accept international phone formats: 7–15 digits, optional leading +, spaces, hyphens or brackets.
+      const digits = contact.replace(/\D/g, '');
+      if (!/^\+?[0-9][0-9\s().-]*$/.test(contact) || digits.length < 7 || digits.length > 15)
+        return {error:'Enter a valid contact number containing 7 to 15 digits. You may use +, spaces, hyphens or brackets.'};
+      return {name, contact};
+    }
+
+    function openPreview() {
+      const valid = validateDetails();
+      if (valid.error) { showMessage(valid.error, 'error'); return; }
+      nameInput.value = valid.name;
+      document.getElementById('previewTreasury').textContent = currentTreasury;
+      document.getElementById('previewName').textContent = valid.name;
+      document.getElementById('previewContact').textContent = valid.contact;
+      document.getElementById('previewBackdrop').classList.add('show');
+    }
+
+    async function confirmUpdate() {
+      const valid = validateDetails();
+      if (valid.error) { document.getElementById('previewBackdrop').classList.remove('show'); showMessage(valid.error,'error'); return; }
+      const button = document.getElementById('confirmBtn');
+      setBusy(button, true, 'Updating');
+      try {
+        const result = await apiGet({action:'update', treasury:currentTreasury, name:valid.name, contact:valid.contact});
+        if (!result.success) throw new Error(result.message || 'Update failed.');
+        original = {name:valid.name, contact:valid.contact};
+        nameInput.value = valid.name;
+        contactInput.value = valid.contact;
+        document.getElementById('previewBackdrop').classList.remove('show');
+        setEditMode(false);
+        showMessage('Administrator details updated successfully.', 'success');
+      } catch (error) {
+        document.getElementById('previewBackdrop').classList.remove('show');
+        showMessage(error.message, 'error');
+      } finally {
+        button.disabled = false;
+        button.innerHTML = '<i class="bi bi-cloud-arrow-up"></i> Confirm &amp; Update';
+      }
+    }
+
+    document.getElementById('viewBtn').addEventListener('click', viewDetails);
+    document.getElementById('reloadBtn').addEventListener('click', loadTreasuries);
+    document.getElementById('editBtn').addEventListener('click', () => { clearMessage(); setEditMode(true); });
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+      nameInput.value = original.name; contactInput.value = original.contact; setEditMode(false); clearMessage();
+    });
+    document.getElementById('updateBtn').addEventListener('click', openPreview);
+    document.getElementById('backBtn').addEventListener('click', () => document.getElementById('previewBackdrop').classList.remove('show'));
+    document.getElementById('confirmBtn').addEventListener('click', confirmUpdate);
+    document.getElementById('previewBackdrop').addEventListener('click', e => {
+      if (e.target.id === 'previewBackdrop') e.currentTarget.classList.remove('show');
+    });
+
+    loadTreasuries().finally(() => {
+      setTimeout(() => {
+        $treasury.select2('open');
+        setTimeout(() => document.querySelector('.select2-container--open .select2-search__field')?.focus(), 50);
+      }, 120);
+    });
+  </script>
+</body>
+</html>
